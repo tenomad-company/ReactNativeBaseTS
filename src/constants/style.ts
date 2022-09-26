@@ -1,10 +1,9 @@
 import {DarkTheme, DefaultTheme} from '@react-navigation/native';
-import {extendTheme} from 'native-base';
-import baseColors from 'native-base/src/theme/base/colors';
+import {extendTheme, theme as nbTheme} from 'native-base';
 
 const colors = {
-  primary: baseColors.indigo,
-  darkPrimary: baseColors.amber,
+  primary: nbTheme.colors.indigo,
+  darkPrimary: nbTheme.colors.amber,
   background: {
     dark: '#282d55',
     light: '#FFFFFF',
@@ -40,6 +39,7 @@ export const theme = extendTheme({
   components: {
     Button: {
       baseStyle: (props: any) => {
+        const {darkPrimary} = props.theme.colors;
         return {
           colorScheme: 'amber',
         };
