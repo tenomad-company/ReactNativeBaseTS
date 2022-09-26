@@ -9,13 +9,14 @@
 typeset assetFonts="$PWD/assets/fonts"
 typeset androidFonts="$PWD/android/app/src/main/res/font"
 
-echo "================================================================"
-echo "[Font] from: $assetFonts"
-echo "[Font] to: $androidFonts"
+echo "----------------------------------------------------------"
+echo "Linking fonts for Android"
+echo "----------------------------------------------------------"
+
+echo "* [Font] from: $assetFonts"
+echo "* [Font] to: $androidFonts"
 
 if [[ -d "$assetFonts" && ! -z "$assetFonts" ]]; then
-  echo "Normalization..."
-
   mkdir -p $androidFonts
 
   pushd "$assetFonts";
@@ -25,10 +26,6 @@ if [[ -d "$assetFonts" && ! -z "$assetFonts" ]]; then
     cp "$file" "$androidFonts/$normalized";
   done
   popd
-
-  echo "Normalization End..."
 fi
 
 node $PWD/bin/generateFontXml
-
-echo "================================================================"

@@ -68,21 +68,21 @@ function addFontToMainApplication(rawFontName) {
 
     const addLine = `ReactFontManager.getInstance().addCustomFont(this, "${rawFontName}", R.font.${fontName});`;
     if (!content.includes(addLine)) {
-      console.log('[Font] Add code', addLine);
+      console.log('* [Font] Add code', addLine);
       content = content.replace(
         'super.onCreate();',
         `super.onCreate();\n    ${addLine}`,
       );
     } else {
       console.log(
-        `[Font] [${rawFontName}] is already exist in MainApplication.java`,
+        `* [Font] [${rawFontName}] is already exist in MainApplication.java`,
       );
       return;
     }
 
     const importLine = 'import com.facebook.react.views.text.ReactFontManager;';
     if (!content.includes(importLine)) {
-      console.log('[Font] Import', importLine);
+      console.log('* [Font] Import', importLine);
       content = content.replace(
         'import com.facebook.react.ReactApplication;',
         `import com.facebook.react.ReactApplication;\n${importLine}`,
@@ -91,7 +91,7 @@ function addFontToMainApplication(rawFontName) {
 
     fs.writeFileSync(mainAppFile, content, 'utf8');
 
-    console.log(`[Font] [${rawFontName}] is added to MainApplication.java`);
+    console.log(`* [Font] [${rawFontName}] is added to MainApplication.java`);
   });
 }
 
@@ -118,7 +118,7 @@ const data = fs.readFileSync(`${rootDir}/assets/assets.json`, 'utf8');
 const json = JSON.parse(data);
 
 if (!json || !json.fonts) {
-  console.error('[Font] Fonts is not defined in app.json!');
+  console.error('* [Font] Fonts is not defined in app.json!');
   return;
 }
 
