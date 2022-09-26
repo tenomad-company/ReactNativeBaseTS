@@ -114,7 +114,7 @@ function deleteDupplicateFonts(rawFontName) {
 
 // -------------------------- EXECUTE --------------------------
 
-const data = fs.readFileSync(`${rootDir}/app.json`, 'utf8');
+const data = fs.readFileSync(`${rootDir}/assets/assets.json`, 'utf8');
 const json = JSON.parse(data);
 
 if (!json || !json.fonts) {

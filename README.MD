@@ -13,3 +13,7 @@ https://github.com/junedomingo/react-native-rename
 ```
     bin/setup
 ```
+- Link fonts
+```
+    yarn linkfont
+```
