@@ -1,4 +1,5 @@
 {
   "name": "ReactNativeTS",
-  "displayName": "ReactNativeTS"
+  "displayName": "ReactNativeTS",
+  "fonts": ["OpenSans"]
 }

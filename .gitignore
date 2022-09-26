@@ -30,6 +30,9 @@ local.properties
 *.iml
 *.hprof
 
+# local font
+android/app/src/main/res/font/
+
 # node.js
 #
 node_modules/
