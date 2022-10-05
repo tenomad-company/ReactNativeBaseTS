@@ -31,7 +31,7 @@ local.properties
 *.hprof
 
 # local font
-android/app/src/main/res/font/
+android/app/src/main/res/font/*.ttf
 
 # node.js
 #

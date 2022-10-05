@@ -12,8 +12,7 @@ const androidAssetFontDir = path.join(androidDir, '/app/src/main/assets/fonts');
 
 function generateFontXml(rawFontName) {
   const fontName = rawFontName.toLowerCase();
-  const xmlContent = `
-<?xml version="1.0" encoding="utf-8"?>
+  const xmlContent = `<?xml version="1.0" encoding="utf-8"?>
 <font-family xmlns:app="http://schemas.android.com/apk/res-auto">
     <font app:fontStyle="normal" app:fontWeight="100" app:font="@font/${fontName}_thin" />
     <font app:fontStyle="italic" app:fontWeight="100" app:font="@font/${fontName}_thinitalic"/>
@@ -118,7 +117,7 @@ const data = fs.readFileSync(`${rootDir}/assets/assets.json`, 'utf8');
 const json = JSON.parse(data);
 
 if (!json || !json.fonts) {
-  console.error('* [Font] Fonts is not defined in app.json!');
+  console.error('* [Font] Fonts is not defined in /assets/assets.json!');
   return;
 }
 

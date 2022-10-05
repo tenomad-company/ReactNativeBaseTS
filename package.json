@@ -15,6 +15,7 @@
     "adb": "adb reverse tcp:9090 tcp:9090 && adb reverse tcp:3000 tcp:3000 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:8081 tcp:8081",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "android-clean": "cd android && ./gradlew clean",
     "postinstall": "node ./bin/postInstall",
     "linkfont": "react-native link && ./bin/setupAndroidFonts"
   },
