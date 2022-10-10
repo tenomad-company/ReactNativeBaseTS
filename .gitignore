@@ -20,6 +20,8 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+# react-native-config codegen
+ios/tmp.xcconfig
 
 # Android/IntelliJ
 #
