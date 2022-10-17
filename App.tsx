@@ -10,7 +10,9 @@
 
 import {navDarkTheme, navTheme, theme} from '@/constants/style';
 import RootNavigator from '@/navigations/RootNavigator';
-import {store} from '@/redux/store';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
+import {persistor, store} from '@/redux/store';
+import {setColorMode} from '@/redux/system/slice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationContainer} from '@react-navigation/native';
 import {
@@ -19,37 +21,36 @@ import {
   StorageManager,
   useColorMode,
 } from 'native-base';
-import React from 'react';
+import React, {useMemo} from 'react';
 import {Provider} from 'react-redux';
-
-// Define the colorModeManager,
-// here we are using react-native-async-storage (https://react-native-async-storage.github.io/async-storage/)
-const colorModeManager: StorageManager = {
-  get: async () => {
-    try {
-      let val = await AsyncStorage.getItem('@color-mode');
-      return val === 'dark' ? 'dark' : 'light';
-    } catch (e) {
-      console.log(e);
-      return 'light';
-    }
-  },
-  set: async (value: ColorMode) => {
-    try {
-      await AsyncStorage.setItem('@color-mode', value || 'light');
-    } catch (e) {
-      console.log(e);
-    }
-  },
-};
+import {PersistGate} from 'redux-persist/integration/react';
 
 const App = () => {
   return (
     <Provider store={store}>
-      <NativeBaseProvider theme={theme} colorModeManager={colorModeManager}>
-        <NavigationContent />
-      </NativeBaseProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <NativeBaseContent />
+      </PersistGate>
     </Provider>
+  );
+};
+
+const NativeBaseContent = () => {
+  const colorTheme = useAppSelector(state => state.system.colorMode);
+  const dispatch = useAppDispatch();
+
+  const colorModeManager: StorageManager = useMemo(
+    () => ({
+      get: async initTheme => colorTheme || initTheme,
+      set: (value: ColorMode) => dispatch(setColorMode(value)),
+    }),
+    [colorTheme, dispatch],
+  );
+
+  return (
+    <NativeBaseProvider theme={theme} colorModeManager={colorModeManager}>
+      <NavigationContent />
+    </NativeBaseProvider>
   );
 };
 
