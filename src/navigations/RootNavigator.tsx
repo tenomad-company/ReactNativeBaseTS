@@ -1,36 +1,52 @@
+import HomeTabNavigator from '@/navigations/tab/HomeTabNavigator';
 import {useAppSelector} from '@/redux/hooks';
-import LoginScreen from '@/screens/Authentication/LoginScreen';
-import RegisterScreen from '@/screens/Authentication/RegisterScreen';
 import SettingsScreen from '@/screens/Settings';
 import WelcomeScreen from '@/screens/Welcome';
+import {useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React, {useMemo} from 'react';
-import HomeTabNavigator from './tab/HomeTabNavigator';
-import RootStackParamList from './type/RootStack';
+import React, {useEffect, useMemo} from 'react';
+import AuthStackNavigator from './stack/AuthStackNavigator';
+import {hideHeaderOptions} from './stack/screenOption';
+import {RootNavigationProp, RootStackParamList} from './type';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const AuthenGroup = () => (
-  <Stack.Group>
-    <Stack.Screen name="Welcome" component={WelcomeScreen} />
-    <Stack.Screen name="Login" component={LoginScreen} />
-    <Stack.Screen name="Register" component={RegisterScreen} />
-  </Stack.Group>
-);
-
-const HomeGroup = () => (
-  <Stack.Group>
-    <Stack.Screen name="HomeTab" component={HomeTabNavigator} />
-  </Stack.Group>
-);
-
 const RootNavigator = () => {
+  const navigation = useNavigation<RootNavigationProp>();
   const user = useAppSelector(state => state.authentication.user);
   const navigationKey = useMemo(() => (user ? 'user' : 'guest'), [user]);
 
+  useEffect(() => {
+    if (user) {
+      navigation.reset({
+        index: 1,
+        routes: [{name: 'HomeTab'}],
+      });
+    } else {
+      navigation.reset({
+        index: 1,
+        routes: [{name: 'AuthStack'}],
+      });
+    }
+  }, [navigation, user]);
+
   return (
-    <Stack.Navigator>
-      {user ? HomeGroup() : AuthenGroup()}
+    <Stack.Navigator initialRouteName={user ? 'HomeTab' : 'Welcome'}>
+      <Stack.Screen
+        name="Welcome"
+        component={WelcomeScreen}
+        options={hideHeaderOptions}
+      />
+      <Stack.Screen
+        name="AuthStack"
+        component={AuthStackNavigator}
+        options={hideHeaderOptions}
+      />
+      <Stack.Screen
+        name="HomeTab"
+        component={HomeTabNavigator}
+        options={hideHeaderOptions}
+      />
       <Stack.Screen
         navigationKey={navigationKey}
         name="Settings"

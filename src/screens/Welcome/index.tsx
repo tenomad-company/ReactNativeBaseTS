@@ -1,12 +1,13 @@
 import NativeBaseIcon from '@/components/NativeBaseIcon';
 import ToggleDarkMode from '@/components/ToggleDarkMode';
+import {RootNavigationProp} from '@/navigations/type';
 import {useNavigation} from '@react-navigation/native';
 import {Box, Center, Heading, HStack, Link, Text, VStack} from 'native-base';
 import React from 'react';
 import {StyleSheet} from 'react-native';
 
 const WelcomeScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootNavigationProp>();
 
   return (
     <Center px={4} flex={1}>
@@ -20,7 +21,7 @@ const WelcomeScreen = () => {
           </Box>
           <Text>and save to reload.</Text>
         </HStack>
-        <Link onPress={() => navigation.navigate({name: 'Login'})}>
+        <Link onPress={() => navigation.navigate('AuthStack')}>
           <Text
             color="primary.500"
             _dark={{color: 'amber.500'}}

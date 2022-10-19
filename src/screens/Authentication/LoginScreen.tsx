@@ -19,8 +19,8 @@ const LoginScreen = () => {
   const dispatch = useAppDispatch();
   const navigation = useNavigation();
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('77498623');
+  const [password, setPassword] = useState('nINDXMn3QerQumz');
 
   const onLogin = () => dispatch(loginAsync({username, password}));
 
@@ -41,11 +41,11 @@ const LoginScreen = () => {
       <VStack space={3} mt="5">
         <FormControl>
           <FormControl.Label>Email ID</FormControl.Label>
-          <Input onChangeText={setUsername} />
+          <Input onChangeText={setUsername} value={username} />
         </FormControl>
         <FormControl>
           <FormControl.Label>Password</FormControl.Label>
-          <Input onChangeText={setPassword} type="password" />
+          <Input onChangeText={setPassword} value={password} type="password" />
           <Link
             _text={{
               fontSize: 'xs',
