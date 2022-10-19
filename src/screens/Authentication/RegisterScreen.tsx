@@ -1,6 +1,6 @@
+import Button from '@/components/primitives/Button';
 import {
   Box,
-  Button,
   FormControl,
   Heading,
   HStack,
@@ -42,7 +42,7 @@ const RegisterScreen = () => {
           <Input type="password" />
         </FormControl>
         <VStack space={2} mt={5}>
-          <Button _text={{color: 'white'}}>SignUp</Button>
+          <Button>SignUp</Button>
 
           <HStack justifyContent="center" alignItems="center">
             <IconButton

@@ -1,10 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {
-  Action,
-  combineReducers,
-  configureStore,
-  ThunkAction,
-} from '@reduxjs/toolkit';
+import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
 import {
   FLUSH,
   PAUSE,
@@ -15,19 +10,14 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
-import authenticationReducer from './authentication/slice';
-import systemReducer from './system/slice';
+import middlewares from './middlewares';
+import rootReducer from './reducers';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['authentication', 'system'],
+  whitelist: ['authentication', 'system'], // only persist these reducers
 };
-
-const rootReducer = combineReducers({
-  authentication: authenticationReducer,
-  system: systemReducer,
-});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -40,7 +30,7 @@ export const store = configureStore({
         // https://redux-toolkit.js.org/usage/usage-guide#use-with-redux-persist
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(middlewares),
 });
 
 export const persistor = persistStore(store);

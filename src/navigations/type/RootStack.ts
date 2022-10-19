@@ -1,10 +1,12 @@
 type RootStackParamList = {
+  Welcome: undefined;
+  Login: undefined;
+  Register: undefined;
+
+  HomeTab: undefined;
   Home: undefined;
   Profile: {userId: string};
-  Welcome: undefined;
-  Login?: undefined;
-  Register?: {};
-  Settings?: undefined;
+  Settings: undefined;
 };
 
 export default RootStackParamList;

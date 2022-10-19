@@ -12,8 +12,7 @@ import {navDarkTheme, navTheme, theme} from '@/constants/style';
 import RootNavigator from '@/navigations/RootNavigator';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {persistor, store} from '@/redux/store';
-import {setColorMode} from '@/redux/system/slice';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {setColorMode} from '@/redux/system';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   ColorMode,

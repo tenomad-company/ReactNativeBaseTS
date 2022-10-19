@@ -1,17 +1,15 @@
-import {loginAsync} from '@/redux/authentication/action';
+import Button from '@/components/primitives/Button';
+import {loginAsync} from '@/redux/authentication';
 import {useAppDispatch} from '@/redux/hooks';
 import {useNavigation} from '@react-navigation/native';
 import {
   Box,
-  Button,
-  Center,
   FormControl,
   Heading,
   HStack,
   Input,
   Link,
   Text,
-  useColorModeValue,
   VStack,
 } from 'native-base';
 import React, {useState} from 'react';
@@ -60,12 +58,9 @@ const LoginScreen = () => {
             Forget Password?
           </Link>
         </FormControl>
-        <Button
-          mt="2"
-          colorScheme={useColorModeValue('primary', 'darkPrimary')}
-          onPress={onLogin}>
-          Sign in
-        </Button>
+
+        <Button onPress={onLogin}>Sign in</Button>
+
         <HStack mt="6" justifyContent="center">
           <Text
             fontSize="sm"

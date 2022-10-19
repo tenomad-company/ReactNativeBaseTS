@@ -20,7 +20,7 @@ const AuthenGroup = () => (
 
 const HomeGroup = () => (
   <Stack.Group>
-    <Stack.Screen name="Home" component={HomeTabNavigator} />
+    <Stack.Screen name="HomeTab" component={HomeTabNavigator} />
   </Stack.Group>
 );
 

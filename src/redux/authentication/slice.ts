@@ -21,8 +21,10 @@ export const authenticationSlice = createSlice({
     setUser: (state: AuthenticationState, action: PayloadAction<User>) => {
       state.user = action.payload;
     },
+    logout: (state: AuthenticationState) => {
+      state.user = undefined;
+    },
   },
-
   extraReducers: builder => {
     builder
       .addCase(loginAsync.pending, state => {
@@ -37,8 +39,3 @@ export const authenticationSlice = createSlice({
       });
   },
 });
-
-// Action creators are generated for each case reducer function
-export const {setUser} = authenticationSlice.actions;
-
-export default authenticationSlice.reducer;
