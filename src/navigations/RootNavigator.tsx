@@ -17,17 +17,8 @@ const RootNavigator = () => {
   const navigationKey = useMemo(() => (user ? 'user' : 'guest'), [user]);
 
   useEffect(() => {
-    if (user) {
-      navigation.reset({
-        index: 1,
-        routes: [{name: 'HomeTab'}],
-      });
-    } else {
-      navigation.reset({
-        index: 1,
-        routes: [{name: 'AuthStack'}],
-      });
-    }
+    const name = user ? 'HomeTab' : 'AuthStack';
+    navigation.reset({index: 0, routes: [{name}]});
   }, [navigation, user]);
 
   return (
