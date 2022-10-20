@@ -44,11 +44,9 @@ platform :ios do
             configuration: "Release",
             scheme: ENV["SCHEME"],
             workspace: "ios/ReactNativeTS.xcworkspace", 
-            # export_method: "ad-hoc"
+            export_method: "app-store",
         )
-        # diawi(
-        #     token:  ENV["DIAWI_TOKEN"],
-        # )  
+        upload_to_testflight(skip_waiting_for_build_processing: true)
         commit_version_bump(message: 'Bump build', xcodeproj: './ios/ReactNativeTS.xcodeproj')
     end
 end
