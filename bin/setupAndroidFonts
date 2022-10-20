@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Create Native custom Fonts for Android - based on Android XML Fonts
+# 1. Get all fonts from ./assets/fonts
+# 1. Replace - with _;
+# 2. Replace any uppercase letter with its lowercase counterpart.
+# 3. Copy all normalized fonts to ./android/app/src/main/res/font
+
+typeset assetFonts="$PWD/assets/fonts"
+typeset androidFonts="$PWD/android/app/src/main/res/font"
+
+echo "----------------------------------------------------------"
+echo "Linking fonts for Android"
+echo "----------------------------------------------------------"
+
+echo "* [Font] from: $assetFonts"
+echo "* [Font] to: $androidFonts"
+
+if [[ -d "$assetFonts" && ! -z "$assetFonts" ]]; then
+  mkdir -p $androidFonts
+
+  pushd "$assetFonts";
+  for file in *.ttf; do
+    typeset normalized="${file//-/_}";
+    normalized="$(tr [A-Z] [a-z] <<< "$normalized")";
+    cp "$file" "$androidFonts/$normalized";
+  done
+  popd
+fi
+
+node $PWD/bin/generateFontXml

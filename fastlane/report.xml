@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: increment_version_code" time="0.003454">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: git_commit" time="0.050432">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: clean" time="10.81751">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: assembleproductionRelease" time="74.500995">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: diawi" time="9.117374">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
