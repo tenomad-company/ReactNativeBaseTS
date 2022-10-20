@@ -147,7 +147,11 @@ android {
         applicationId "com.reactnativets"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+<<<<<<< HEAD
+        versionCode 3
+=======
         versionCode 1
+>>>>>>> main
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
         resValue "string", "build_config_package", "com.reactnativets"

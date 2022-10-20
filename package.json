@@ -24,7 +24,11 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "android-clean": "cd android && ./gradlew clean",
     "postinstall": "node ./bin/postInstall",
-    "linkfont": "react-native link && ./bin/setupAndroidFonts"
+    "linkfont": "react-native link && ./bin/setupAndroidFonts",
+    "ios:deploy:prod": "fastlane ios deploy --env prod",
+    "ios:deploy:dev": "fastlane ios deploy --env dev",
+    "android:deploy:dev": "fastlane android deploy --env dev",
+    "android:deploy:prod": "fastlane android deploy --env prod"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.17.7",
