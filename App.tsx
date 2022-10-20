@@ -19,6 +19,7 @@ import {
   NativeBaseProvider,
   StorageManager,
   useColorMode,
+  useColorModeValue,
 } from 'native-base';
 import React, {useMemo} from 'react';
 import {Provider} from 'react-redux';
@@ -54,10 +55,10 @@ const NativeBaseContent = () => {
 };
 
 const NavigationContent = () => {
-  const {colorMode} = useColorMode();
+  const navigationTheme = useColorModeValue(navTheme, navDarkTheme);
 
   return (
-    <NavigationContainer theme={colorMode === 'dark' ? navDarkTheme : navTheme}>
+    <NavigationContainer theme={navigationTheme}>
       <RootNavigator />
     </NavigationContainer>
   );

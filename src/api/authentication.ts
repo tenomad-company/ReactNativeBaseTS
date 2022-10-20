@@ -1,5 +1,5 @@
 import {User} from '@/models/User';
-import {get} from './base';
+import {post} from './base';
 
 // A mock function to mimic making an async request for data
 // export async function login(username: void, password) {
@@ -9,5 +9,5 @@ import {get} from './base';
 // }
 
 export async function login(username: string, password: string): Promise<User> {
-  return get<User>(`/users?username=${username}&password=${password}`);
+  return post<User>(`/users?username=${username}&password=${password}`, {});
 }

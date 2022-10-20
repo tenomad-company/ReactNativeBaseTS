@@ -1,7 +1,7 @@
-import {DarkTheme, DefaultTheme} from '@react-navigation/native';
+import {DarkTheme, DefaultTheme, Theme} from '@react-navigation/native';
 import {extendTheme, theme as nbTheme} from 'native-base';
 
-const colors = {
+export const colors = {
   primary: nbTheme.colors.indigo,
   darkPrimary: nbTheme.colors.amber,
   background: {
@@ -14,17 +14,18 @@ const colors = {
   },
 };
 
-export const navTheme = {
+export const navTheme: Theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
+    primary: colors.primary[50],
     text: colors.text.light,
     card: colors.background.light,
     background: colors.background.light,
   },
 };
 
-export const navDarkTheme = {
+export const navDarkTheme: Theme = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
