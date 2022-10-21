@@ -38,6 +38,7 @@
     "@react-navigation/native-stack": "^6.6.2",
     "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.27.2",
+    "lottie-react-native": "^5.1.4",
     "native-base": "3.4.0",
     "react": "17.0.2",
     "react-native": "0.68.2",
