@@ -264,9 +264,6 @@ android {
         development {
             applicationIdSuffix ".dev"
         }
-        // developmentRelease {
-        //     applicationIdSuffix ".dev"
-        // }
         staging {
             applicationIdSuffix ".staging"
         }

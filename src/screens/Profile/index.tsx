@@ -75,12 +75,12 @@ const ItemMenu = ({
         space={2}
         shadow={2}
         borderRadius={8}
-        bg="background.light"
-        _dark={{bg: 'background.dark'}}
+        backgroundColor="background.light"
+        _dark={{backgroundColor: 'background.dark'}}
         alignItems="center">
-        <Icon name={icon} as={AntDesign} size="sm" ml={1} />
+        <Icon name={icon} as={AntDesign} size="md" ml={1} />
         <Text flex={1}>{title}</Text>
-        <Icon name="right" as={AntDesign} size="sm" />
+        <Icon name="right" as={AntDesign} size="md" />
       </HStack>
     </Pressable>
   );

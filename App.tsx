@@ -8,20 +8,14 @@
  * @format
  */
 
-import {navDarkTheme, navTheme, theme} from '@/constants/style';
-import RootNavigator from '@/navigations/RootNavigator';
-import {useAppDispatch, useAppSelector} from '@/redux/hooks';
-import {persistor, store} from '@/redux/store';
-import {setColorMode} from '@/redux/system';
+import useColorModeManager from '@Hooks/useColorModeManager';
+import useTransparentStatusBar from '@Hooks/useTransparentStatusBar';
+import RootNavigator from '@Navigations/RootNavigator';
 import {NavigationContainer} from '@react-navigation/native';
-import {
-  ColorMode,
-  NativeBaseProvider,
-  StorageManager,
-  useColorMode,
-  useColorModeValue,
-} from 'native-base';
-import React, {useMemo} from 'react';
+import {persistor, store} from '@Redux/store';
+import {navDarkTheme, navTheme, theme} from '@Styles';
+import {NativeBaseProvider, useColorModeValue} from 'native-base';
+import React from 'react';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 
@@ -36,16 +30,8 @@ const App = () => {
 };
 
 const NativeBaseContent = () => {
-  const colorTheme = useAppSelector(state => state.system.colorMode);
-  const dispatch = useAppDispatch();
-
-  const colorModeManager: StorageManager = useMemo(
-    () => ({
-      get: async initTheme => colorTheme || initTheme,
-      set: (value: ColorMode) => dispatch(setColorMode(value)),
-    }),
-    [colorTheme, dispatch],
-  );
+  useTransparentStatusBar();
+  const colorModeManager = useColorModeManager();
 
   return (
     <NativeBaseProvider theme={theme} colorModeManager={colorModeManager}>

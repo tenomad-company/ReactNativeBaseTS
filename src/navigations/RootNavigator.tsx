@@ -1,10 +1,9 @@
-import {useAppSelector} from '@/redux/hooks';
 import {useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useAppSelector} from '@Redux/hooks';
+import SettingsScreen from '@Screens/Settings';
+import WelcomeScreen from '@Screens/Welcome';
 import React, {useEffect, useMemo} from 'react';
-
-import SettingsScreen from '@/screens/Settings';
-import WelcomeScreen from '@/screens/Welcome';
 import AuthStack from './stack/AuthStack';
 import {hideHeaderOptions} from './stack/screenOption';
 import HomeTab from './tab/HomeTab';
