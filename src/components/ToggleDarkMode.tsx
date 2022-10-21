@@ -1,5 +1,5 @@
 import {colors} from '@/constants/style';
-import {HStack, Link, useColorMode} from 'native-base';
+import {HStack, Pressable, useColorMode} from 'native-base';
 import React, {useMemo} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -10,14 +10,14 @@ function ToggleDarkMode() {
 
   return (
     <HStack space={2} alignItems="center">
-      <Link
+      <Pressable
         p={1}
         borderRadius={4}
         bg={isLight ? colors.darkPrimary[500] : colors.primary[500]}
         onPress={toggleColorMode}
         aria-label={isLight ? 'switch to dark mode' : 'switch to light mode'}>
         <Feather name={isLight ? 'sun' : 'moon'} color={'white'} size={16} />
-      </Link>
+      </Pressable>
     </HStack>
   );
 }

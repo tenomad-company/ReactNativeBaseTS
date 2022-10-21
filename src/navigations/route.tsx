@@ -1,14 +1,22 @@
-import {AuthStackParamList} from './stack/AuthStack/type';
-import {HomeTabParamList} from './tab/HomeTab/type';
-import {RootStackParamList} from './type';
+import {AuthNavigationProp, AuthStackParamList} from './stack/AuthStack/type';
+import {HomeTabNavigationProp, HomeTabParamList} from './tab/HomeTab/type';
+import {RootNavigationProp, RootStackParamList} from './type';
 
-type AppParamList = RootStackParamList & HomeTabParamList & AuthStackParamList;
+export type AppParamList = RootStackParamList &
+  HomeTabParamList &
+  AuthStackParamList;
 
-type RouteName = {
-  [key in keyof AppParamList]: keyof AppParamList;
+export type RouteName = keyof AppParamList;
+
+type RouteNameMap = {
+  [key in RouteName]: RouteName;
 };
 
-const routeName: RouteName = {
+export type AppNavigationProps = RootNavigationProp &
+  HomeTabNavigationProp &
+  AuthNavigationProp;
+
+const routeName: RouteNameMap = {
   Welcome: 'Welcome',
   AuthStack: 'AuthStack',
   HomeTab: 'HomeTab',
