@@ -1,9 +1,14 @@
 import {Assets} from '@/constants/assets';
 import AnimatedLottieView from 'lottie-react-native';
 import {View} from 'native-base';
-import {InterfaceBoxProps} from 'native-base/lib/typescript/components/primitives/Box';
 import React, {FC} from 'react';
-import {Modal, RefreshControl, ScrollView, StyleSheet} from 'react-native';
+import {
+  Modal,
+  RefreshControl,
+  ScrollView,
+  ScrollViewProps,
+  StyleSheet,
+} from 'react-native';
 
 interface PageContainerProps {
   isLoading?: boolean;
@@ -12,7 +17,7 @@ interface PageContainerProps {
   onRefresh?(): Promise<void>;
 }
 
-const PageContainer: FC<PageContainerProps & InterfaceBoxProps> = ({
+const PageContainer: FC<PageContainerProps & ScrollViewProps> = ({
   isLoading = false,
   initialized = false,
   isEmpty = false,
@@ -64,7 +69,8 @@ const PageContainer: FC<PageContainerProps & InterfaceBoxProps> = ({
       contentContainerStyle={styles.container}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
-      }>
+      }
+      {...props}>
       {_renderChild()}
       {_buildLoading()}
     </ScrollView>
