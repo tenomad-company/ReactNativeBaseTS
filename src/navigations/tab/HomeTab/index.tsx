@@ -1,7 +1,6 @@
-import {colors as AppColor} from '@/constants/style';
-
 import HomeScreen from '@/screens/Home';
 import ProfileScreen from '@/screens/Profile';
+import {AppColor} from '@/styles';
 import {
   BottomTabBarButtonProps,
   createBottomTabNavigator,
@@ -11,8 +10,13 @@ import React, {ClassicComponent, useRef} from 'react';
 import {StyleSheet, TouchableOpacity, ViewProps, ViewStyle} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {HomeTabParamList} from './type';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<HomeTabParamList>();
+
+type HomeTabRouteIconMap = {
+  [key in keyof HomeTabParamList]: string;
+};
 
 const HomeTabNavigator = () => {
   const {colorMode} = useColorMode();

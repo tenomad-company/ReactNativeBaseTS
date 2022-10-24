@@ -3,6 +3,7 @@ import {MaterialTopTabNavigationProp} from '@react-navigation/material-top-tabs'
 export type HomeTabParamList = {
   Home: undefined;
   Profile: {userId: string};
+  Plus: undefined;
 };
 
 export type HomeTabNavigationProp =
@@ -13,4 +14,5 @@ export const homeTabRoute: {
 } = {
   Home: 'Home',
   Profile: 'Profile',
+  Plus: 'Plus',
 };

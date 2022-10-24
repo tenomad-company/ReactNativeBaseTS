@@ -1,7 +1,6 @@
-import {colors} from '@/constants/style';
 import {RootNavigationProp} from '@/navigations/type';
 import {useNavigation} from '@react-navigation/native';
-import {HStack, Link, useColorMode} from 'native-base';
+import {HStack, Icon, Pressable, useColorMode} from 'native-base';
 import React, {useCallback, useMemo} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -17,14 +16,18 @@ function SettingLink() {
 
   return (
     <HStack space={2} alignItems="center">
-      <Link
+      <Pressable
         p={1}
         borderRadius={4}
-        bg={isLight ? colors.darkPrimary[500] : colors.primary[500]}
         onPress={goToSetting}
         aria-label={isLight ? 'switch to dark mode' : 'switch to light mode'}>
-        <Feather name="settings" color={'white'} size={16} />
-      </Link>
+        <Icon
+          as={Feather}
+          name="settings"
+          color={isLight ? 'text.light' : 'text.dark'}
+          size="md"
+        />
+      </Pressable>
     </HStack>
   );
 }
