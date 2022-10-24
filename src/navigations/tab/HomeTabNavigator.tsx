@@ -1,21 +1,41 @@
+import {colors as AppColor} from '@/constants/style';
+
 import HomeScreen from '@/screens/Home';
 import ProfileScreen from '@/screens/Profile';
-import React from 'react';
 import {
   BottomTabBarButtonProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
+import {useColorMode, View} from 'native-base';
+import React, {ClassicComponent, useRef} from 'react';
+import {StyleSheet, TouchableOpacity, ViewProps, ViewStyle} from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {StyleSheet, TouchableOpacity} from 'react-native';
-import {theme as nbTheme, useColorMode, useTheme, View} from 'native-base';
+
 const Tab = createBottomTabNavigator();
 
 const HomeTabNavigator = () => {
-  const {colors} = useTheme();
   const {colorMode} = useColorMode();
-  const backgroundBottom = colorMode === 'dark' ? '#303666' : 'white';
-  const background = colorMode === 'dark' ? '#282d55' : '#F2F2F3';
 
+  const backgroundBottom =
+    colorMode === 'dark'
+      ? AppColor.onBackground.dark
+      : AppColor.onBackground.light;
+  const background =
+    colorMode === 'dark' ? AppColor.background.dark : AppColor.background.light;
+
+  const homeRef = useRef<ClassicComponent<
+    Animatable.AnimatableProperties<ViewStyle> & ViewProps,
+    any
+  > | null>(null);
+  const profileRef = useRef<ClassicComponent<
+    Animatable.AnimatableProperties<ViewStyle> & ViewProps,
+    any
+  > | null>(null);
+  const plusRef = useRef<ClassicComponent<
+    Animatable.AnimatableProperties<ViewStyle> & ViewProps,
+    any
+  > | null>(null);
   return (
     <Tab.Navigator
       screenOptions={{
@@ -25,16 +45,47 @@ const HomeTabNavigator = () => {
           ...styles.shadow,
           backgroundColor: backgroundBottom,
         },
-        tabBarActiveTintColor: colors.primary[500],
+        tabBarActiveTintColor: AppColor.primary[500],
         tabBarShowLabel: false,
+      }}
+      screenListeners={{
+        state: e => {
+          switch (e?.data?.state?.index) {
+            case 1:
+              plusRef?.current?.rotate(800);
+              break;
+            case 0:
+              homeRef?.current?.bounceIn(400);
+              break;
+            default:
+              profileRef?.current?.bounceIn(400);
+              break;
+          }
+        },
       }}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
+          tabBarIcon: ({focused, color, size}) => {
+            if (!focused) {
+              return (
+                <MaterialCommunityIcons name="home" color={color} size={size} />
+              );
+            }
+            return (
+              <Animatable.View ref={_ref => (homeRef.current = _ref)}>
+                <View alignItems="center">
+                  <MaterialCommunityIcons
+                    name="home"
+                    color={color}
+                    size={size}
+                  />
+                  <View style={styles.activeTab} />
+                </View>
+              </Animatable.View>
+            );
+          },
         }}
       />
       <Tab.Screen
@@ -42,19 +93,28 @@ const HomeTabNavigator = () => {
         component={HomeScreen}
         options={{
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="plus" color={color} size={size} />
+            <Animatable.View ref={profileRef}>
+              <MaterialCommunityIcons name="plus" color={color} size={size} />
+            </Animatable.View>
           ),
           tabBarButton: (props: BottomTabBarButtonProps) => (
-            <View style={styles.customButtonTab(background)}>
-              <TouchableOpacity
-                {...props}
-                style={{
-                  ...styles.customTab,
-                  ...styles.shadow,
-                  backgroundColor: colors.primary[600],
-                }}>
-                <MaterialCommunityIcons name="plus" size={24} color={'white'} />
-              </TouchableOpacity>
+            <View
+              style={{...styles.customButtonTab, backgroundColor: background}}>
+              <Animatable.View ref={_ref => (plusRef.current = _ref)}>
+                <TouchableOpacity
+                  {...props}
+                  style={{
+                    ...styles.customTab,
+                    ...styles.shadow,
+                    backgroundColor: AppColor.primary[500],
+                  }}>
+                  <MaterialCommunityIcons
+                    name="plus"
+                    size={24}
+                    color={'white'}
+                  />
+                </TouchableOpacity>
+              </Animatable.View>
             </View>
           ),
         }}
@@ -63,9 +123,29 @@ const HomeTabNavigator = () => {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
-          ),
+          tabBarIcon: ({focused, color, size}) => {
+            if (!focused) {
+              return (
+                <MaterialCommunityIcons
+                  name="account"
+                  color={color}
+                  size={size}
+                />
+              );
+            }
+            return (
+              <Animatable.View ref={_ref => (profileRef.current = _ref)}>
+                <View alignItems="center">
+                  <MaterialCommunityIcons
+                    name="account"
+                    color={color}
+                    size={size}
+                  />
+                  <View style={styles.activeTab} />
+                </View>
+              </Animatable.View>
+            );
+          },
         }}
       />
     </Tab.Navigator>
@@ -96,20 +176,26 @@ const styles = StyleSheet.create({
 
     elevation: 10,
   },
-  customButtonTab: bg => ({
+  customButtonTab: {
     justifyContent: 'center',
     alignItems: 'center',
     width: 68,
     height: 68,
     borderRadius: 34,
     marginTop: -34,
-    backgroundColor: bg,
-  }),
+  },
   customTab: {
     justifyContent: 'center',
     alignItems: 'center',
     width: 50,
     height: 50,
     borderRadius: 50 / 2,
+  },
+  activeTab: {
+    borderRadius: 4,
+    width: 8,
+    height: 8,
+    margin: 8,
+    backgroundColor: AppColor.primary[400],
   },
 });

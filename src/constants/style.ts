@@ -12,6 +12,10 @@ export const colors = {
     dark: '#FFFFFF',
     light: '#282d55',
   },
+  onBackground: {
+    dark: '#303666',
+    light: '#ffff',
+  },
 };
 
 export const navTheme: Theme = {
@@ -74,3 +78,5 @@ export const theme = extendTheme({
     },
   },
 });
+
+export const AppColor = colors;
