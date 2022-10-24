@@ -4,7 +4,19 @@ import {theme as nbTheme} from 'native-base';
 const palletes = {
   ...nbTheme.colors,
 
-  darkBlue: {
+  light: {
+    50: '#ffffff',
+    100: '#e9eaee',
+    200: '#d4d5dd',
+    300: '#bec0cc',
+    400: '#a9abbb',
+    500: '#9396aa',
+    600: '#7e8199',
+    700: '#686c88',
+    800: '#525676',
+    900: '#3d4266',
+  },
+  dark: {
     50: '#9396aa',
     100: '#7e8199',
     200: '#686c88',
@@ -21,15 +33,14 @@ const palletes = {
 export const colors = {
   ...palletes,
 
-  primary: palletes.indigo,
+  primary: palletes.lightBlue,
   darkPrimary: palletes.amber,
 
+  lightText: palletes.white,
+  darkText: palletes.black,
+
   background: {
-    dark: palletes.darkBlue[500],
+    dark: palletes.dark[500],
     light: palletes.white,
-  },
-  text: {
-    dark: palletes.white,
-    light: palletes.darkBlue[500],
   },
 };

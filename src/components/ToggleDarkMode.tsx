@@ -2,8 +2,12 @@ import {HStack, Icon, Pressable, useColorMode} from 'native-base';
 import React, {useMemo} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 
+type Props = {
+  iconColor?: string;
+};
+
 // Color Switch Component
-function ToggleDarkMode() {
+function ToggleDarkMode({iconColor}: Props) {
   const {colorMode, toggleColorMode} = useColorMode();
   const isLight = useMemo(() => colorMode === 'light', [colorMode]);
 
@@ -17,7 +21,7 @@ function ToggleDarkMode() {
         <Icon
           as={Feather}
           name={isLight ? 'sun' : 'moon'}
-          color={isLight ? 'text.light' : 'text.dark'}
+          color={iconColor || (isLight ? 'darkText' : 'lightText')}
           size="md"
         />
       </Pressable>

@@ -26,18 +26,16 @@ const ProfileScreen = () => {
 
   return (
     <Box flex={1}>
-      <Box safeArea p={2} pb={8} bg="primary.200" _dark={{bg: 'darkBlue.400'}}>
+      <Box safeArea p={2} pb={8} bg="primary.400" _dark={{bg: 'dark.400'}}>
         <HStack space={2} justifyContent="space-between">
-          <SettingLink />
-          <ToggleDarkMode />
+          <SettingLink iconColor="lightText" />
+          <ToggleDarkMode iconColor="lightText" />
         </HStack>
 
-        <VStack space={2} alignItems="center">
+        <VStack space={1} alignItems="center">
           <Avatar size="2xl" source={{uri: user?.avatar}} />
-          <Heading>Truong Van Tien</Heading>
-          <Text color="coolGray.600" _dark={{color: 'warmGray.300'}}>
-            {user?.description}
-          </Text>
+          <Heading color="lightText">{user?.name}</Heading>
+          <Text color="lightText">{user?.description}</Text>
         </VStack>
       </Box>
 
@@ -76,11 +74,24 @@ const ItemMenu = ({
         shadow={2}
         borderRadius={8}
         backgroundColor="background.light"
-        _dark={{backgroundColor: 'background.dark'}}
+        _dark={{backgroundColor: 'dark.300'}}
         alignItems="center">
-        <Icon name={icon} as={AntDesign} size="md" ml={1} />
+        <Icon
+          name={icon}
+          as={AntDesign}
+          size="md"
+          ml={1}
+          color={'darkText'}
+          _dark={{color: 'lightText'}}
+        />
         <Text flex={1}>{title}</Text>
-        <Icon name="right" as={AntDesign} size="md" />
+        <Icon
+          name="right"
+          as={AntDesign}
+          size="md"
+          color={'darkText'}
+          _dark={{color: 'lightText'}}
+        />
       </HStack>
     </Pressable>
   );

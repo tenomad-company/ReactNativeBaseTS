@@ -7,8 +7,8 @@ export const navTheme: Theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: colors.primary[500],
-    text: colors.text.light,
+    primary: colors.primary[400],
+    text: colors.darkText,
     card: colors.background.light,
     background: colors.background.light,
   },
@@ -18,8 +18,8 @@ export const navDarkTheme: Theme = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
-    primary: colors.darkPrimary[500],
-    text: colors.text.dark,
+    primary: colors.darkPrimary[400],
+    text: colors.lightText,
     card: colors.background.dark,
     background: colors.background.dark,
   },
@@ -35,16 +35,16 @@ export const theme = extendTheme({
           _dark: {
             borderColor: 'muted.400',
             _hover: {
-              borderColor: 'darkPrimary.500',
+              borderColor: 'darkPrimary.400',
             },
             _focus: {
-              borderColor: 'darkPrimary.500',
-              _hover: {borderColor: 'darkPrimary.500'},
+              borderColor: 'darkPrimary.400',
+              _hover: {borderColor: 'darkPrimary.400'},
               _stack: {
                 style: {
                   outlineWidth: '1px',
                   outlineColor: `${
-                    props.focusOutlineColor || 'darkPrimary.500'
+                    props.focusOutlineColor || 'darkPrimary.400'
                   }`,
                   outlineStyle: 'solid',
                 },

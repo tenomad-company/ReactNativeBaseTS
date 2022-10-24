@@ -4,7 +4,11 @@ import {HStack, Icon, Pressable, useColorMode} from 'native-base';
 import React, {useCallback, useMemo} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 
-function SettingLink() {
+type Props = {
+  iconColor?: string;
+};
+
+function SettingLink({iconColor}: Props) {
   const navigation = useNavigation<RootNavigationProp>();
   const {colorMode} = useColorMode();
   const isLight = useMemo(() => colorMode === 'light', [colorMode]);
@@ -24,7 +28,7 @@ function SettingLink() {
         <Icon
           as={Feather}
           name="settings"
-          color={isLight ? 'text.light' : 'text.dark'}
+          color={iconColor || (isLight ? 'darkText' : 'lightText')}
           size="md"
         />
       </Pressable>
