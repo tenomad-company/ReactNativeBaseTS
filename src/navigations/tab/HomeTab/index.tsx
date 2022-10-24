@@ -6,17 +6,24 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {useColorMode, View} from 'native-base';
-import React, {ClassicComponent, useRef} from 'react';
-import {StyleSheet, TouchableOpacity, ViewProps, ViewStyle} from 'react-native';
+import React, {useRef} from 'react';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {HomeTabParamList} from './type';
+import {HomeTabParamList, homeTabRoute} from './type';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 
 type HomeTabRouteIconMap = {
   [key in keyof HomeTabParamList]: string;
 };
+
+interface TabProps {
+  name: string;
+  iconName: string;
+  component: React.ComponentType<any>;
+  ref: any;
+}
 
 const HomeTabNavigator = () => {
   const {colorMode} = useColorMode();
@@ -28,18 +35,102 @@ const HomeTabNavigator = () => {
   const background =
     colorMode === 'dark' ? AppColor.background.dark : AppColor.background.light;
 
-  const homeRef = useRef<ClassicComponent<
-    Animatable.AnimatableProperties<ViewStyle> & ViewProps,
-    any
-  > | null>(null);
-  const profileRef = useRef<ClassicComponent<
-    Animatable.AnimatableProperties<ViewStyle> & ViewProps,
-    any
-  > | null>(null);
-  const plusRef = useRef<ClassicComponent<
-    Animatable.AnimatableProperties<ViewStyle> & ViewProps,
-    any
-  > | null>(null);
+  // define tabs screen
+  const Tabs: TabProps[] = [
+    {
+      name: homeTabRoute.Home,
+      component: HomeScreen,
+      iconName: 'home',
+      ref: useRef(null),
+    },
+    {
+      name: homeTabRoute.Plus,
+      component: HomeScreen,
+      iconName: 'plus',
+      ref: useRef(null),
+    },
+    {
+      name: homeTabRoute.Profile,
+      component: ProfileScreen,
+      iconName: 'account',
+      ref: useRef(null),
+    },
+  ];
+
+  const _renderTab = (tab: TabProps, index: number) => {
+    let customButton =
+      index === 1
+        ? {
+            tabBarButton: (props: BottomTabBarButtonProps) => (
+              <View
+                style={{
+                  ...styles.customButtonTab,
+                  backgroundColor: background,
+                }}>
+                <Animatable.View ref={_ref => (tab.ref.current = _ref)}>
+                  <TouchableOpacity
+                    {...props}
+                    style={{
+                      ...styles.customTab,
+                      ...styles.shadow,
+                      backgroundColor: AppColor.primary[500],
+                    }}>
+                    <MaterialCommunityIcons
+                      name={tab.iconName}
+                      size={24}
+                      color={'white'}
+                    />
+                  </TouchableOpacity>
+                </Animatable.View>
+              </View>
+            ),
+          }
+        : null;
+    return (
+      <Tab.Screen
+        listeners={{
+          focus: () => {
+            // change more animation https://github.com/oblador/react-native-animatable
+            if (index === 1) {
+              tab.ref.current?.rotate(400);
+            } else {
+              tab.ref.current?.flipInY(400);
+            }
+          },
+        }}
+        key={tab.name}
+        name={tab.name}
+        component={tab.component}
+        options={{
+          tabBarIcon: ({focused, color, size}) => {
+            if (!focused) {
+              return (
+                <MaterialCommunityIcons
+                  name={tab.iconName}
+                  color={color}
+                  size={size}
+                />
+              );
+            }
+            return (
+              <Animatable.View ref={_ref => (tab.ref.current = _ref)}>
+                <View alignItems="center">
+                  <MaterialCommunityIcons
+                    name={tab.iconName}
+                    color={color}
+                    size={size}
+                  />
+                  <View style={styles.activeTab} />
+                </View>
+              </Animatable.View>
+            );
+          },
+          ...customButton,
+        }}
+      />
+    );
+  };
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -51,107 +142,8 @@ const HomeTabNavigator = () => {
         },
         tabBarActiveTintColor: AppColor.primary[500],
         tabBarShowLabel: false,
-      }}
-      screenListeners={{
-        state: e => {
-          switch (e?.data?.state?.index) {
-            case 1:
-              plusRef?.current?.rotate(800);
-              break;
-            case 0:
-              homeRef?.current?.bounceIn(400);
-              break;
-            default:
-              profileRef?.current?.bounceIn(400);
-              break;
-          }
-        },
       }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({focused, color, size}) => {
-            if (!focused) {
-              return (
-                <MaterialCommunityIcons name="home" color={color} size={size} />
-              );
-            }
-            return (
-              <Animatable.View ref={_ref => (homeRef.current = _ref)}>
-                <View alignItems="center">
-                  <MaterialCommunityIcons
-                    name="home"
-                    color={color}
-                    size={size}
-                  />
-                  <View style={styles.activeTab} />
-                </View>
-              </Animatable.View>
-            );
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Plus"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <Animatable.View ref={profileRef}>
-              <MaterialCommunityIcons name="plus" color={color} size={size} />
-            </Animatable.View>
-          ),
-          tabBarButton: (props: BottomTabBarButtonProps) => (
-            <View
-              style={{...styles.customButtonTab, backgroundColor: background}}>
-              <Animatable.View ref={_ref => (plusRef.current = _ref)}>
-                <TouchableOpacity
-                  {...props}
-                  style={{
-                    ...styles.customTab,
-                    ...styles.shadow,
-                    backgroundColor: AppColor.primary[500],
-                  }}>
-                  <MaterialCommunityIcons
-                    name="plus"
-                    size={24}
-                    color={'white'}
-                  />
-                </TouchableOpacity>
-              </Animatable.View>
-            </View>
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          tabBarIcon: ({focused, color, size}) => {
-            if (!focused) {
-              return (
-                <MaterialCommunityIcons
-                  name="account"
-                  color={color}
-                  size={size}
-                />
-              );
-            }
-            return (
-              <Animatable.View ref={_ref => (profileRef.current = _ref)}>
-                <View alignItems="center">
-                  <MaterialCommunityIcons
-                    name="account"
-                    color={color}
-                    size={size}
-                  />
-                  <View style={styles.activeTab} />
-                </View>
-              </Animatable.View>
-            );
-          },
-        }}
-      />
+      {Tabs.map(_renderTab)}
     </Tab.Navigator>
   );
 };
