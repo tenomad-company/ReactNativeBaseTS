@@ -1,6 +1,22 @@
 import {DarkTheme, DefaultTheme, Theme} from '@react-navigation/native';
-import {extendTheme} from 'native-base';
-import {colors} from './colors';
+import {extendTheme, theme as nbTheme} from 'native-base';
+
+export const colors = {
+  primary: nbTheme.colors.indigo,
+  darkPrimary: nbTheme.colors.amber,
+  background: {
+    dark: '#282d55',
+    light: '#F2F2F3',
+  },
+  text: {
+    dark: '#FFFFFF',
+    light: '#282d55',
+  },
+  onBackground: {
+    dark: '#303666',
+    light: '#ffff',
+  },
+};
 
 // Navigation Theme
 export const navTheme: Theme = {
@@ -56,3 +72,5 @@ export const theme = extendTheme({
     },
   },
 });
+
+export const AppColor = colors;

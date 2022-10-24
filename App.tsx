@@ -8,7 +8,7 @@
  * @format
  */
 
-import useColorModeManager from '@Hooks/useColorModeManager';
+import useColorModeManager from '@/hooks/useColorModeManager';
 import useTransparentStatusBar from '@Hooks/useTransparentStatusBar';
 import RootNavigator from '@Navigations/RootNavigator';
 import {NavigationContainer} from '@react-navigation/native';
