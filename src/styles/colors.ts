@@ -1,6 +1,7 @@
 import {theme as nbTheme} from 'native-base';
 
-// /node_modules/native-base/src/theme/base/colors.ts
+// ../node_modules/native-base/src/theme/base/colors.ts
+
 const palletes = {
   ...nbTheme.colors,
 
@@ -33,7 +34,7 @@ const palletes = {
 export const colors = {
   ...palletes,
 
-  primary: palletes.lightBlue,
+  primary: palletes.indigo,
   darkPrimary: palletes.amber,
 
   lightText: palletes.white,
@@ -41,6 +42,11 @@ export const colors = {
 
   background: {
     dark: palletes.dark[500],
+    light: palletes.white,
+  },
+
+  onBackground: {
+    dark: '#303666',
     light: palletes.white,
   },
 };

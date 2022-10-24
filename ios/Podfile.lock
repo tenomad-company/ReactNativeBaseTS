@@ -726,7 +726,7 @@ SPEC CHECKSUMS:
   ReactCommon: 095366164a276d91ea704ce53cb03825c487a3f2
   RNCAsyncStorage: d81ee5c3db1060afd49ea7045ad460eff82d2b7d
   RNPermissions: de7b7c3fe1680d974ac7a85e3e97aa539c0e68ea
-  RNReanimated: 35e1fd109a0ace9b0814fd594c5dd2c717b34bbd
+  RNReanimated: 6ea4cfe35f84618dd9072cf90d1dd412cee3acc3
   RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
@@ -735,4 +735,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a6030b9a18cf7373e0e01afec653d963a276e993
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
