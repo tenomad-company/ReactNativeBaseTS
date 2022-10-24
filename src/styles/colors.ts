@@ -23,6 +23,7 @@ const palletes = {
     200: '#686c88',
     300: '#525676',
     400: '#3d4266',
+    450: '#303666',
     500: '#282d55',
     600: '#24284c',
     700: '#202444',
@@ -46,7 +47,7 @@ export const colors = {
   },
 
   onBackground: {
-    dark: '#303666',
+    dark: palletes.dark[450],
     light: palletes.white,
   },
 };
