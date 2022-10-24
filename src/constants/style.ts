@@ -6,7 +6,7 @@ export const colors = {
   darkPrimary: nbTheme.colors.amber,
   background: {
     dark: '#282d55',
-    light: '#FFFFFF',
+    light: '#F2F2F3',
   },
   text: {
     dark: '#FFFFFF',
