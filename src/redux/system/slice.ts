@@ -5,12 +5,14 @@ import {ColorMode} from 'native-base';
 interface SystemState {
   colorMode: ColorMode;
   loading: boolean;
+  language?: string;
 }
 
 // Define the initial state using that type
 const initialState: SystemState = {
   colorMode: 'light',
   loading: false,
+  language: undefined,
 };
 
 export const systemSlice = createSlice({
@@ -19,6 +21,9 @@ export const systemSlice = createSlice({
   reducers: {
     setColorMode: (state: SystemState, action: PayloadAction<ColorMode>) => {
       state.colorMode = action.payload;
+    },
+    setLanguage: (state: SystemState, action: PayloadAction<string>) => {
+      state.language = action.payload;
     },
   },
 });

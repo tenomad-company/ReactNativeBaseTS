@@ -8,21 +8,29 @@
  * @format
  */
 
-import useColorModeManager from '@/hooks/useColorModeManager';
+import useColorModeManager from '@Hooks/useColorModeManager';
 import useTransparentStatusBar from '@Hooks/useTransparentStatusBar';
+import {initializeI18n} from '@Language';
 import RootNavigator from '@Navigations/RootNavigator';
 import {NavigationContainer} from '@react-navigation/native';
 import {persistor, store} from '@Redux/store';
 import {navDarkTheme, navTheme, theme} from '@Styles';
 import {NativeBaseProvider, useColorModeValue} from 'native-base';
-import React from 'react';
+import React, {useCallback} from 'react';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 
 const App = () => {
+  const onBeforeLift = useCallback(() => {
+    initializeI18n();
+  }, []);
+
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate
+        loading={null}
+        persistor={persistor}
+        onBeforeLift={onBeforeLift}>
         <NativeBaseContent />
       </PersistGate>
     </Provider>
