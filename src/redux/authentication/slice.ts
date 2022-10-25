@@ -1,6 +1,6 @@
 import {User} from '@/models/User';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {loginAsync} from './action';
+import {loginApi} from './action';
 
 // Define a type for the slice state
 interface AuthenticationState {
@@ -27,14 +27,14 @@ export const authenticationSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(loginAsync.pending, state => {
+      .addCase(loginApi.pending, state => {
         state.loading = true;
       })
-      .addCase(loginAsync.fulfilled, (state, action) => {
+      .addCase(loginApi.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
       })
-      .addCase(loginAsync.rejected, state => {
+      .addCase(loginApi.rejected, state => {
         state.loading = false;
       });
   },

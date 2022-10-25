@@ -3,7 +3,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 
 // https://redux-toolkit.js.org/api/createAsyncThunk#payloadcreator
 
-export const loginAsync = createAsyncThunk(
+export const loginApi = createAsyncThunk(
   'authentication/login',
   async (payload: {username: string; password: string}) => {
     try {

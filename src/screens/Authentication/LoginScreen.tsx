@@ -1,5 +1,5 @@
 import Button from '@/components/primitives/Button';
-import {loginAsync} from '@/redux/authentication';
+import {loginApi} from '@/redux/authentication';
 import {useAppDispatch} from '@/redux/hooks';
 import {useNavigation} from '@react-navigation/native';
 import {
@@ -22,7 +22,7 @@ const LoginScreen = () => {
   const [username, setUsername] = useState('77498623');
   const [password, setPassword] = useState('nINDXMn3QerQumz');
 
-  const onLogin = () => dispatch(loginAsync({username, password}));
+  const onLogin = () => dispatch(loginApi({username, password}));
 
   return (
     <Box safeArea flex={1} p={2} w="90%" mx="auto">

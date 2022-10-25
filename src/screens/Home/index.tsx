@@ -1,55 +1,97 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
-import PageContainer from '@/components/container/PageContainer';
-import {Box, Button, VStack} from 'native-base';
-
-// TEST
-function delay(time: number) {
-  return new Promise(res => setTimeout(res, time));
-}
+import {getFoodsApi} from '@/redux/food';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
+import {
+  AspectRatio,
+  Box,
+  Button,
+  FlatList,
+  Heading,
+  HStack,
+  Image,
+  ScrollView,
+  Skeleton,
+  Spacer,
+  Text,
+  VStack,
+} from 'native-base';
+import React, {useCallback, useEffect, useRef} from 'react';
+import {RefreshControl} from 'react-native';
 
 const HomeScreen = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(true);
-  const [pageInitlazited, setPageInitlazited] = useState(false);
-  const [didMount, setDidMount] = useState(false);
-  const initPage = async () => {
-    await delay(3000);
-    setPageInitlazited(true);
-  };
+  const dispatch = useAppDispatch();
+  const food = useAppSelector(state => state.food);
+  const reload = useCallback(() => dispatch(getFoodsApi()), [dispatch]);
 
-  const onRefresh = async () => {
-    await initPage();
-    setIsEmpty(false);
-  };
-  const onSubmitData = async () => {
-    setIsLoading(true);
-    await delay(3000);
-    setIsLoading(false);
-  };
+  const isRendered = useRef(false);
 
   useEffect(() => {
-    setDidMount(true);
-    initPage();
+    reload();
+    isRendered.current = true;
+  }, [reload]);
 
-    return () => setDidMount(false);
-  }, []);
-  if (!didMount) {
-    return null;
-  }
   return (
-    <PageContainer
-      isEmpty={isEmpty}
-      onRefresh={onRefresh}
-      initialized={pageInitlazited}
-      isLoading={isLoading}>
-      <Box alignContent={'center'} justifyContent="center" flex={1}>
-        <Text>Page has data</Text>
-        <VStack space={2} mt={8}>
-          <Button onPress={onSubmitData}>Submit data</Button>
+    <Box safeArea flex={1} p={2}>
+      <ScrollView
+        flex={1}
+        nestedScrollEnabled={true}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRendered.current && food.loading}
+            onRefresh={reload}
+          />
+        }>
+        <VStack mt={4} space={8} overflow="hidden" rounded="md">
+          <Heading size="sm">Address, District, City, Country</Heading>
+
+          <Box>
+            <FlatList
+              data={food.list}
+              scrollEnabled={false}
+              nestedScrollEnabled={true}
+              keyExtractor={(item, index) => `${item.id || index}`}
+              ItemSeparatorComponent={() => <Spacer h="2" />}
+              renderItem={({item, index}) => {
+                return (
+                  <HStack rounded="lg" space={2}>
+                    <Box flex={1}>
+                      <AspectRatio ratio={1}>
+                        <Image
+                          source={{uri: item.image}}
+                          alt={item.name}
+                          rounded="lg"
+                        />
+                      </AspectRatio>
+                    </Box>
+                    <Box flex={3}>
+                      <Heading fontSize="md" lineHeight="20px">
+                        {item.name}
+                      </Heading>
+                      <Text fontSize="sm" color="gray.500" numberOfLines={3}>
+                        {item.description}
+                      </Text>
+                    </Box>
+                  </HStack>
+                );
+              }}
+            />
+          </Box>
+
+          <Skeleton.Text lines={4} isLoaded={!food.loading}>
+            <Text fontSize={'md'} lineHeight={'20px'}>
+              {'aaaaaaaaa'}
+            </Text>
+          </Skeleton.Text>
+          <Skeleton
+            mb="4"
+            rounded="md"
+            startColor="primary.100"
+            isLoaded={!food.loading}>
+            <Button>Explore</Button>
+          </Skeleton>
         </VStack>
-      </Box>
-    </PageContainer>
+      </ScrollView>
+    </Box>
   );
 };
 

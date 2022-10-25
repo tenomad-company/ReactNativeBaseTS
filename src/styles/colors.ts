@@ -47,7 +47,7 @@ export const colors = {
   },
 
   onBackground: {
-    dark: palletes.dark[450],
+    dark: palletes.dark[400],
     light: palletes.white,
   },
 };
