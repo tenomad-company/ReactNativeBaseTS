@@ -2,52 +2,49 @@ import {theme as nbTheme} from 'native-base';
 
 // ../node_modules/native-base/src/theme/base/colors.ts
 
-const palletes = {
+const pallets = {
   ...nbTheme.colors,
-
-  light: {
-    50: '#ffffff',
-    100: '#e9eaee',
-    200: '#d4d5dd',
-    300: '#bec0cc',
-    400: '#a9abbb',
-    500: '#9396aa',
-    600: '#7e8199',
-    700: '#686c88',
-    800: '#525676',
-    900: '#3d4266',
+  primary: {
+    900: '#109059',
+    800: '#11955D',
+    700: '#12A366',
+    600: '#14B16F',
+    500: '#15BE77',
+    400: '#17CC80',
+    300: '#18DA89',
+    200: '#1CE691',
+    100: '#6FBC9B',
+    50: '#EBFBF3',
+  },
+  secondary: {
+    300: '#FEF8E0',
+    400: '#FFDEA4',
+    450: '#FFC668',
+    500: '#FFAD1D',
   },
   dark: {
-    50: '#9396aa',
-    100: '#7e8199',
-    200: '#686c88',
-    300: '#525676',
-    400: '#3d4266',
-    450: '#303666',
-    500: '#282d55',
-    600: '#24284c',
-    700: '#202444',
-    800: '#1c1f3b',
-    900: '#181b33',
+    50: '#0D0D0D',
+    100: '#232323',
+    200: '#383838',
+    300: '#4F4F4F',
+    400: '#676767',
+    500: '#808080',
+    600: '#9A9A9A',
+    700: '#B5B5B5',
+    800: '#D0D0D0',
+    900: '#EDEDED',
   },
 };
 
-export const colors = {
-  ...palletes,
-
-  primary: palletes.indigo,
-  darkPrimary: palletes.amber,
-
-  lightText: palletes.white,
-  darkText: palletes.black,
+export const appColors = {
+  ...pallets,
 
   background: {
-    dark: palletes.dark[500],
-    light: palletes.white,
+    dark: pallets.dark[50],
+    light: pallets.dark[900],
   },
-
-  onBackground: {
-    dark: palletes.dark[400],
-    light: palletes.white,
+  cardBg: {
+    dark: pallets.dark[100],
+    light: '#ffff',
   },
 };

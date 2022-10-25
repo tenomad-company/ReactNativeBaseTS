@@ -44,7 +44,7 @@ const HomeScreen = () => {
         <VStack mt={4} space={8} overflow="hidden" rounded="md">
           <Heading size="sm">Address, District, City, Country</Heading>
 
-          <Box>
+          {/* <Box>
             <FlatList
               data={food.list}
               scrollEnabled={false}
@@ -75,7 +75,7 @@ const HomeScreen = () => {
                 );
               }}
             />
-          </Box>
+          </Box> */}
 
           <Skeleton.Text lines={4} isLoaded={!food.loading}>
             <Text fontSize={'md'} lineHeight={'20px'}>

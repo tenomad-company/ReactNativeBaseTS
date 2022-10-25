@@ -11,7 +11,7 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {HomeTabParamList, homeTabRoute} from './type';
-
+import {useTheme} from '@react-navigation/native';
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 
 type HomeTabRouteIconMap = {
@@ -27,11 +27,8 @@ interface TabProps {
 
 const HomeTabNavigator = () => {
   const {colorMode} = useColorMode();
+  const {colors} = useTheme();
 
-  const backgroundBottom =
-    colorMode === 'dark'
-      ? AppColor.onBackground.dark
-      : AppColor.onBackground.light;
   const background =
     colorMode === 'dark' ? AppColor.background.dark : AppColor.background.light;
 
@@ -138,7 +135,8 @@ const HomeTabNavigator = () => {
         tabBarStyle: {
           ...styles.bottomContainer,
           ...styles.shadow,
-          backgroundColor: backgroundBottom,
+          // backgroundColor: backgroundBottom,
+          backgroundColor: colors.card,
         },
         tabBarActiveTintColor: AppColor.primary[500],
         tabBarShowLabel: false,
