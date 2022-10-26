@@ -1,3 +1,14 @@
 {
-  "Welcome to React": "Welcome to React and react-i18next"
+  "onboarding": {
+    "slogan1": "Find your Comfort \n Food here",
+    "slogan2": "Food Ninja is Where Your \n Comfort Food Lives",
+    "subSlogan1": "Here You Can find a chef or dish for every \n taste and color. Enjoy!",
+    "subSlogan2": "Enjoy a fast and smooth food delivery at \n your doorstep"
+  },
+  "home": {
+    "title": "Home"
+  },
+  "common": {
+    "next": "Next"
+  }
 }

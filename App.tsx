@@ -8,6 +8,7 @@
  * @format
  */
 
+import InitScreen from '@/screens/Initial/Initial';
 import useColorModeManager from '@Hooks/useColorModeManager';
 import useTransparentStatusBar from '@Hooks/useTransparentStatusBar';
 import {initializeI18n} from '@Language';
@@ -28,7 +29,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate
-        loading={null}
+        loading={<InitScreen />}
         persistor={persistor}
         onBeforeLift={onBeforeLift}>
         <NativeBaseContent />

@@ -35,7 +35,7 @@ const palletes = {
 export const colors = {
   ...palletes,
 
-  primary: palletes.indigo,
+  primary: palletes.emerald,
   darkPrimary: palletes.amber,
 
   lightText: palletes.white,

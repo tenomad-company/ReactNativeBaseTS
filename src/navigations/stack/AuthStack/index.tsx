@@ -2,13 +2,14 @@ import LoginScreen from '@/screens/Authentication/LoginScreen';
 import RegisterScreen from '@/screens/Authentication/RegisterScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
+import {hideHeaderOptions} from '../screenOption';
 import {AuthStackParamList} from './type';
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
 const AuthStackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={hideHeaderOptions}>
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
       {/* <Stack.Screen name="RegisterStep1" component={RegisterStep1Screen} /> */}

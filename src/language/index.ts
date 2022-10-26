@@ -45,7 +45,9 @@ const reduxPersistLanguageDetector: LanguageDetectorAsyncModule = {
 
 // NOTE: 2 - because of [1] - init after Redux-persist rehydrated
 export const initializeI18n = () => {
-  return i18n
+  if (i18n.isInitialized) return;
+
+  i18n
     .use(reduxPersistLanguageDetector)
     .use(initReactI18next)
     .init({
