@@ -8,18 +8,20 @@
  * @format
  */
 
-import InitScreen from '@/screens/Initial/Initial';
 import useColorModeManager from '@Hooks/useColorModeManager';
 import useTransparentStatusBar from '@Hooks/useTransparentStatusBar';
 import {initializeI18n} from '@Language';
 import RootNavigator from '@Navigations/RootNavigator';
 import {NavigationContainer} from '@react-navigation/native';
 import {persistor, store} from '@Redux/store';
+import InitScreen from '@Screens/Initial';
 import {navDarkTheme, navTheme, theme} from '@Styles';
 import {NativeBaseProvider, useColorModeValue} from 'native-base';
 import React, {useCallback} from 'react';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
+
+import '@Utils/ActivateLayoutAnimation';
 
 const App = () => {
   const onBeforeLift = useCallback(() => {

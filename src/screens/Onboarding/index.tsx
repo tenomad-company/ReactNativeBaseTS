@@ -1,9 +1,11 @@
 import Button from '@/components/primitives/Button';
+import {useBackHandler} from '@/hooks/useBackHandler';
 import {AppNavigationProps} from '@/navigations/route';
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {Box, Heading, Image, Text, VStack} from 'native-base';
 import React, {useCallback, useState} from 'react';
 import {useTranslation} from 'react-i18next';
+import {LayoutAnimation} from 'react-native';
 
 const images: any = {
   '1': {
@@ -18,6 +20,7 @@ const images: any = {
 
 const Onboarding = () => {
   const navigation = useNavigation<AppNavigationProps>();
+  const isFocused = useIsFocused();
   const {t} = useTranslation();
   const [step, setStep] = useState(1);
 
@@ -27,8 +30,21 @@ const Onboarding = () => {
       return;
     }
 
+    LayoutAnimation.easeInEaseOut();
     setStep(step + 1);
   }, [navigation, step]);
+
+  const onBack = useCallback(() => {
+    if (!isFocused) return false;
+
+    if (step === 1) return true;
+
+    LayoutAnimation.spring();
+    setStep(step - 1);
+    return true;
+  }, [isFocused, step]);
+
+  useBackHandler(onBack);
 
   return (
     <Box safeArea flex={1}>
