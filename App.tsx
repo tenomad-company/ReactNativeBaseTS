@@ -23,6 +23,12 @@ import {PersistGate} from 'redux-persist/integration/react';
 
 import '@Utils/ActivateLayoutAnimation';
 
+const config = {
+  dependencies: {
+    'linear-gradient': require('react-native-linear-gradient').default,
+  },
+};
+
 const App = () => {
   const onBeforeLift = useCallback(() => {
     initializeI18n();
@@ -45,7 +51,10 @@ const NativeBaseContent = () => {
   const colorModeManager = useColorModeManager();
 
   return (
-    <NativeBaseProvider theme={theme} colorModeManager={colorModeManager}>
+    <NativeBaseProvider
+      theme={theme}
+      config={config}
+      colorModeManager={colorModeManager}>
       <NavigationContent />
     </NativeBaseProvider>
   );

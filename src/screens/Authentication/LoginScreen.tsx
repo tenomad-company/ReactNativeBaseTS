@@ -1,9 +1,14 @@
+import AppLogo from '@/components/AppLogo';
+import Container from '@/components/container/Container';
 import Button from '@/components/primitives/Button';
+import ToggleDarkMode from '@/components/ToggleDarkMode';
+import {AuthNavigationProp} from '@/navigations/stack/AuthStack/type';
 import {loginApi} from '@/redux/authentication';
 import {useAppDispatch} from '@/redux/hooks';
 import {useNavigation} from '@react-navigation/native';
+import {t} from 'i18next';
 import {
-  Box,
+  Center,
   FormControl,
   Heading,
   HStack,
@@ -13,11 +18,10 @@ import {
   VStack,
 } from 'native-base';
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
 
 const LoginScreen = () => {
   const dispatch = useAppDispatch();
-  const navigation = useNavigation();
+  const navigation = useNavigation<AuthNavigationProp>();
 
   const [username, setUsername] = useState('77498623');
   const [password, setPassword] = useState('nINDXMn3QerQumz');
@@ -25,20 +29,19 @@ const LoginScreen = () => {
   const onLogin = () => dispatch(loginApi({username, password}));
 
   return (
-    <Box safeArea flex={1} p={2} w="90%" mx="auto">
-      <Heading size="lg" color="primary.500" _dark={{color: 'amber.500'}}>
-        Welcome
-      </Heading>
-      <Heading
-        mt="1"
-        _dark={{color: 'warmGray.200'}}
-        color="coolGray.600"
-        fontWeight="medium"
-        size="xs">
-        Sign in to continue!
-      </Heading>
+    <Container flex={1} mx="auto">
+      <HStack safeArea px={2} justifyContent="space-between">
+        <ToggleDarkMode />
+      </HStack>
+      <Center height="1/3">
+        <AppLogo />
+      </Center>
 
-      <VStack space={3} mt="5">
+      <VStack space={3} p={6} mt="5">
+        <Heading size="md" alignSelf="center">
+          {t('login.description')}
+        </Heading>
+
         <FormControl>
           <FormControl.Label>Email ID</FormControl.Label>
           <Input onChangeText={setUsername} value={username} />
@@ -50,8 +53,8 @@ const LoginScreen = () => {
             _text={{
               fontSize: 'xs',
               fontWeight: '500',
-              color: 'indigo.500',
-              _dark: {color: 'amber.500'},
+              color: 'primary.500',
+              _dark: {color: 'darkPrimary.500'},
             }}
             alignSelf="flex-end"
             mt="1">
@@ -70,20 +73,18 @@ const LoginScreen = () => {
           </Text>
           <Link
             _text={{
-              color: 'indigo.500',
+              color: 'primary.500',
+              _dark: {color: 'darkPrimary.500'},
               fontWeight: 'medium',
               fontSize: 'sm',
-              _dark: {color: 'amber.500'},
             }}
-            onPress={() => navigation.navigate({name: 'Register'})}>
+            onPress={() => navigation.navigate('Register')}>
             Sign Up
           </Link>
         </HStack>
       </VStack>
-    </Box>
+    </Container>
   );
 };
 
 export default LoginScreen;
-
-const styles = StyleSheet.create({});

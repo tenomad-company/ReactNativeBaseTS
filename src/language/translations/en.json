@@ -8,6 +8,10 @@
   "home": {
     "title": "Home"
   },
+  "login": {
+    "title": "Login",
+    "description": "Login To Your Account"
+  },
   "common": {
     "next": "Next"
   }

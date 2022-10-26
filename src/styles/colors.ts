@@ -18,17 +18,17 @@ const palletes = {
     900: '#3d4266',
   },
   dark: {
-    50: '#9396aa',
-    100: '#7e8199',
-    200: '#686c88',
-    300: '#525676',
-    400: '#3d4266',
-    450: '#303666',
-    500: '#282d55',
-    600: '#24284c',
-    700: '#202444',
-    800: '#1c1f3b',
-    900: '#181b33',
+    50: '#656565',
+    100: '#5b5b5b',
+    200: '#515151',
+    300: '#484848',
+    400: '#3e3e3e',
+    450: '#343434',
+    500: '#2a2a2a',
+    600: '#202020',
+    700: '#171717',
+    800: '#0d0d0d',
+    900: '#030303',
   },
 };
 
@@ -42,12 +42,12 @@ export const colors = {
   darkText: palletes.black,
 
   background: {
-    dark: palletes.dark[500],
+    dark: palletes.dark[800],
     light: palletes.white,
   },
 
   onBackground: {
-    dark: palletes.dark[400],
+    dark: palletes.dark[600],
     light: palletes.white,
   },
 };
