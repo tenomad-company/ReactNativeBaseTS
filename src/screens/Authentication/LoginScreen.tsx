@@ -149,9 +149,7 @@ const LoginScreen = () => {
           <Link
             _text={{
               color: 'primary.500',
-              _dark: {color: 'darkPrimary.500'},
-              fontWeight: 'medium',
-              fontSize: 'sm',
+              fontWeight: 'bold',
             }}
             onPress={() => navigation.navigate('Register')}>
             {t('register.title')}
