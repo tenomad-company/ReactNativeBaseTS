@@ -51,7 +51,11 @@ export const IInput: FC<IInputProps & Props> = ({
         )}
         name={name ?? 'TextInput'}
       />
-      <FormControl.ErrorMessage>{errorMessage}</FormControl.ErrorMessage>
+      <FormControl.ErrorMessage
+        margin={0}
+        _text={{fontStyle: 'italic', fontSize: 'sm'}}>
+        {errorMessage}
+      </FormControl.ErrorMessage>
     </FormControl>
   );
 };

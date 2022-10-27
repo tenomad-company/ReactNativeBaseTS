@@ -19,14 +19,14 @@ const Container: FC<IBoxProps<ContainerProps>> = ({...props}) => {
   const image = useColorModeValue(bg.light, bg.dark);
 
   return (
-    <Box flex={1} w="full" {...props}>
-      <ImageBackground
-        key={image.alt}
-        source={image.img}
-        style={styles.background}>
+    <ImageBackground
+      key={image.alt}
+      source={image.img}
+      style={styles.background}>
+      <Box flex={1} w="full" {...props}>
         {props.children}
-      </ImageBackground>
-    </Box>
+      </Box>
+    </ImageBackground>
   );
 };
 export default Container;
