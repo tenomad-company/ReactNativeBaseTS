@@ -29,9 +29,17 @@ export const navDarkTheme: Theme = {
 export const theme = extendTheme({
   colors: colors,
   components: {
+    Button: {
+      baseStyle: (props: any) => {
+        return {
+          borderRadius: '2xl',
+        };
+      },
+    },
     Input: {
       baseStyle: (props: any) => {
         return {
+          borderRadius: '2xl',
           _dark: {
             borderColor: 'muted.400',
             _hover: {
