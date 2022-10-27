@@ -49,7 +49,7 @@ const HomeScreen = () => {
           />
         }>
         <VStack mt={4} space={8} overflow="hidden" rounded="md">
-          <Heading size="sm">Address, District, City, Country</Heading>
+          <Heading>{t('home.welcome')}</Heading>
 
           {/* <Box>
             <FlatList
