@@ -36,7 +36,7 @@ const palletes = {
     900: '#030303',
   },
 };
-
+// #F4F4F4
 export const appColors = {
   ...palletes,
 
@@ -47,12 +47,12 @@ export const appColors = {
   darkText: palletes.black,
 
   background: {
-    dark: palletes.dark[800],
+    dark: palletes.dark[900],
     light: palletes.white,
   },
 
   cardBg: {
-    dark: palletes.dark[600],
+    dark: palletes.dark[500],
     light: palletes.white,
   },
 };

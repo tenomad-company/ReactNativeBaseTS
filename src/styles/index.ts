@@ -11,6 +11,7 @@ export const navTheme: Theme = {
     text: appColors.darkText,
     card: appColors.cardBg.light,
     background: appColors.background.light,
+    border: '#F4F4F4',
   },
 };
 
@@ -36,32 +37,32 @@ export const theme = extendTheme({
         };
       },
     },
-    Input: {
-      baseStyle: (props: any) => {
-        return {
-          borderRadius: '2xl',
-          _dark: {
-            borderColor: 'muted.400',
-            _hover: {
-              borderColor: 'darkPrimary.400',
-            },
-            _focus: {
-              borderColor: 'darkPrimary.400',
-              _hover: {borderColor: 'darkPrimary.400'},
-              _stack: {
-                style: {
-                  outlineWidth: '1px',
-                  outlineColor: `${
-                    props.focusOutlineColor || 'darkPrimary.400'
-                  }`,
-                  outlineStyle: 'solid',
-                },
-              },
-            },
-          },
-        };
-      },
-    },
+    // Input: {
+    //   baseStyle: (props: any) => {
+    //     return {
+    //       borderRadius: '2xl',
+    //       _dark: {
+    //         borderColor: 'muted.400',
+    //         _hover: {
+    //           borderColor: 'darkPrimary.400',
+    //         },
+    //         _focus: {
+    //           borderColor: 'darkPrimary.400',
+    //           _hover: {borderColor: 'darkPrimary.400'},
+    //           _stack: {
+    //             style: {
+    //               outlineWidth: '1px',
+    //               outlineColor: `${
+    //                 props.focusOutlineColor || 'darkPrimary.400'
+    //               }`,
+    //               outlineStyle: 'solid',
+    //             },
+    //           },
+    //         },
+    //       },
+    //     };
+    //   },
+    // },
   },
 });
 

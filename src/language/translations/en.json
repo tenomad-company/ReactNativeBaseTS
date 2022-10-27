@@ -11,9 +11,20 @@
   },
   "login": {
     "title": "Login",
-    "description": "Login To Your Account"
+    "description": "Login To Your Account",
+    "newUser": "I am a new user",
+    "forgotPassword": "Forgot password"
+  },
+  "register": {
+    "title": "Register",
+    "hadAccount": "I had account"
   },
   "common": {
     "next": "Next"
+  },
+  "error": {
+    "usernameEmpty": "email is a required field",
+    "passwordEmpty": "password is a required field",
+    "passwordMin": "password must be at least 6 characters"
   }
 }

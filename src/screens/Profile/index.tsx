@@ -1,5 +1,6 @@
+// import SettingLink from '@/components/SettingLink';
+import ToggleDarkMode from '@/components/button/ToggleDarkMode';
 import SettingLink from '@/components/SettingLink';
-import ToggleDarkMode from '@/components/ToggleDarkMode';
 import {AppNavigationProps} from '@/navigations/route';
 import {logout} from '@/redux/authentication';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
