@@ -10,9 +10,20 @@
   },
   "login": {
     "title": "Đăng nhập",
-    "description": "Đăng nhập"
+    "description": "Login To Your Account",
+    "newUser": "Tôi là người mới ",
+    "forgotPassword": "Quên mật khẩu"
+  },
+  "register": {
+    "title": "Đăng ký",
+    "hadAccount": "Tôi đã có tài khoản"
   },
   "common": {
-    "next": "Sau"
+    "next": "Tiếp"
+  },
+  "error": {
+    "usernameEmpty": "Email không được trống",
+    "passwordEmpty": "Mật khẩu không được để trống",
+    "passwordMin": "Mật khẩu tối thiểu 6 ký tự"
   }
 }

@@ -5,6 +5,7 @@ import {ColorMode} from 'native-base';
 interface SystemState {
   colorMode: ColorMode;
   loading: boolean;
+  firstTime: boolean;
   language?: string;
 }
 
@@ -12,6 +13,7 @@ interface SystemState {
 const initialState: SystemState = {
   colorMode: 'light',
   loading: false,
+  firstTime: true,
   language: undefined,
 };
 
@@ -24,6 +26,9 @@ export const systemSlice = createSlice({
     },
     setLanguage: (state: SystemState, action: PayloadAction<string>) => {
       state.language = action.payload;
+    },
+    setFirstTime: (state: SystemState) => {
+      state.firstTime = false;
     },
   },
 });

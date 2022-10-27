@@ -15,7 +15,15 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const RootNavigator = () => {
   const navigation = useNavigation<RootNavigationProp>();
   const user = useAppSelector(state => state.authentication.user);
+  const firstTime = useAppSelector(state => state.system.firstTime);
+
   const navigationKey = useMemo(() => (user ? 'user' : 'guest'), [user]);
+
+  const initialRouteName = useMemo(() => {
+    if (firstTime) return 'OnBoarding';
+    if (user) return 'HomeTab';
+    return 'AuthStack';
+  }, [firstTime, user]);
 
   useUpdateEffect(() => {
     const name = user ? 'HomeTab' : 'AuthStack';
@@ -23,7 +31,7 @@ const RootNavigator = () => {
   }, [navigation, user]);
 
   return (
-    <Stack.Navigator initialRouteName={'OnBoarding'}>
+    <Stack.Navigator initialRouteName={initialRouteName}>
       <Stack.Screen
         name="OnBoarding"
         component={Onboarding}

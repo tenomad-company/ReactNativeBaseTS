@@ -7,7 +7,8 @@ import {Assets} from '@/constants/assets';
 import {LoginParams} from '@/models/params/AuthParams';
 import {AuthNavigationProp} from '@/navigations/stack/AuthStack/type';
 import {loginApi} from '@/redux/authentication';
-import {useAppDispatch} from '@/redux/hooks';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
+import {setFirstTime} from '@/redux/system';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {useNavigation, useTheme} from '@react-navigation/native';
 import {t} from 'i18next';
@@ -23,20 +24,26 @@ import {
   View,
   VStack,
 } from 'native-base';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as yup from 'yup';
 
-const schema = yup.object().shape({
-  email: yup.string().required(),
-  password: yup.string().min(6).max(32),
-});
-
 const LoginScreen = () => {
   const dispatch = useAppDispatch();
+  const firstTime = useAppSelector(state => state.system.firstTime);
+
   const navigation = useNavigation<AuthNavigationProp>();
   const {border, card, text} = useTheme().colors;
+
+  const schema = yup.object().shape({
+    email: yup.string().required(t('error.usernameEmpty')),
+    password: yup
+      .string()
+      .min(6, t('error.passwordMin'))
+      .max(32)
+      .required(t('error.passwordEmpty')),
+  });
 
   const {
     control,
@@ -76,6 +83,10 @@ const LoginScreen = () => {
       }
     />
   );
+  useEffect(() => {
+    if (firstTime) dispatch(setFirstTime());
+  }, [firstTime, dispatch]);
+
   return (
     <Container
       flex={1}
@@ -90,7 +101,7 @@ const LoginScreen = () => {
 
       <VStack space={3} mt="5">
         <Heading size="md" alignSelf="center">
-          {t('login.description')}
+          {t('login.title')}
         </Heading>
 
         <IInput
@@ -104,6 +115,7 @@ const LoginScreen = () => {
               source={Assets.icon.profile}
               size="16px"
               margin={'8px'}
+              resizeMode="contain"
             />
           }
         />
@@ -120,18 +132,19 @@ const LoginScreen = () => {
               source={Assets.icon.lock}
               size="16px"
               margin={'8px'}
+              resizeMode="contain"
             />
           }
         />
 
-        <IButton onPress={handleSubmit(onLogin)}>Sign in</IButton>
+        <IButton onPress={handleSubmit(onLogin)}>{t('login.title')}</IButton>
 
         <HStack mt="6" justifyContent="center">
           <Text
             fontSize="sm"
             color="coolGray.600"
             _dark={{color: 'warmGray.200'}}>
-            I'm a new user.{' '}
+            {t('login.newUser')}.{' '}
           </Text>
           <Link
             _text={{
@@ -141,7 +154,7 @@ const LoginScreen = () => {
               fontSize: 'sm',
             }}
             onPress={() => navigation.navigate('Register')}>
-            Sign Up
+            {t('register.title')}
           </Link>
         </HStack>
 
