@@ -1,0 +1,18 @@
+{
+  "onboarding": {
+    "slogan1": "Tìm sự thoải mái của bạn \n Thức ăn ở đây",
+    "slogan2": "Ninja thực phẩm là nơi của bạn \n Cuộc sống thực phẩm thoải mái",
+    "subSlogan1": "Ở đây bạn có thể tìm thấy một đầu bếp hoặc món ăn cho mọi \n hương vị và màu sắc. Hưởng!",
+    "subSlogan2": "Tận hưởng dịch vụ giao đồ ăn nhanh chóng và suôn sẻ tại \n ngưỡng cửa của bạn"
+  },
+  "home": {
+    "title": "Màn hình chính"
+  },
+  "login": {
+    "title": "Đăng nhập",
+    "description": "Đăng nhập"
+  },
+  "common": {
+    "next": "Sau"
+  }
+}

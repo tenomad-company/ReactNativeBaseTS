@@ -23,28 +23,36 @@ const pallets = {
     500: '#FFAD1D',
   },
   dark: {
-    50: '#0D0D0D',
-    100: '#232323',
-    200: '#383838',
-    300: '#4F4F4F',
-    400: '#676767',
-    500: '#808080',
-    600: '#9A9A9A',
-    700: '#B5B5B5',
-    800: '#D0D0D0',
-    900: '#EDEDED',
+    50: '#656565',
+    100: '#5b5b5b',
+    200: '#515151',
+    300: '#484848',
+    400: '#3e3e3e',
+    450: '#343434',
+    500: '#2a2a2a',
+    600: '#202020',
+    700: '#171717',
+    800: '#0d0d0d',
+    900: '#030303',
   },
 };
 
-export const appColors = {
-  ...pallets,
+export const colors = {
+  ...palletes,
+
+  primary: palletes.emerald,
+  darkPrimary: palletes.amber,
+
+  lightText: palletes.white,
+  darkText: palletes.black,
 
   background: {
-    dark: pallets.dark[50],
-    light: pallets.dark[900],
+    dark: palletes.dark[800],
+    light: palletes.white,
   },
-  cardBg: {
-    dark: pallets.dark[100],
-    light: '#ffff',
+
+  onBackground: {
+    dark: palletes.dark[600],
+    light: palletes.white,
   },
 };

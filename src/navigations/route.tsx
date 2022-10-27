@@ -21,12 +21,14 @@ const routeName: RouteNameMap = {
   AuthStack: 'AuthStack',
   HomeTab: 'HomeTab',
   Settings: 'Settings',
+  OnBoarding: 'OnBoarding',
 
   Home: 'Home',
   Profile: 'Profile',
 
   Login: 'Login',
   Register: 'Register',
+  Plus: 'Home',
 };
 
 export default routeName;

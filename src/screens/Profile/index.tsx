@@ -26,7 +26,7 @@ const ProfileScreen = () => {
 
   return (
     <Box flex={1}>
-      <Box safeArea p={2} pb={8} bg="primary.400" _dark={{bg: 'dark.400'}}>
+      <Box safeArea p={2} pb={8} bg="primary.400" _dark={{bg: 'dark.500'}}>
         <HStack space={2} justifyContent="space-between">
           <SettingLink iconColor="lightText" />
           <ToggleDarkMode iconColor="lightText" />
@@ -74,7 +74,7 @@ const ItemMenu = ({
         shadow={2}
         borderRadius={8}
         backgroundColor="background.light"
-        _dark={{backgroundColor: 'dark.300'}}
+        _dark={{backgroundColor: 'dark.600'}}
         alignItems="center">
         <Icon
           name={icon}

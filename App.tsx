@@ -8,21 +8,38 @@
  * @format
  */
 
-import useColorModeManager from '@/hooks/useColorModeManager';
+import useColorModeManager from '@Hooks/useColorModeManager';
 import useTransparentStatusBar from '@Hooks/useTransparentStatusBar';
+import {initializeI18n} from '@Language';
 import RootNavigator from '@Navigations/RootNavigator';
 import {NavigationContainer} from '@react-navigation/native';
 import {persistor, store} from '@Redux/store';
+import InitScreen from '@Screens/Initial';
 import {navDarkTheme, navTheme, theme} from '@Styles';
 import {NativeBaseProvider, useColorModeValue} from 'native-base';
-import React from 'react';
+import React, {useCallback} from 'react';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 
+import '@Utils/ActivateLayoutAnimation';
+
+const config = {
+  dependencies: {
+    'linear-gradient': require('react-native-linear-gradient').default,
+  },
+};
+
 const App = () => {
+  const onBeforeLift = useCallback(() => {
+    initializeI18n();
+  }, []);
+
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate
+        loading={<InitScreen />}
+        persistor={persistor}
+        onBeforeLift={onBeforeLift}>
         <NativeBaseContent />
       </PersistGate>
     </Provider>
@@ -34,7 +51,10 @@ const NativeBaseContent = () => {
   const colorModeManager = useColorModeManager();
 
   return (
-    <NativeBaseProvider theme={theme} colorModeManager={colorModeManager}>
+    <NativeBaseProvider
+      theme={theme}
+      config={config}
+      colorModeManager={colorModeManager}>
       <NavigationContent />
     </NativeBaseProvider>
   );

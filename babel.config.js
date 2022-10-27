@@ -15,6 +15,7 @@ module.exports = {
           '@Components': './src/components',
           '@Constants': './src/constants',
           '@Hooks': './src/hooks',
+          '@Language': './src/language',
           '@Models': './src/models',
           '@Navigations': './src/navigations',
           '@Redux': './src/redux',

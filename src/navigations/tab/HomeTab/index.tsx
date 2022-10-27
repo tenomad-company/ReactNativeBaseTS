@@ -96,7 +96,7 @@ const HomeTabNavigator = () => {
           },
         }}
         key={tab.name}
-        name={tab.name}
+        name={tab.name as any}
         component={tab.component}
         options={{
           tabBarIcon: ({focused, color, size}) => {

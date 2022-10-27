@@ -1,9 +1,10 @@
+import Onboarding from '@/screens/Onboarding';
+import useUpdateEffect from '@Hooks/useUpdateEffect';
 import {useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useAppSelector} from '@Redux/hooks';
 import SettingsScreen from '@Screens/Settings';
-import WelcomeScreen from '@Screens/Welcome';
-import React, {useEffect, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import AuthStack from './stack/AuthStack';
 import {hideHeaderOptions} from './stack/screenOption';
 import HomeTab from './tab/HomeTab';
@@ -16,16 +17,16 @@ const RootNavigator = () => {
   const user = useAppSelector(state => state.authentication.user);
   const navigationKey = useMemo(() => (user ? 'user' : 'guest'), [user]);
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     const name = user ? 'HomeTab' : 'AuthStack';
     navigation.reset({index: 0, routes: [{name}]});
   }, [navigation, user]);
 
   return (
-    <Stack.Navigator initialRouteName={user ? 'HomeTab' : 'Welcome'}>
+    <Stack.Navigator initialRouteName={'OnBoarding'}>
       <Stack.Screen
-        name="Welcome"
-        component={WelcomeScreen}
+        name="OnBoarding"
+        component={Onboarding}
         options={hideHeaderOptions}
       />
       <Stack.Screen
