@@ -53,11 +53,14 @@ const Onboarding = () => {
           key={images[step].alt}
           source={images[step].img}
           alt={images[step].alt}
-          resizeMode="cover"
+          w="full"
+          h="full"
         />
       </Box>
       <VStack flex={1} space="md" alignItems="center" justifyContent="center">
-        <Heading textAlign="center">{t(`onboarding.slogan${step}`)}</Heading>
+        <Heading size="xl" textAlign="center">
+          {t(`onboarding.slogan${step}`)}
+        </Heading>
         <Text textAlign="center">{t(`onboarding.subSlogan${step}`)}</Text>
         <Button
           borderRadius="lg"
