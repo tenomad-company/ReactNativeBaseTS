@@ -20,9 +20,6 @@ if (['darwin', 'linux'].includes(process.platform)) {
 // Make sure our Android native modules are androidX-happy
 run('npx jetify');
 
-run('react-native link');
-run('./bin/setupAndroidFonts');
-
 // On iOS, make sure CocoaPods are installed
 if (process.platform === 'darwin') {
   run('if [ -d "ios" ]; then cd ios && pod install && cd -; fi');
