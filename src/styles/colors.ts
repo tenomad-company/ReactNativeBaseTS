@@ -4,18 +4,23 @@ import {theme as nbTheme} from 'native-base';
 
 const palletes = {
   ...nbTheme.colors,
-
-  light: {
-    50: '#ffffff',
-    100: '#e9eaee',
-    200: '#d4d5dd',
-    300: '#bec0cc',
-    400: '#a9abbb',
-    500: '#9396aa',
-    600: '#7e8199',
-    700: '#686c88',
-    800: '#525676',
-    900: '#3d4266',
+  primary: {
+    900: '#109059',
+    800: '#11955D',
+    700: '#12A366',
+    600: '#14B16F',
+    500: '#15BE77',
+    400: '#17CC80',
+    300: '#18DA89',
+    200: '#1CE691',
+    100: '#6FBC9B',
+    50: '#EBFBF3',
+  },
+  secondary: {
+    300: '#FEF8E0',
+    400: '#FFDEA4',
+    450: '#FFC668',
+    500: '#FFAD1D',
   },
   dark: {
     50: '#656565',
@@ -32,10 +37,10 @@ const palletes = {
   },
 };
 
-export const colors = {
+export const appColors = {
   ...palletes,
 
-  primary: palletes.emerald,
+  // primary: palletes.emerald,
   darkPrimary: palletes.amber,
 
   lightText: palletes.white,
@@ -46,7 +51,7 @@ export const colors = {
     light: palletes.white,
   },
 
-  onBackground: {
+  cardBg: {
     dark: palletes.dark[600],
     light: palletes.white,
   },
