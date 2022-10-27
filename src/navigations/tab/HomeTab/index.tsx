@@ -6,7 +6,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {useColorMode, View} from 'native-base';
-import React, {useRef} from 'react';
+import React, {useCallback, useRef} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -54,79 +54,82 @@ const HomeTabNavigator = () => {
     },
   ];
 
-  const _renderTab = (tab: TabProps, index: number) => {
-    let customButton =
-      index === 1
-        ? {
-            tabBarButton: (props: BottomTabBarButtonProps) => (
-              <View
-                style={{
-                  ...styles.customButtonTab,
-                  backgroundColor: background,
-                }}>
-                <Animatable.View ref={_ref => (tab.ref.current = _ref)}>
-                  <TouchableOpacity
-                    {...props}
-                    style={{
-                      ...styles.customTab,
-                      ...styles.shadow,
-                      backgroundColor: AppColor.primary[500],
-                    }}>
-                    <MaterialCommunityIcons
-                      name={tab.iconName}
-                      size={24}
-                      color={'white'}
-                    />
-                  </TouchableOpacity>
-                </Animatable.View>
-              </View>
-            ),
-          }
-        : null;
-    return (
-      <Tab.Screen
-        listeners={{
-          focus: () => {
-            // change more animation https://github.com/oblador/react-native-animatable
-            if (index === 1) {
-              tab.ref.current?.rotate(400);
-            } else {
-              tab.ref.current?.flipInY(400);
+  const _renderTab = useCallback(
+    (tab: TabProps, index: number) => {
+      let customButton =
+        index === 1
+          ? {
+              tabBarButton: (props: BottomTabBarButtonProps) => (
+                <View
+                  style={{
+                    ...styles.customButtonTab,
+                    backgroundColor: background,
+                  }}>
+                  <Animatable.View ref={_ref => (tab.ref.current = _ref)}>
+                    <TouchableOpacity
+                      {...props}
+                      style={{
+                        ...styles.customTab,
+                        ...styles.shadow,
+                        backgroundColor: AppColor.primary[500],
+                      }}>
+                      <MaterialCommunityIcons
+                        name={tab.iconName}
+                        size={24}
+                        color={'white'}
+                      />
+                    </TouchableOpacity>
+                  </Animatable.View>
+                </View>
+              ),
             }
-          },
-        }}
-        key={tab.name}
-        name={tab.name as any}
-        component={tab.component}
-        options={{
-          tabBarIcon: ({focused, color, size}) => {
-            if (!focused) {
-              return (
-                <MaterialCommunityIcons
-                  name={tab.iconName}
-                  color={color}
-                  size={size}
-                />
-              );
-            }
-            return (
-              <Animatable.View ref={_ref => (tab.ref.current = _ref)}>
-                <View alignItems="center">
+          : null;
+      return (
+        <Tab.Screen
+          listeners={{
+            focus: () => {
+              // change more animation https://github.com/oblador/react-native-animatable
+              if (index === 1) {
+                tab.ref.current?.rotate(400);
+              } else {
+                tab.ref.current?.flipInY(400);
+              }
+            },
+          }}
+          key={tab.name}
+          name={tab.name as any}
+          component={tab.component}
+          options={{
+            tabBarIcon: ({focused, color, size}) => {
+              if (!focused) {
+                return (
                   <MaterialCommunityIcons
                     name={tab.iconName}
                     color={color}
                     size={size}
                   />
-                  <View style={styles.activeTab} />
-                </View>
-              </Animatable.View>
-            );
-          },
-          ...customButton,
-        }}
-      />
-    );
-  };
+                );
+              }
+              return (
+                <Animatable.View ref={_ref => (tab.ref.current = _ref)}>
+                  <View alignItems="center">
+                    <MaterialCommunityIcons
+                      name={tab.iconName}
+                      color={color}
+                      size={size}
+                    />
+                    <View style={styles.activeTab} />
+                  </View>
+                </Animatable.View>
+              );
+            },
+            ...customButton,
+          }}
+        />
+      );
+    },
+    [background],
+  );
 
   return (
     <Tab.Navigator
