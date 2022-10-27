@@ -6,7 +6,8 @@
     "subSlogan2": "Enjoy a fast and smooth food delivery at \n your doorstep"
   },
   "home": {
-    "title": "Home"
+    "title": "Home",
+    "welcome": "Find Your Favorite Food"
   },
   "login": {
     "title": "Login",

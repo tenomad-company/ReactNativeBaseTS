@@ -4,7 +4,8 @@ import Button from '@/components/primitives/Button';
 import ToggleDarkMode from '@/components/ToggleDarkMode';
 import {AuthNavigationProp} from '@/navigations/stack/AuthStack/type';
 import {loginApi} from '@/redux/authentication';
-import {useAppDispatch} from '@/redux/hooks';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
+import {setFirstTime} from '@/redux/system';
 import {useNavigation} from '@react-navigation/native';
 import {t} from 'i18next';
 import {
@@ -17,16 +18,22 @@ import {
   Text,
   VStack,
 } from 'native-base';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 const LoginScreen = () => {
   const dispatch = useAppDispatch();
+  const firstTime = useAppSelector(state => state.system.firstTime);
+
   const navigation = useNavigation<AuthNavigationProp>();
 
   const [username, setUsername] = useState('77498623');
   const [password, setPassword] = useState('nINDXMn3QerQumz');
 
   const onLogin = () => dispatch(loginApi({username, password}));
+
+  useEffect(() => {
+    if (firstTime) dispatch(setFirstTime());
+  }, [firstTime, dispatch]);
 
   return (
     <Container flex={1} mx="auto">
