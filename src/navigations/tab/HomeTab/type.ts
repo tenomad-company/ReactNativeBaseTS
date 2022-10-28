@@ -16,3 +16,11 @@ export const homeTabRoute: {
   Profile: 'Profile',
   Plus: 'Plus',
 };
+
+export type TabBarProps = {
+  name: string;
+  iconName: string;
+  component: React.ComponentType<any>;
+  ref: any;
+  icon?: any;
+};

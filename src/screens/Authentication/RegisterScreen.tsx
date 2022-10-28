@@ -23,7 +23,7 @@ import {
   View,
   VStack,
 } from 'native-base';
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as yup from 'yup';
