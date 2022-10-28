@@ -1,4 +1,5 @@
 import {Assets} from '@/constants/assets';
+import ChatTabScreen from '@/screens/Chat/ChatTab';
 import HomeScreen from '@/screens/Home';
 import ProfileScreen from '@/screens/Profile';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -30,9 +31,8 @@ const HomeTabNavigator = () => {
       icon: Assets.icon.buy,
     },
     {
-      name: homeTabRoute.Message,
-      component: ProfileScreen,
-
+      name: homeTabRoute.Chat,
+      component: ChatTabScreen,
       ref: useRef(null),
       icon: Assets.icon.message,
     },
