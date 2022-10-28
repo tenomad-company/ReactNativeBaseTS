@@ -13,7 +13,6 @@ const HomeTabNavigator = () => {
     {
       name: homeTabRoute.Home,
       component: HomeScreen,
-      iconName: 'home',
       ref: useRef(null),
       icon: Assets.icon.home,
     },
@@ -21,21 +20,19 @@ const HomeTabNavigator = () => {
     {
       name: homeTabRoute.Profile,
       component: ProfileScreen,
-      iconName: 'account',
       ref: useRef(null),
       icon: Assets.icon.profile,
     },
     {
-      name: 'Buy',
+      name: homeTabRoute.Buy,
       component: ProfileScreen,
-      iconName: 'account',
       ref: useRef(null),
       icon: Assets.icon.buy,
     },
     {
-      name: 'Message',
+      name: homeTabRoute.Message,
       component: ProfileScreen,
-      iconName: 'account',
+
       ref: useRef(null),
       icon: Assets.icon.message,
     },
@@ -44,7 +41,12 @@ const HomeTabNavigator = () => {
   const _renderTab = (tab: TabBarProps) => {
     return (
       <Tab.Screen
+        key={tab.name}
+        name={tab.name as any}
+        component={tab.component}
         listeners={{
+          /// animation when selecting tab
+          /// read more: https://github.com/oblador/react-native-animatable
           focus: () => {
             tab.ref.current?.animate(
               {
@@ -55,9 +57,6 @@ const HomeTabNavigator = () => {
             );
           },
         }}
-        key={tab.name}
-        name={tab.name as any}
-        component={tab.component}
       />
     );
   };

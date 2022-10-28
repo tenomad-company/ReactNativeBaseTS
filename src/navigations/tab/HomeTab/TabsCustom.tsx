@@ -1,32 +1,22 @@
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
-import {useFocusEffect, useTheme} from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
 import {HStack, Image, Text, View} from 'native-base';
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {TabBarProps} from './type';
-export default function TabsCustom(
-  props: BottomTabBarProps & {tabs: TabBarProps[]},
-) {
+interface TabsCustomProps {
+  tabs: TabBarProps[];
+}
+
+export default function TabsCustom(props: BottomTabBarProps & TabsCustomProps) {
   const {colors} = useTheme();
   const {state, descriptors, navigation, tabs} = props;
-
-  useFocusEffect(
-    React.useCallback(() => {
-      console.log('useFocusEffect', state);
-      // let index =
-    }, [state]),
-  );
 
   const getItem = ({isFocused = false, label = '', source = undefined}) => {
     if (!isFocused) {
       return (
-        <Image
-          alt={label as string}
-          source={source}
-          size="20px"
-          resizeMode="contain"
-        />
+        <Image alt={label} source={source} size="20px" resizeMode="contain" />
       );
     }
 
@@ -39,12 +29,7 @@ export default function TabsCustom(
           backgroundColor: 'primary.800',
         }}
         backgroundColor={'primary.100'}>
-        <Image
-          alt={label as string}
-          source={source}
-          size="20px"
-          resizeMode="contain"
-        />
+        <Image alt={label} source={source} size="20px" resizeMode="contain" />
         <Text color={colors.text}>{label}</Text>
       </HStack>
     );
@@ -86,7 +71,7 @@ export default function TabsCustom(
         return (
           <TouchableOpacity
             key={route.key}
-            hitSlop={{top: 12, bottom: 12, right: 12, left: 12}}
+            hitSlop={{top: 12, bottom: 12, right: 24, left: 24}}
             accessibilityRole="button"
             accessibilityState={isFocused ? {selected: true} : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
@@ -96,7 +81,11 @@ export default function TabsCustom(
             <Animatable.View
               ref={_ref => (tabs[index].ref.current = _ref)}
               style={styles.item}>
-              {getItem({label, source: tabs[index].icon, isFocused})}
+              {getItem({
+                label: `${label}`,
+                source: tabs[index].icon,
+                isFocused,
+              })}
             </Animatable.View>
           </TouchableOpacity>
         );
