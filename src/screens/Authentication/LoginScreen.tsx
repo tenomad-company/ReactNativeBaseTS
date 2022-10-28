@@ -113,8 +113,8 @@ const LoginScreen = () => {
             <Image
               alt="profile"
               source={Assets.icon.profile}
-              size="16px"
-              margin={'8px'}
+              size={14}
+              margin={2}
               resizeMode="contain"
             />
           }
@@ -130,8 +130,8 @@ const LoginScreen = () => {
             <Image
               alt="password"
               source={Assets.icon.lock}
-              size="16px"
-              margin={'8px'}
+              size={14}
+              margin={2}
               resizeMode="contain"
             />
           }

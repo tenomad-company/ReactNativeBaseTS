@@ -4,7 +4,7 @@ export type HomeTabParamList = {
   Home: undefined;
   Profile: {userId: string};
   Buy: undefined;
-  Message: undefined;
+  Chat: undefined;
 };
 
 export type HomeTabNavigationProp =
@@ -16,7 +16,7 @@ export const homeTabRoute: {
   Home: 'Home',
   Profile: 'Profile',
   Buy: 'Buy',
-  Message: 'Message',
+  Chat: 'Chat',
 };
 
 export type TabBarProps = {

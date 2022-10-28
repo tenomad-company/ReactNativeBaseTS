@@ -23,8 +23,8 @@ export default function TabsCustom(props: BottomTabBarProps & TabsCustomProps) {
     return (
       <HStack
         space={2}
-        padding="16px"
-        borderRadius={'12px'}
+        padding={4}
+        borderRadius={3}
         _dark={{
           backgroundColor: 'primary.800',
         }}
