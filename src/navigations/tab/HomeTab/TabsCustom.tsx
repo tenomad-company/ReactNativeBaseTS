@@ -16,7 +16,7 @@ export default function TabsCustom(props: BottomTabBarProps & TabsCustomProps) {
   const getItem = ({isFocused = false, label = '', source = undefined}) => {
     if (!isFocused) {
       return (
-        <Image alt={label} source={source} size="20px" resizeMode="contain" />
+        <Image alt={label} source={source} size={5} resizeMode="contain" />
       );
     }
 
@@ -24,12 +24,12 @@ export default function TabsCustom(props: BottomTabBarProps & TabsCustomProps) {
       <HStack
         space={2}
         padding={4}
-        borderRadius={3}
+        borderRadius={'xl'}
         _dark={{
           backgroundColor: 'primary.800',
         }}
         backgroundColor={'primary.100'}>
-        <Image alt={label} source={source} size="20px" resizeMode="contain" />
+        <Image alt={label} source={source} size={5} resizeMode="contain" />
         <Text color={colors.text}>{label}</Text>
       </HStack>
     );
