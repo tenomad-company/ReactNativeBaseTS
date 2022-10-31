@@ -115,5 +115,9 @@ const styles = StyleSheet.create({
 
     elevation: 12,
   },
-  item: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  item: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

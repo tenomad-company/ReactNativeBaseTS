@@ -1,5 +1,6 @@
 // import SettingLink from '@/components/SettingLink';
 import ToggleDarkMode from '@/components/button/ToggleDarkMode';
+import ListTitle from '@/components/container/ListTitle';
 import SettingLink from '@/components/SettingLink';
 import {AppNavigationProps} from '@/navigations/route';
 import {logout} from '@/redux/authentication';
@@ -8,6 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 import {
   Avatar,
   Box,
+  Button,
   Heading,
   HStack,
   Icon,
@@ -41,7 +43,7 @@ const ProfileScreen = () => {
       </Box>
 
       <VStack p={2} mt={-6} mx={2} space={2}>
-        {/* <Button onPress={onLogout}>Log out</Button> */}
+        <Button onPress={onLogout}>Log out</Button>
         <ItemMenu icon="user" title="Account" />
         <ItemMenu icon="calendar" title="Schedule" />
         <ItemMenu icon="shoppingcart" title="Shop" />
@@ -53,6 +55,7 @@ const ProfileScreen = () => {
           onPress={() => navigation.navigate('Settings')}
         />
         <ItemMenu icon="logout" title="Log out" onPress={onLogout} />
+        <ListTitle />
       </VStack>
     </Box>
   );

@@ -5,6 +5,7 @@ import {ImageSourcePropType} from 'react-native';
 
 interface ListTitleProps {
   rightComponent?: JSX.Element | JSX.Element[];
+  leftComponent?: JSX.Element | JSX.Element[];
   source?: ImageSourcePropType;
   title?: string;
   subTitle?: string;

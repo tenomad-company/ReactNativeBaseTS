@@ -26,6 +26,7 @@ import {
 } from 'native-base';
 import React, {useCallback, useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
+
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as yup from 'yup';
 
@@ -114,14 +115,14 @@ const LoginScreen = () => {
               alt="profile"
               source={Assets.icon.profile}
               size={14}
-              margin={2}
+              marginLeft={4}
               resizeMode="contain"
             />
           }
         />
         <IInput
           control={control}
-          name="password"
+          name="passwords"
           placeholder={'your password...'}
           errorMessage={errors?.password?.message}
           type={!isHiddenPass ? 'text' : 'password'}
@@ -131,7 +132,7 @@ const LoginScreen = () => {
               alt="password"
               source={Assets.icon.lock}
               size={14}
-              margin={2}
+              marginLeft={4}
               resizeMode="contain"
             />
           }
@@ -169,7 +170,11 @@ const LoginScreen = () => {
             borderColor={border}
             borderWidth={1}
             shadow={2}>
-            <HStack justifyContent="center" space={2} _text={{color: text}}>
+            <HStack
+              justifyContent="center"
+              alignItems="center"
+              space={2}
+              _text={{color: text}}>
               <Image alt="fb" source={Assets.icon.facebook} size="24px" />
               <Text>Facebook</Text>
             </HStack>
@@ -181,7 +186,11 @@ const LoginScreen = () => {
             borderColor={border}
             _text={{color: text}}
             backgroundColor={card}>
-            <HStack justifyContent="center" space={2} _text={{color: text}}>
+            <HStack
+              justifyContent="center"
+              alignItems="center"
+              space={2}
+              _text={{color: text}}>
               <Image alt="gg" source={Assets.icon.google} size="24px" />
               <Text>Google</Text>
             </HStack>
