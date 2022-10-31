@@ -50,10 +50,19 @@ const HomeTabNavigator = () => {
           focus: () => {
             tab.ref.current?.animate(
               {
-                0: {width: '0%'},
-                1: {width: '100%'},
+                0: {width: '0%', opacity: 0, marginTop: 0},
+                1: {width: '100%', opacity: 1, marginTop: -30},
               },
-              300,
+              400,
+            );
+          },
+          blur: () => {
+            tab.ref.current?.animate(
+              {
+                0: {width: '0%', height: '0%', opacity: 0},
+                1: {width: '100%', height: '100%', opacity: 1},
+              },
+              400,
             );
           },
         }}

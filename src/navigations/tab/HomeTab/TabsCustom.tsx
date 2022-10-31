@@ -21,17 +21,30 @@ export default function TabsCustom(props: BottomTabBarProps & TabsCustomProps) {
     }
 
     return (
-      <HStack
-        space={2}
-        padding={4}
-        borderRadius={'xl'}
-        _dark={{
-          backgroundColor: 'primary.800',
-        }}
-        backgroundColor={'primary.100'}>
-        <Image alt={label} source={source} size={5} resizeMode="contain" />
-        <Text color={colors.text}>{label}</Text>
-      </HStack>
+      <>
+        <View
+          width="56px"
+          height="56px"
+          borderRadius="full"
+          alignItems={'center'}
+          justifyContent="center"
+          shadow={1}
+          _dark={{
+            backgroundColor: 'primary.800',
+          }}
+          backgroundColor={'primary.500'}>
+          <Image
+            alt={label}
+            source={source}
+            size={5}
+            resizeMode="contain"
+            tintColor={colors.text}
+          />
+        </View>
+        <Text fontWeight="bold" color={colors.text} marginTop={2}>
+          {label}
+        </Text>
+      </>
     );
   };
 
