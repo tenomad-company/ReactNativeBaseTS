@@ -62,6 +62,8 @@ const ChatTabScreen: FC<ChatTabProps> = () => {
         </>
       ) : (
         <FlatList
+          contentContainerStyle={{flex: 1}}
+          scrollEnabled={false}
           data={data}
           renderItem={({item}) => {
             return (

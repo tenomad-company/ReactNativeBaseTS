@@ -45,22 +45,11 @@ const HomeTabNavigator = () => {
         name={tab.name as any}
         component={tab.component}
         listeners={{
-          /// animation when selecting tab
-          /// read more: https://github.com/oblador/react-native-animatable
-          focus: () => {
-            tab.ref.current?.animate(
-              {
-                0: {width: '0%', opacity: 0, marginTop: 0},
-                1: {width: '100%', opacity: 1, marginTop: -30},
-              },
-              400,
-            );
-          },
           blur: () => {
             tab.ref.current?.animate(
               {
-                0: {width: '0%', height: '0%', opacity: 0},
-                1: {width: '100%', height: '100%', opacity: 1},
+                0: {width: '0%', opacity: 0, marginTop: -30},
+                1: {width: '100%', opacity: 1, marginTop: 0},
               },
               400,
             );

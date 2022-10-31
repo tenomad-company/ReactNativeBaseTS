@@ -1,9 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import {useAppSelector} from '@/redux/hooks';
+import {showTabBar} from '@/redux/system';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {useTheme} from '@react-navigation/native';
-import {HStack, Image, Text, View} from 'native-base';
-import React from 'react';
+import {Image, Text, View} from 'native-base';
+import React, {useEffect, useRef} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import {useDispatch} from 'react-redux';
+
 import {TabBarProps} from './type';
 interface TabsCustomProps {
   tabs: TabBarProps[];
@@ -11,7 +16,48 @@ interface TabsCustomProps {
 
 export default function TabsCustom(props: BottomTabBarProps & TabsCustomProps) {
   const {colors} = useTheme();
+
   const {state, descriptors, navigation, tabs} = props;
+  const isShowTab = useAppSelector(store => store.system.showTabBar);
+
+  const tabRef = useRef<Animatable.View & View>(null);
+
+  useEffect(() => {
+    if (!isShowTab) {
+      tabRef.current?.animate(
+        {
+          0: {marginBottom: 0},
+          1: {marginBottom: -200},
+        },
+        400,
+      );
+    } else {
+      tabRef.current?.animate(
+        {
+          1: {marginBottom: 0},
+          0: {marginBottom: -200},
+        },
+        400,
+      );
+    }
+
+    console.log('[TabsCustom] isShowTab: ', isShowTab);
+  }, [isShowTab]);
+
+  useEffect(() => {
+    _handleAnimationTab(state.index);
+  }, [state]);
+
+  const _handleAnimationTab = (index: number) =>
+    /// animation when selecting tab
+    /// read more: https://github.com/oblador/react-native-animatable
+    tabs[index].ref.current?.animate(
+      {
+        0: {width: '0%', opacity: 0, marginTop: 0},
+        1: {width: '100%', opacity: 1, marginTop: -30},
+      },
+      400,
+    );
 
   const getItem = ({isFocused = false, label = '', source = undefined}) => {
     if (!isFocused) {
@@ -41,7 +87,7 @@ export default function TabsCustom(props: BottomTabBarProps & TabsCustomProps) {
             tintColor={colors.text}
           />
         </View>
-        <Text fontWeight="bold" color={colors.text} marginTop={2}>
+        <Text fontWeight="bold" color={'primary.400'} marginTop={2}>
           {label}
         </Text>
       </>
@@ -49,7 +95,9 @@ export default function TabsCustom(props: BottomTabBarProps & TabsCustomProps) {
   };
 
   return (
-    <View style={[styles.container, {backgroundColor: colors.card}]}>
+    <Animatable.View
+      style={[styles.container, {backgroundColor: colors.card}]}
+      ref={_ref => (tabRef.current = _ref)}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
         const label =
@@ -70,7 +118,7 @@ export default function TabsCustom(props: BottomTabBarProps & TabsCustomProps) {
 
           if (!isFocused && !event.defaultPrevented) {
             // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({name: route.name, merge: true});
+            navigation.navigate(route.name, {merge: true});
           }
         };
 
@@ -103,7 +151,7 @@ export default function TabsCustom(props: BottomTabBarProps & TabsCustomProps) {
           </TouchableOpacity>
         );
       })}
-    </View>
+    </Animatable.View>
   );
 }
 

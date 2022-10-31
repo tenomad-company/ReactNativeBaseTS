@@ -1,7 +1,20 @@
 import {useTheme} from '@react-navigation/native';
-import {HStack, Image, Skeleton, Spacer, Text, VStack} from 'native-base';
+import {
+  ChevronRightIcon,
+  HStack,
+  Image,
+  Skeleton,
+  Spacer,
+  Text,
+  VStack,
+} from 'native-base';
+import {InterfaceHStackProps} from 'native-base/lib/typescript/components/primitives/Stack/HStack';
 import React from 'react';
-import {ImageSourcePropType} from 'react-native';
+import {
+  GestureResponderEvent,
+  ImageSourcePropType,
+  TouchableOpacity,
+} from 'react-native';
 
 interface ListTitleProps {
   rightComponent?: JSX.Element | JSX.Element[];
@@ -10,6 +23,7 @@ interface ListTitleProps {
   title?: string;
   subTitle?: string;
   loading?: boolean;
+  onPress?: (event: GestureResponderEvent) => void;
 }
 
 export default ({
@@ -18,7 +32,10 @@ export default ({
   source,
   title,
   subTitle,
-}: ListTitleProps) => {
+  leftComponent,
+  onPress,
+  ...props
+}: ListTitleProps & InterfaceHStackProps) => {
   const {colors} = useTheme();
   if (loading) {
     return (
@@ -36,24 +53,31 @@ export default ({
   }
 
   return (
-    <HStack
-      backgroundColor={colors.card}
-      borderRadius="lg"
-      padding={4}
-      marginTop={4}
-      space={4}>
-      <Image
-        size={16}
+    <TouchableOpacity activeOpacity={0.6} onPress={onPress}>
+      <HStack
+        backgroundColor={colors.card}
         borderRadius="lg"
-        source={source}
-        alt={`listTitle-${title}`}
-      />
-      <VStack justifyContent={'center'} space={2}>
-        <Text fontWeight="bold">{title}</Text>
-        <Text color={'gray.400'}>{subTitle}</Text>
-      </VStack>
-      <Spacer />
-      {!!rightComponent && rightComponent}
-    </HStack>
+        padding={4}
+        alignItems="center"
+        marginTop={4}
+        space={4}
+        {...props}>
+        {leftComponent ?? (
+          <Image
+            size={16}
+            borderRadius="lg"
+            source={source}
+            alt={`listTitle-${title}`}
+          />
+        )}
+
+        <VStack justifyContent={'center'} space={2}>
+          <Text fontWeight="bold">{title}</Text>
+          {!!subTitle ?? <Text color={'gray.400'}>{subTitle}</Text>}
+        </VStack>
+        <Spacer />
+        {rightComponent ? rightComponent : <ChevronRightIcon />}
+      </HStack>
+    </TouchableOpacity>
   );
 };
