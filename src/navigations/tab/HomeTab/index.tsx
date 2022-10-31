@@ -10,7 +10,7 @@ const Tab = createBottomTabNavigator<HomeTabParamList>();
 
 const HomeTabNavigator = () => {
   // define tabs screen
-  const Tabs: TabBarProps[] = [
+  const tabs: TabBarProps[] = [
     {
       name: homeTabRoute.Home,
       component: HomeScreen,
@@ -61,9 +61,9 @@ const HomeTabNavigator = () => {
 
   return (
     <Tab.Navigator
-      tabBar={props => <TabsCustom {...props} tabs={Tabs} />}
+      tabBar={props => <TabsCustom {...props} tabs={tabs} />}
       screenOptions={{headerShown: false}}>
-      {Tabs.map(_renderTab)}
+      {tabs.map(_renderTab)}
     </Tab.Navigator>
   );
 };

@@ -1,13 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useAppSelector} from '@/redux/hooks';
-import {showTabBar} from '@/redux/system';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {useTheme} from '@react-navigation/native';
 import {Image, Text, View} from 'native-base';
 import React, {useEffect, useRef} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import {useDispatch} from 'react-redux';
 
 import {TabBarProps} from './type';
 interface TabsCustomProps {
