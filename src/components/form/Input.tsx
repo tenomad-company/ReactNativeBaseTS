@@ -36,8 +36,8 @@ export const IInput: FC<IInputProps & Props> = ({
           <Input
             backgroundColor={colors.card}
             variant="filled"
-            padding={'12px'}
-            borderRadius="16px"
+            padding={4}
+            borderRadius={'full'}
             type={placeholder}
             onBlur={onBlur}
             onChangeText={onChange}

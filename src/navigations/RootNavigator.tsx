@@ -1,10 +1,12 @@
+import {showTabBar} from '@/redux/system';
 import Onboarding from '@/screens/Onboarding';
 import useUpdateEffect from '@Hooks/useUpdateEffect';
 import {useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useAppSelector} from '@Redux/hooks';
 import SettingsScreen from '@Screens/Settings';
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
+import {useDispatch} from 'react-redux';
 import AuthStack from './stack/AuthStack';
 import {hideHeaderOptions} from './stack/screenOption';
 import HomeTab from './tab/HomeTab';
@@ -16,6 +18,8 @@ const RootNavigator = () => {
   const navigation = useNavigation<RootNavigationProp>();
   const user = useAppSelector(state => state.authentication.user);
   const firstTime = useAppSelector(state => state.system.firstTime);
+
+  const dispatch = useDispatch();
 
   const navigationKey = useMemo(() => (user ? 'user' : 'guest'), [user]);
 
@@ -29,6 +33,10 @@ const RootNavigator = () => {
     const name = user ? 'HomeTab' : 'AuthStack';
     navigation.reset({index: 0, routes: [{name}]});
   }, [navigation, user]);
+
+  useEffect(() => {
+    dispatch(showTabBar(true));
+  }, [dispatch]);
 
   return (
     <Stack.Navigator initialRouteName={initialRouteName}>

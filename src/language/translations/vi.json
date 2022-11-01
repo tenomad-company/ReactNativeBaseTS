@@ -12,7 +12,7 @@
   "login": {
     "title": "Đăng nhập",
     "description": "Login To Your Account",
-    "newUser": "Tôi là người mới ",
+    "newUser": "Tôi là người mới",
     "forgotPassword": "Quên mật khẩu"
   },
   "register": {

@@ -26,6 +26,7 @@ import {
 } from 'native-base';
 import React, {useCallback, useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
+
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as yup from 'yup';
 
@@ -113,8 +114,8 @@ const LoginScreen = () => {
             <Image
               alt="profile"
               source={Assets.icon.profile}
-              size="16px"
-              margin={'8px'}
+              size={14}
+              marginLeft={4}
               resizeMode="contain"
             />
           }
@@ -130,8 +131,8 @@ const LoginScreen = () => {
             <Image
               alt="password"
               source={Assets.icon.lock}
-              size="16px"
-              margin={'8px'}
+              size={14}
+              marginLeft={4}
               resizeMode="contain"
             />
           }
@@ -149,9 +150,7 @@ const LoginScreen = () => {
           <Link
             _text={{
               color: 'primary.500',
-              _dark: {color: 'darkPrimary.500'},
-              fontWeight: 'medium',
-              fontSize: 'sm',
+              fontWeight: 'bold',
             }}
             onPress={() => navigation.navigate('Register')}>
             {t('register.title')}
@@ -171,7 +170,11 @@ const LoginScreen = () => {
             borderColor={border}
             borderWidth={1}
             shadow={2}>
-            <HStack justifyContent="center" space={2} _text={{color: text}}>
+            <HStack
+              justifyContent="center"
+              alignItems="center"
+              space={2}
+              _text={{color: text}}>
               <Image alt="fb" source={Assets.icon.facebook} size="24px" />
               <Text>Facebook</Text>
             </HStack>
@@ -183,7 +186,11 @@ const LoginScreen = () => {
             borderColor={border}
             _text={{color: text}}
             backgroundColor={card}>
-            <HStack justifyContent="center" space={2} _text={{color: text}}>
+            <HStack
+              justifyContent="center"
+              alignItems="center"
+              space={2}
+              _text={{color: text}}>
               <Image alt="gg" source={Assets.icon.google} size="24px" />
               <Text>Google</Text>
             </HStack>

@@ -9,5 +9,9 @@ export const Assets = {
     profile: require('../../assets/icons/profile.png'),
     message: require('../../assets/icons/message.png'),
     lock: require('../../assets/icons/lock.png'),
+    home: require('../../assets/icons/home.png'),
+    buy: require('../../assets/icons/buy.png'),
+    wallet: require('../../assets/icons/wallet.png'),
+    voucher: require('../../assets/icons/voucher.png'),
   },
 };
