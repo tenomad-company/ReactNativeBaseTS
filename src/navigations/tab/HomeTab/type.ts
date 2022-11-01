@@ -3,7 +3,7 @@ import {MaterialTopTabNavigationProp} from '@react-navigation/material-top-tabs'
 export type HomeTabParamList = {
   Home: undefined;
   Profile: {userId: string};
-  Buy: undefined;
+  Order: undefined;
   Chat: undefined;
 };
 
@@ -15,7 +15,7 @@ export const homeTabRoute: {
 } = {
   Home: 'Home',
   Profile: 'Profile',
-  Buy: 'Buy',
+  Order: 'Order',
   Chat: 'Chat',
 };
 

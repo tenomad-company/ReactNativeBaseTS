@@ -157,14 +157,14 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 12,
+    padding: 16,
     position: 'absolute',
     bottom: 16,
-    right: 16,
-    left: 16,
+    right: 8,
+    left: 8,
     height: 72,
     borderRadius: 20,
-    shadowColor: '#2e312e',
+    shadowColor: '#374037',
     shadowOffset: {
       width: 0,
       height: 6,
