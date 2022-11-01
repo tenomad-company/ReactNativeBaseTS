@@ -13,3 +13,6 @@
 -keep class com.reactnativets.BuildConfig { *; }
 -keep class com.swmansion.reanimated.** { *; }
 -keep class com.facebook.react.turbomodule.** { *; }
+
+# svg
+-keep public class com.horcrux.svg.** {*;}
