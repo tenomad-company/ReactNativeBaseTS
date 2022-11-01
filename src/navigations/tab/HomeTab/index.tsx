@@ -1,10 +1,11 @@
+import React, {useRef} from 'react';
+
 import {Assets} from '@/constants/assets';
 import ChatTabScreen from '@/screens/Chat/ChatTab';
 import HomeScreen from '@/screens/Home';
 import OrderTabScreen from '@/screens/Order';
 import ProfileScreen from '@/screens/Profile';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import React, {useRef} from 'react';
 import TabsCustom from './TabsCustom';
 import {HomeTabParamList, homeTabRoute, TabBarProps} from './type';
 const Tab = createBottomTabNavigator<HomeTabParamList>();
