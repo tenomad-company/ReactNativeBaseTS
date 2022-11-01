@@ -2,6 +2,7 @@
 import ToggleDarkMode from '@/components/button/ToggleDarkMode';
 import Container from '@/components/container/Container';
 import ListTitle from '@/components/container/ListTitle';
+import IFlatList from '@/components/scroll/Flatlist';
 import SettingLink from '@/components/SettingLink';
 import {Assets} from '@/constants/assets';
 import {AppNavigationProps} from '@/navigations/route';
@@ -13,7 +14,6 @@ import {
   Avatar,
   Box,
   Divider,
-  FlatList,
   Heading,
   HStack,
   Icon,
@@ -22,7 +22,6 @@ import {
   VStack,
 } from 'native-base';
 import React, {useCallback, useEffect, useRef} from 'react';
-import {NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const ProfileScreen = () => {
@@ -116,35 +115,6 @@ const ProfileScreen = () => {
       onPress: onLogout,
     },
   ];
-  const isCloseToBottom = ({
-    layoutMeasurement,
-    contentOffset,
-    contentSize,
-  }: NativeScrollEvent) => {
-    const paddingToBottom = 20;
-
-    return (
-      layoutMeasurement.height + contentOffset.y >=
-      contentSize.height - paddingToBottom
-    );
-  };
-
-  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const currentPosition = event.nativeEvent.contentOffset.y;
-
-    if (currentPosition < 0) return;
-    const isEndPage = isCloseToBottom(event.nativeEvent);
-    const isScrollTop = positionRef.current - currentPosition >= 0;
-    if (isEndPage && !!currentPosition) {
-      dispatch(showTabBar(false));
-    } else {
-      dispatch(showTabBar(isScrollTop));
-    }
-
-    setTimeout(() => {
-      positionRef.current = currentPosition;
-    }, 400);
-  };
 
   useEffect(() => {
     dispatch(showTabBar(true));
@@ -152,9 +122,9 @@ const ProfileScreen = () => {
 
   return (
     <Container flex={1}>
-      <FlatList
+      <IFlatList
+        scrollRef={positionRef}
         ListHeaderComponent={_buildHeader()}
-        onScroll={handleScroll}
         data={menuItems}
         keyExtractor={(item, index) => `${item.title}${index}`}
         renderItem={({item, index}) => (
