@@ -32,6 +32,9 @@ const OrderTabScreen: FC<OrderTabProps> = () => {
       alignSelf={'flex-end'}>
       <Center
         backgroundColor="primary.800"
+        _light={{
+          backgroundColor: 'primary.100',
+        }}
         borderRadius={8}
         width={'32px'}
         height={'32px'}>
