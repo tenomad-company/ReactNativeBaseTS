@@ -1,12 +1,23 @@
 import {showTabBar} from '@/redux/system';
-import {FlatList} from 'native-base';
+import {Center, FlatList, Text, View} from 'native-base';
 import {InterfaceFlatListProps} from 'native-base/lib/typescript/components/basic/FlatList/types';
 import React, {FC} from 'react';
-import {NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
+import {
+  ActivityIndicator,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+} from 'react-native';
 import {useDispatch} from 'react-redux';
 
-const IFlatList: FC<InterfaceFlatListProps<any> & {scrollRef: any}> = ({
+interface IFlatListProps {
+  scrollRef: any;
+  loadMore?: () => void;
+  endPage?: boolean;
+}
+const IFlatList: FC<InterfaceFlatListProps<any> & IFlatListProps> = ({
   scrollRef,
+  loadMore,
+  endPage,
   ...props
 }) => {
   const dispatch = useDispatch();
@@ -40,7 +51,36 @@ const IFlatList: FC<InterfaceFlatListProps<any> & {scrollRef: any}> = ({
     }, 400);
   };
 
-  return <FlatList onScroll={handleScroll} onEndReached={} {...props} />;
+  const _buildFooter = () => {
+    if (endPage) {
+      return (
+        <Center p={4}>
+          <Text>End Page</Text>
+        </Center>
+      );
+    }
+    if (!loadMore) return <View />;
+
+    return (
+      <Center p={4}>
+        <ActivityIndicator />
+      </Center>
+    );
+  };
+
+  return (
+    <FlatList
+      onScroll={handleScroll}
+      onEndReachedThreshold={0.01}
+      onEndReached={info => {
+        if (info.distanceFromEnd < 100 && !endPage) {
+          !!loadMore ?? loadMore!();
+        }
+      }}
+      ListFooterComponent={_buildFooter()}
+      {...props}
+    />
+  );
 };
 
 export default IFlatList;
