@@ -6,7 +6,7 @@ interface ContainerProps {}
 
 const bg = {
   light: {
-    img: require('@Assets/images/background.png'),
+    img: require('@Assets/images/bg.png'),
     alt: 'bg',
   },
   dark: {

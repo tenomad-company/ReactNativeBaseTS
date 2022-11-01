@@ -122,7 +122,7 @@ const LoginScreen = () => {
         />
         <IInput
           control={control}
-          name="passwords"
+          name="password"
           placeholder={'your password...'}
           errorMessage={errors?.password?.message}
           type={!isHiddenPass ? 'text' : 'password'}
