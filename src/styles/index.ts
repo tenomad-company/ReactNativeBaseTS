@@ -1,6 +1,7 @@
 import {DarkTheme, DefaultTheme, Theme} from '@react-navigation/native';
 import {extendTheme} from 'native-base';
 import {appColors} from './colors';
+import {typography} from './typography';
 
 // Navigation Theme
 export const navTheme: Theme = {
@@ -29,6 +30,7 @@ export const navDarkTheme: Theme = {
 // NativeBase theme
 export const theme = extendTheme({
   colors: appColors,
+  typography,
   components: {
     Button: {
       baseStyle: (props: any) => {
