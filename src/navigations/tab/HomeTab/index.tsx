@@ -9,10 +9,13 @@ import OrderTabScreen from '@/screens/Order';
 import ProfileScreen from '@/screens/Profile';
 import TabBar from './TabBar';
 import {HomeTabParamList, homeTabRoute} from './type';
+import {useTranslation} from 'react-i18next';
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 
 const HomeTabNavigator = () => {
+  const {t} = useTranslation();
+
   return (
     <Tab.Navigator
       tabBar={props => <TabBar {...props} />}
@@ -22,6 +25,7 @@ const HomeTabNavigator = () => {
         name={homeTabRoute.Home}
         component={HomeScreen}
         options={{
+          tabBarLabel: t('home.title'),
           tabBarIcon: ({size}) => (
             <Image
               key={homeTabRoute.Home}
@@ -38,6 +42,7 @@ const HomeTabNavigator = () => {
         name={homeTabRoute.Profile}
         component={ProfileScreen}
         options={{
+          tabBarLabel: t('profile.title'),
           tabBarIcon: ({size}) => (
             <Image
               key={homeTabRoute.Profile}
@@ -54,6 +59,7 @@ const HomeTabNavigator = () => {
         name={homeTabRoute.Order}
         component={OrderTabScreen}
         options={{
+          tabBarLabel: t('order.title'),
           tabBarIcon: ({size}) => (
             <Image
               key={homeTabRoute.Order}
@@ -70,6 +76,7 @@ const HomeTabNavigator = () => {
         name={homeTabRoute.Chat}
         component={ChatTabScreen}
         options={{
+          tabBarLabel: t('chat.title'),
           tabBarIcon: ({size}) => (
             <Image
               key={homeTabRoute.Chat}

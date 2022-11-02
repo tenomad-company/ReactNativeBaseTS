@@ -9,6 +9,15 @@
     "title": "Home",
     "welcome": "Find Your Favorite Food"
   },
+  "profile": {
+    "title": "Profile"
+  },
+  "order": {
+    "title": "Order"
+  },
+  "chat": {
+    "title": "Chat"
+  },
   "login": {
     "title": "Login",
     "description": "Login To Your Account",
