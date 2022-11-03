@@ -1,24 +1,22 @@
 import {getFoodsApi} from '@/redux/food';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {widthNoSpace} from '@/styles/mixins';
-import {HALF_WIDTH} from '@/styles/spacing';
+import {FULL_WIDTH, HALF_WIDTH} from '@/styles/spacing';
 import FilterIcon from '@Assets/icons/filter.svg';
 import {
   AspectRatio,
   Box,
-  Button,
   FlatList,
   Heading,
   HStack,
   Icon,
+  Image,
   Input,
   Pressable,
   ScrollView,
-  Skeleton,
   Spacer,
-  VStack,
-  Image,
   Text,
+  VStack,
 } from 'native-base';
 import React, {useCallback, useEffect, useRef} from 'react';
 import {useTranslation} from 'react-i18next';
@@ -44,7 +42,7 @@ const HomeScreen = () => {
   }, [reload]);
 
   return (
-    <Box safeArea flex={1} p={2} mb={50}>
+    <Box safeArea flex={1} px={4} mb={50}>
       <ScrollView
         flex={1}
         flexGrow={1}
@@ -117,93 +115,151 @@ const HomeScreen = () => {
             <Heading fontSize="lg">{t('home.nearestRestaurant')}</Heading>
             <Text color="orange.500">{t('common.viewMore')}</Text>
           </HStack>
-          <AspectRatio>
-            <FlatList
-              data={food.list}
-              nestedScrollEnabled={true}
-              showsHorizontalScrollIndicator={false}
-              horizontal
-              keyExtractor={(item, index) => `${item.id || index}`}
-              w="full"
-              ItemSeparatorComponent={() => <Spacer w="2" />}
-              renderItem={({item, index}) => {
-                return (
-                  <VStack
-                    key={item.id}
-                    backgroundColor="primary.100"
-                    w={widthNoSpace(HALF_WIDTH, '2')}>
-                    <AspectRatio ratio={96 / 73}>
-                      <Image
-                        key={item.id}
-                        alt={item.name}
-                        source={{uri: item.image}}
-                        w="full"
-                      />
-                    </AspectRatio>
-                    <Heading fontSize="lg">{item.name}</Heading>
-                    <Text color="orange.500">{t('common.viewMore')}</Text>
+          <FlatList
+            data={food.list}
+            nestedScrollEnabled={true}
+            showsHorizontalScrollIndicator={false}
+            horizontal
+            keyExtractor={(item, index) => `${item.id || index}`}
+            w="full"
+            ItemSeparatorComponent={() => <Spacer w="4" />}
+            renderItem={({item}) => {
+              return (
+                <VStack
+                  key={item.id}
+                  p={3}
+                  space={8}
+                  w={widthNoSpace(HALF_WIDTH, '4')}
+                  borderRadius="xl"
+                  // justifyContent="space-between"
+                  backgroundColor={'white'}>
+                  <AspectRatio ratio={96 / 73}>
+                    <Image
+                      key={item.id}
+                      alt={item.name}
+                      source={{uri: item.image}}
+                      borderRadius="xl"
+                    />
+                  </AspectRatio>
+                  <VStack>
+                    <Heading fontSize="md" alignSelf="center" numberOfLines={1}>
+                      {item.name}
+                    </Heading>
+                    <Text
+                      fontSize="sm"
+                      color="gray.400"
+                      fontWeight="light"
+                      alignSelf="center">
+                      {8} mins
+                    </Text>
                   </VStack>
-                );
-              }}
-            />
-          </AspectRatio>
+                </VStack>
+              );
+            }}
+          />
 
           <HStack py={2} alignItems="center" justifyContent="space-between">
             <Heading fontSize="lg">{t('home.popularMenu')}</Heading>
             <Text color="orange.500">{t('common.viewMore')}</Text>
           </HStack>
+          <FlatList
+            data={food.list}
+            nestedScrollEnabled={true}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item, index) => `${item.id || index}`}
+            numColumns={2}
+            columnWrapperStyle={{justifyContent: 'space-between'}}
+            scrollEnabled={false}
+            w="full"
+            ItemSeparatorComponent={() => <Spacer w="4" h="4" />}
+            renderItem={({item}) => {
+              return (
+                <HStack
+                  key={item.id}
+                  p={2}
+                  space={3}
+                  w={widthNoSpace(FULL_WIDTH, '4')}
+                  borderRadius="xl"
+                  backgroundColor={'white'}>
+                  <VStack flex={1} justifyContent="center">
+                    <AspectRatio ratio={1}>
+                      <Image
+                        key={item.id}
+                        alt={item.name}
+                        source={{uri: item.image}}
+                        borderRadius="xl"
+                      />
+                    </AspectRatio>
+                  </VStack>
+                  <VStack flex={3} justifyContent="center">
+                    <Heading fontSize="md" numberOfLines={1}>
+                      {item.name}
+                    </Heading>
+                    <Text fontSize="sm" color="gray.400" numberOfLines={1}>
+                      {item.description}
+                    </Text>
+                  </VStack>
+                  <VStack
+                    flex={1}
+                    mr={2}
+                    justifyContent="center"
+                    alignItems="flex-end">
+                    <Heading fontSize="lg" color="amber.500" numberOfLines={1}>
+                      ${10}
+                    </Heading>
+                  </VStack>
+                </HStack>
+              );
+            }}
+          />
 
           <HStack py={2} alignItems="center" justifyContent="space-between">
             <Heading fontSize="lg">{t('home.popularRestaurant')}</Heading>
             <Text color="orange.500">{t('common.viewMore')}</Text>
           </HStack>
-
-          {/* <Box>
-            <FlatList
-              data={food.list}
-              scrollEnabled={false}
-              nestedScrollEnabled={true}
-              keyExtractor={(item, index) => `${item.id || index}`}
-              ItemSeparatorComponent={() => <Spacer h="2" />}
-              renderItem={({item, index}) => {
-                return (
-                  <HStack rounded="lg" space={2}>
-                    <Box flex={1}>
-                      <AspectRatio ratio={1}>
-                        <Image
-                          key={item.name}
-                          source={{uri: item.image}}
-                          alt={item.name}
-                          rounded="lg"
-                        />
-                      </AspectRatio>
-                    </Box>
-                    <Box flex={3}>
-                      <Heading fontSize="md" lineHeight="20px">
-                        {item.name}
-                      </Heading>
-                      <Text fontSize="sm" color="gray.500" numberOfLines={3}>
-                        {item.description}
-                      </Text>
-                    </Box>
-                  </HStack>
-                );
-              }}
-            />
-          </Box> */}
-
-          {/* <Skeleton.Text lines={4} isLoaded={!food.loading}>
-            <Text fontSize={'md'} lineHeight={'20px'}>
-              {'aaaaaaaaa'}
-            </Text>
-          </Skeleton.Text> */}
-          <Skeleton
-            mb="4"
-            rounded="md"
-            startColor="primary.100"
-            isLoaded={!food.loading}>
-            <Button onPress={changeLanguage}>Change language</Button>
-          </Skeleton>
+          <FlatList
+            data={food.list}
+            nestedScrollEnabled={true}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item, index) => `${item.id || index}`}
+            numColumns={2}
+            columnWrapperStyle={{justifyContent: 'space-between'}}
+            w="full"
+            ItemSeparatorComponent={() => <Spacer w="4" h="4" />}
+            renderItem={({item}) => {
+              return (
+                <VStack
+                  key={item.id}
+                  p={3}
+                  space={8}
+                  w={widthNoSpace(HALF_WIDTH, '3')}
+                  borderRadius="xl"
+                  // justifyContent="space-between"
+                  backgroundColor={'white'}>
+                  <AspectRatio ratio={96 / 73}>
+                    <Image
+                      key={item.id}
+                      alt={item.name}
+                      source={{uri: item.image}}
+                      borderRadius="xl"
+                    />
+                  </AspectRatio>
+                  <VStack>
+                    <Heading fontSize="md" alignSelf="center" numberOfLines={1}>
+                      {item.name}
+                    </Heading>
+                    <Text
+                      fontSize="sm"
+                      color="gray.400"
+                      fontWeight="light"
+                      alignSelf="center">
+                      {8} mins
+                    </Text>
+                  </VStack>
+                </VStack>
+              );
+            }}
+          />
         </VStack>
       </ScrollView>
     </Box>

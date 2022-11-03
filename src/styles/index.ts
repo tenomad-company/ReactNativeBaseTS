@@ -39,32 +39,6 @@ export const theme = extendTheme({
         };
       },
     },
-    // Input: {
-    //   baseStyle: (props: any) => {
-    //     return {
-    //       borderRadius: '2xl',
-    //       _dark: {
-    //         borderColor: 'muted.400',
-    //         _hover: {
-    //           borderColor: 'darkPrimary.400',
-    //         },
-    //         _focus: {
-    //           borderColor: 'darkPrimary.400',
-    //           _hover: {borderColor: 'darkPrimary.400'},
-    //           _stack: {
-    //             style: {
-    //               outlineWidth: '1px',
-    //               outlineColor: `${
-    //                 props.focusOutlineColor || 'darkPrimary.400'
-    //               }`,
-    //               outlineStyle: 'solid',
-    //             },
-    //           },
-    //         },
-    //       },
-    //     };
-    //   },
-    // },
   },
 });
 

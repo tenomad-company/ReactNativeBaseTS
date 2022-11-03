@@ -7,7 +7,10 @@
   },
   "home": {
     "title": "Home",
-    "welcome": "Find Your Favorite Food"
+    "welcome": "Find Your Favorite Food",
+    "nearestRestaurant": "Nearest Restaurant",
+    "popularMenu": "Popular Menu",
+    "popularRestaurant": "Popular Restaurant"
   },
   "profile": {
     "title": "Profile"
@@ -29,7 +32,8 @@
     "hadAccount": "I had account"
   },
   "common": {
-    "next": "Next"
+    "next": "Next",
+    "viewMore": "View More"
   },
   "error": {
     "usernameEmpty": "email is a required field",

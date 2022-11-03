@@ -19,7 +19,45 @@ export const typography = {
     '4xl': '3em',
     '5xl': '4em',
   },
-  fontConfig: {},
+  fontConfig: {
+    OpenSans: {
+      100: {
+        normal: 'OpenSans',
+        italic: 'OpenSans',
+      },
+      200: {
+        normal: 'OpenSans',
+        italic: 'OpenSans',
+      },
+      300: {
+        normal: 'OpenSans',
+        italic: 'OpenSans',
+      },
+      400: {
+        normal: 'OpenSans',
+        italic: 'OpenSans',
+      },
+      500: {
+        normal: 'OpenSans',
+      },
+      600: {
+        normal: 'OpenSans',
+        italic: 'OpenSans',
+      },
+      700: {
+        normal: 'OpenSans',
+        italic: 'OpenSans',
+      },
+      800: {
+        normal: 'OpenSans',
+        italic: 'OpenSans',
+      },
+      900: {
+        normal: 'OpenSans',
+        italic: 'OpenSans',
+      },
+    },
+  },
   fontWeights: {
     hairline: 100,
     thin: 200,
@@ -34,8 +72,8 @@ export const typography = {
   },
   fonts: {
     heading: 'OpenSans',
-    body: undefined,
-    mono: undefined,
+    body: 'OpenSans',
+    mono: 'OpenSans',
   },
   fontSizes: {
     '2xs': 10,
