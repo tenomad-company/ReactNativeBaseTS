@@ -8,6 +8,7 @@ import SettingsScreen from '@Screens/Settings';
 import React, {useEffect, useMemo} from 'react';
 import {useDispatch} from 'react-redux';
 import AuthStack from './stack/AuthStack';
+import Header from './stack/Header';
 import {hideHeaderOptions} from './stack/screenOption';
 import HomeTab from './tab/HomeTab';
 import {RootNavigationProp, RootStackParamList} from './type';
@@ -39,7 +40,9 @@ const RootNavigator = () => {
   }, [dispatch]);
 
   return (
-    <Stack.Navigator initialRouteName={initialRouteName}>
+    <Stack.Navigator
+      initialRouteName={initialRouteName}
+      screenOptions={{header: props => <Header {...props} />}}>
       <Stack.Screen
         name="OnBoarding"
         component={Onboarding}

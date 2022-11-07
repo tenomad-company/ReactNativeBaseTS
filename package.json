@@ -39,7 +39,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
-    "@react-native-async-storage/async-storage": "^1.17.7",
     "@react-navigation/bottom-tabs": "^6.4.0",
     "@react-navigation/material-top-tabs": "^6.2.1",
     "@react-navigation/native": "^6.0.10",
@@ -56,6 +55,7 @@
     "react-native-config": "^1.4.6",
     "react-native-flipper": "^0.164.0",
     "react-native-linear-gradient": "^2.6.2",
+    "react-native-mmkv": "^2.5.1",
     "react-native-permissions": "^3.6.0",
     "react-native-reanimated": "^2.12.0",
     "react-native-safe-area-context": "^3.2.0",

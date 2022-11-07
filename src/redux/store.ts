@@ -1,25 +1,15 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
 import {
   FLUSH,
   PAUSE,
   PERSIST,
-  persistReducer,
   persistStore,
   PURGE,
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
 import middlewares from './middlewares';
-import rootReducer from './reducers';
-
-const persistConfig = {
-  key: 'root',
-  storage: AsyncStorage,
-  whitelist: ['authentication', 'system'], // only persist these reducers
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+import persistedReducer from './reducers';
 
 export const store = configureStore({
   reducer: persistedReducer,

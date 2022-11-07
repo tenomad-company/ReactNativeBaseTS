@@ -1,3 +1,6 @@
+import {getPromotion} from '@/api/promotion';
+import usePageAutoScroll from '@/hooks/usePageAutoScroll';
+import {Promotion} from '@/models/Promotion';
 import {getFoodsApi} from '@/redux/food';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {widthNoSpace} from '@/styles/mixins';
@@ -18,9 +21,9 @@ import {
   Text,
   VStack,
 } from 'native-base';
-import React, {useCallback, useEffect, useRef} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {RefreshControl} from 'react-native';
+import {FlatList as RNFlatList, RefreshControl} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
 const HomeScreen = () => {
@@ -28,13 +31,26 @@ const HomeScreen = () => {
   const dispatch = useAppDispatch();
   const food = useAppSelector(state => state.food);
   const language = useAppSelector(state => state.system.language);
+
   const isRendered = useRef(false);
+
+  const [promotions, setPromotions] = useState<Promotion[]>();
+  const promotionListRef = useRef<RNFlatList>();
+  usePageAutoScroll({ref: promotionListRef, itemLength: promotions?.length});
 
   const changeLanguage = useCallback(() => {
     i18n.changeLanguage(language === 'en' ? 'vi' : 'en');
   }, [i18n, language]);
 
-  const reload = useCallback(() => dispatch(getFoodsApi()), [dispatch]);
+  const loadPromotions = async () => {
+    const _promotions = await getPromotion();
+    setPromotions(_promotions);
+  };
+
+  const reload = useCallback(() => {
+    dispatch(getFoodsApi());
+    loadPromotions();
+  }, [dispatch]);
 
   useEffect(() => {
     reload();
@@ -42,7 +58,7 @@ const HomeScreen = () => {
   }, [reload]);
 
   return (
-    <Box safeArea flex={1} px={4} mb={50}>
+    <Box safeArea flex={1}>
       <ScrollView
         flex={1}
         flexGrow={1}
@@ -55,9 +71,11 @@ const HomeScreen = () => {
           />
         }>
         <VStack mt={4} space={2} overflow="hidden" rounded="md">
-          <Heading flex={1}>{t('home.welcome')}</Heading>
+          <Heading flex={1} px={4}>
+            {t('home.welcome')}
+          </Heading>
 
-          <HStack space={2}>
+          <HStack space={2} px={4}>
             <Input
               flex={1}
               placeholder="What do you want to order?"
@@ -87,16 +105,17 @@ const HomeScreen = () => {
 
           <AspectRatio ratio={325 / 150}>
             <FlatList
-              data={food.list}
+              ref={promotionListRef}
+              data={promotions}
               nestedScrollEnabled={true}
               showsHorizontalScrollIndicator={false}
               horizontal
               keyExtractor={(item, index) => `${item.id || index}`}
               w="full"
-              ItemSeparatorComponent={() => <Spacer w="2" />}
+              pagingEnabled
               renderItem={({item, index}) => {
                 return (
-                  <AspectRatio ratio={325 / 150}>
+                  <AspectRatio ratio={325 / 150} mx="4">
                     <Image
                       key={item.id}
                       alt={item.name}
@@ -111,7 +130,11 @@ const HomeScreen = () => {
             />
           </AspectRatio>
 
-          <HStack py={2} alignItems="center" justifyContent="space-between">
+          <HStack
+            px={4}
+            py={2}
+            alignItems="center"
+            justifyContent="space-between">
             <Heading fontSize="lg">{t('home.nearestRestaurant')}</Heading>
             <Text color="orange.500">{t('common.viewMore')}</Text>
           </HStack>
@@ -122,6 +145,7 @@ const HomeScreen = () => {
             horizontal
             keyExtractor={(item, index) => `${item.id || index}`}
             w="full"
+            px={4}
             ItemSeparatorComponent={() => <Spacer w="4" />}
             renderItem={({item}) => {
               return (
@@ -158,7 +182,11 @@ const HomeScreen = () => {
             }}
           />
 
-          <HStack py={2} alignItems="center" justifyContent="space-between">
+          <HStack
+            py={2}
+            px={4}
+            alignItems="center"
+            justifyContent="space-between">
             <Heading fontSize="lg">{t('home.popularMenu')}</Heading>
             <Text color="orange.500">{t('common.viewMore')}</Text>
           </HStack>
@@ -171,6 +199,7 @@ const HomeScreen = () => {
             columnWrapperStyle={{justifyContent: 'space-between'}}
             scrollEnabled={false}
             w="full"
+            px={4}
             ItemSeparatorComponent={() => <Spacer w="4" h="4" />}
             renderItem={({item}) => {
               return (
@@ -213,7 +242,11 @@ const HomeScreen = () => {
             }}
           />
 
-          <HStack py={2} alignItems="center" justifyContent="space-between">
+          <HStack
+            py={2}
+            px={4}
+            alignItems="center"
+            justifyContent="space-between">
             <Heading fontSize="lg">{t('home.popularRestaurant')}</Heading>
             <Text color="orange.500">{t('common.viewMore')}</Text>
           </HStack>
@@ -225,6 +258,7 @@ const HomeScreen = () => {
             numColumns={2}
             columnWrapperStyle={{justifyContent: 'space-between'}}
             w="full"
+            px={4}
             ItemSeparatorComponent={() => <Spacer w="4" h="4" />}
             renderItem={({item}) => {
               return (
@@ -261,6 +295,8 @@ const HomeScreen = () => {
             }}
           />
         </VStack>
+
+        <Spacer w="4" h="4" />
       </ScrollView>
     </Box>
   );
