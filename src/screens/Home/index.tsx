@@ -79,23 +79,25 @@ const HomeScreen = () => {
             <Input
               flex={1}
               placeholder="What do you want to order?"
-              placeholderTextColor={'rgba(218, 99, 23, 0.4)'}
+              placeholderTextColor="tertiary.505"
               InputLeftElement={
                 <Icon
                   as={<Feather name="search" />}
                   size={5}
                   ml="4"
-                  color="#DA6317"
+                  color="tertiary.500"
                 />
               }
               borderWidth={0}
               borderRadius="xl"
-              backgroundColor="rgba(249, 168, 77, 0.1)"
+              backgroundColor="tertiary.501"
+              _dark={{backgroundColor: 'dark.600'}}
             />
 
             <Pressable
               px={3}
-              backgroundColor="rgba(249, 168, 77, 0.1)"
+              backgroundColor="tertiary.501"
+              _dark={{backgroundColor: 'dark.600'}}
               borderRadius="xl"
               alignItems="center"
               justifyContent="center">
@@ -155,8 +157,8 @@ const HomeScreen = () => {
                   space={8}
                   w={widthNoSpace(HALF_WIDTH, '4')}
                   borderRadius="xl"
-                  // justifyContent="space-between"
-                  backgroundColor={'white'}>
+                  backgroundColor={'white'}
+                  _dark={{backgroundColor: 'dark.600'}}>
                   <AspectRatio ratio={96 / 73}>
                     <Image
                       key={item.id}
@@ -209,7 +211,8 @@ const HomeScreen = () => {
                   space={3}
                   w={widthNoSpace(FULL_WIDTH, '4')}
                   borderRadius="xl"
-                  backgroundColor={'white'}>
+                  backgroundColor={'white'}
+                  _dark={{backgroundColor: 'dark.600'}}>
                   <VStack flex={1} justifyContent="center">
                     <AspectRatio ratio={1}>
                       <Image
@@ -268,8 +271,8 @@ const HomeScreen = () => {
                   space={8}
                   w={widthNoSpace(HALF_WIDTH, '3')}
                   borderRadius="xl"
-                  // justifyContent="space-between"
-                  backgroundColor={'white'}>
+                  backgroundColor={'white'}
+                  _dark={{backgroundColor: 'dark.600'}}>
                   <AspectRatio ratio={96 / 73}>
                     <Image
                       key={item.id}
