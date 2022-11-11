@@ -3,7 +3,7 @@ import ListTitle from '@/components/container/ListTitle';
 import {ChatModel} from '@/models/ChatModel';
 import {Text} from 'native-base';
 import React, {FC, useEffect, useState} from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 
 interface ChatTabProps {}
 
@@ -62,7 +62,7 @@ const ChatTabScreen: FC<ChatTabProps> = () => {
         </>
       ) : (
         <FlatList
-          contentContainerStyle={{flex: 1}}
+          contentContainerStyle={styles.flex}
           scrollEnabled={false}
           data={data}
           renderItem={({item}) => {
@@ -83,3 +83,7 @@ const ChatTabScreen: FC<ChatTabProps> = () => {
 };
 
 export default ChatTabScreen;
+
+const styles = StyleSheet.create({
+  flex: {flex: 1},
+});

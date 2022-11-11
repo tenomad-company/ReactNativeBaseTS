@@ -8,6 +8,7 @@ export function hexToRgbA(hex: string, alpha = 1) {
     c = '0x' + c.join('');
     return (
       'rgba(' +
+      // eslint-disable-next-line no-bitwise
       [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') +
       `,${alpha})`
     );

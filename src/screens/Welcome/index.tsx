@@ -1,10 +1,9 @@
-import NativeBaseIcon from '@/components/NativeBaseIcon';
-import ToggleDarkMode from '@/components/ToggleDarkMode';
+import NativeBaseIcon from '@Components/NativeBaseIcon';
+import ToggleDarkMode from '@Components/button/ToggleDarkMode';
 import {RootNavigationProp} from '@/navigations/type';
 import {useNavigation} from '@react-navigation/native';
 import {Box, Center, Heading, HStack, Link, Text, VStack} from 'native-base';
 import React from 'react';
-import {StyleSheet} from 'react-native';
 
 const WelcomeScreen = () => {
   const navigation = useNavigation<RootNavigationProp>();
@@ -46,5 +45,3 @@ const WelcomeScreen = () => {
 };
 
 export default WelcomeScreen;
-
-const styles = StyleSheet.create({});

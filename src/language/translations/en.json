@@ -31,6 +31,12 @@
     "title": "Register",
     "hadAccount": "I had account"
   },
+  "settings": {
+    "switchDarkMode": "Switch DarkMode",
+    "switchLightMode": "Switch LightMode",
+    "switchLanguage": "Switch Language",
+    "notification": "Notification"
+  },
   "common": {
     "next": "Next",
     "viewMore": "View More"

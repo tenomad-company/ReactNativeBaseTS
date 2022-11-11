@@ -1,10 +1,4 @@
-import {
-  HStack,
-  Icon,
-  IPressableProps,
-  Pressable,
-  useColorMode,
-} from 'native-base';
+import {Icon, IPressableProps, Pressable, useColorMode} from 'native-base';
 import React, {useMemo} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 

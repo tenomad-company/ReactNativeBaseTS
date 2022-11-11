@@ -4,7 +4,7 @@ const WINDOW_WIDTH = Dimensions.get('window').width;
 
 // iPhone6 as base size which is 375 x 667
 const guidelineBaseWidth = 375;
-const guidelineBaseHeight = 667;
+// const guidelineBaseHeight = 667;
 
 export const scaleSize = (size: number) =>
   (WINDOW_WIDTH / guidelineBaseWidth) * size;

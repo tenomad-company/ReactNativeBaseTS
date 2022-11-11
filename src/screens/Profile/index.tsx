@@ -124,28 +124,26 @@ const ProfileScreen = () => {
     <Container flex={1}>
       <IFlatList
         scrollRef={positionRef}
-        ListHeaderComponent={_buildHeader()}
         data={menuItems}
         keyExtractor={(item, index) => `${item.title}${index}`}
+        ListHeaderComponent={_buildHeader()}
+        ItemSeparatorComponent={() => <Divider opacity={0.3} />}
         renderItem={({item, index}) => (
-          <>
-            <ListTitle
-              onPress={item.onPress}
-              key={index}
-              title={item.title}
-              backgroundColor={'transparent'}
-              leftComponent={
-                <Icon
-                  name={item.iconName}
-                  as={AntDesign}
-                  size="md"
-                  ml={1}
-                  alignSelf="center"
-                />
-              }
-            />
-            <Divider opacity={0.3} />
-          </>
+          <ListTitle
+            onPress={item.onPress}
+            key={index}
+            title={item.title}
+            backgroundColor={'transparent'}
+            leftComponent={
+              <Icon
+                name={item.iconName}
+                as={AntDesign}
+                size="md"
+                ml={1}
+                alignSelf="center"
+              />
+            }
+          />
         )}
       />
     </Container>

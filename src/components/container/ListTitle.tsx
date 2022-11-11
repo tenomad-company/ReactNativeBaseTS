@@ -1,11 +1,9 @@
 import {useTheme} from '@react-navigation/native';
 import {
-  Card,
   ChevronRightIcon,
   HStack,
   Image,
   Skeleton,
-  Spacer,
   Text,
   VStack,
 } from 'native-base';
@@ -62,7 +60,6 @@ export default ({
         alignItems="center"
         marginTop={4}
         space={4}
-        // flex={1}
         {...props}>
         {leftComponent ?? (
           <Image size={16} borderRadius="lg" source={source} alt={`${title}`} />

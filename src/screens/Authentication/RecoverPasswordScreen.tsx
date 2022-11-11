@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {Text, View} from 'react-native';
 
 const RecoverPasswordScreen = () => {
   return (
@@ -11,4 +11,4 @@ const RecoverPasswordScreen = () => {
 
 export default RecoverPasswordScreen;
 
-const styles = StyleSheet.create({});
+// const styles = StyleSheet.create({});

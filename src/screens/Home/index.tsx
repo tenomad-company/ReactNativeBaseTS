@@ -23,24 +23,19 @@ import {
 } from 'native-base';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList as RNFlatList, RefreshControl} from 'react-native';
+import {FlatList as RNFlatList, RefreshControl, StyleSheet} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
 const HomeScreen = () => {
-  const {t, i18n} = useTranslation();
+  const {t} = useTranslation();
   const dispatch = useAppDispatch();
   const food = useAppSelector(state => state.food);
-  const language = useAppSelector(state => state.system.language);
 
   const isRendered = useRef(false);
 
   const [promotions, setPromotions] = useState<Promotion[]>();
   const promotionListRef = useRef<RNFlatList>();
   usePageAutoScroll({ref: promotionListRef, itemLength: promotions?.length});
-
-  const changeLanguage = useCallback(() => {
-    i18n.changeLanguage(language === 'en' ? 'vi' : 'en');
-  }, [i18n, language]);
 
   const loadPromotions = async () => {
     const _promotions = await getPromotion();
@@ -115,7 +110,7 @@ const HomeScreen = () => {
               keyExtractor={(item, index) => `${item.id || index}`}
               w="full"
               pagingEnabled
-              renderItem={({item, index}) => {
+              renderItem={({item}) => {
                 return (
                   <AspectRatio ratio={325 / 150} mx="4">
                     <Image
@@ -198,7 +193,7 @@ const HomeScreen = () => {
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item, index) => `${item.id || index}`}
             numColumns={2}
-            columnWrapperStyle={{justifyContent: 'space-between'}}
+            columnWrapperStyle={styles.spaceBetween}
             scrollEnabled={false}
             w="full"
             px={4}
@@ -259,7 +254,7 @@ const HomeScreen = () => {
             showsHorizontalScrollIndicator={false}
             keyExtractor={(item, index) => `${item.id || index}`}
             numColumns={2}
-            columnWrapperStyle={{justifyContent: 'space-between'}}
+            columnWrapperStyle={styles.spaceBetween}
             w="full"
             px={4}
             ItemSeparatorComponent={() => <Spacer w="4" h="4" />}
@@ -306,3 +301,7 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  spaceBetween: {justifyContent: 'space-between'},
+});

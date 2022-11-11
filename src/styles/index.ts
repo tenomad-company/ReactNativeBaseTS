@@ -33,7 +33,7 @@ export const theme = extendTheme({
   typography,
   components: {
     Button: {
-      baseStyle: (props: any) => {
+      baseStyle: () => {
         return {
           borderRadius: '2xl',
         };

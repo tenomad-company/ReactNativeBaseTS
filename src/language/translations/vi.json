@@ -19,6 +19,12 @@
     "title": "Đăng ký",
     "hadAccount": "Tôi đã có tài khoản"
   },
+  "settings": {
+    "switchDarkMode": "Chuyển giao diện Tối",
+    "switchLightMode": "Chuyển giao diện Sáng",
+    "switchLanguage": "Chuyển ngôn ngữ",
+    "notification": "Thông báo đẩy"
+  },
   "common": {
     "next": "Tiếp"
   },
