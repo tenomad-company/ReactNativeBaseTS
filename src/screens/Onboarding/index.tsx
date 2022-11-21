@@ -1,4 +1,4 @@
-import Button from '@/components/primitives/Button';
+import Button from '@Components/button/Button';
 import {useBackHandler} from '@/hooks/useBackHandler';
 import {AppNavigationProps} from '@/navigations/route';
 import {useIsFocused, useNavigation} from '@react-navigation/native';

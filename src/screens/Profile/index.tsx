@@ -1,16 +1,19 @@
-// import SettingLink from '@/components/SettingLink';
-import ToggleDarkMode from '@/components/button/ToggleDarkMode';
-import Container from '@/components/container/Container';
-import ListTitle from '@/components/container/ListTitle';
-import IFlatList from '@/components/scroll/Flatlist';
-import SettingLink from '@/components/SettingLink';
-import {Assets} from '@/constants/assets';
-import {AppNavigationProps} from '@/navigations/route';
-import {logout} from '@/redux/authentication';
-import {useAppDispatch, useAppSelector} from '@/redux/hooks';
-import {showTabBar} from '@/redux/system';
+import ToastAlert from '@Components/alert/ToastAlert';
+import ToggleDarkMode from '@Components/button/ToggleDarkMode';
+import Container from '@Components/container/Container';
+import ListTitle from '@Components/container/ListTitle';
+import IFlatList from '@Components/scroll/Flatlist';
+import SettingLink from '@Components/SettingLink';
+import {Assets} from '@Constants/assets';
+import {AppNavigationProps} from '@Navigations/route';
+import {logout} from '@Redux/authentication';
+import {useAppDispatch, useAppSelector} from '@Redux/hooks';
+import {showTabBar} from '@Redux/system';
+
+import ModalAlert from '@Components/alert/AlertDialog';
 import {useNavigation, useTheme} from '@react-navigation/native';
 import {
+  Actionsheet,
   Avatar,
   Box,
   Divider,
@@ -19,21 +22,34 @@ import {
   Icon,
   Image,
   Text,
+  useDisclose,
+  useToast,
   VStack,
 } from 'native-base';
-import React, {useCallback, useEffect, useRef} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const ProfileScreen = () => {
   const positionRef = useRef<number>(0);
   const {colors} = useTheme();
+  const toast = useToast();
   const navigation = useNavigation<AppNavigationProps>();
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.authentication.user);
 
+  const {isOpen, onOpen, onClose} = useDisclose();
+
+  const {
+    isOpen: isActionSheetOpen,
+    onOpen: onActionSheetOpen,
+    onClose: onActionSheetClose,
+  } = useDisclose();
+
   const onLogout = useCallback(() => dispatch(logout()), [dispatch]);
 
-  const _buildHeader = useCallback(() => {
+  const _buildHeader = useMemo(() => {
     return (
       <Box>
         <Box safeArea p={4} bg="primary.800">
@@ -85,36 +101,62 @@ const ProfileScreen = () => {
     );
   }, [colors.card, user]);
 
-  const menuItems = [
-    {
-      iconName: 'user',
-      title: 'My profile',
-    },
-    {
-      iconName: 'calendar',
-      title: 'Schedule',
-    },
-    {
-      iconName: 'questioncircleo',
-      title: 'Q & A',
-    },
+  const menuItems = useMemo(
+    () => [
+      {
+        iconName: 'user',
+        title: 'My profile',
+      },
+      {
+        iconName: 'calendar',
+        title: 'Alert',
+        onPress: onOpen,
+      },
+      {
+        iconName: 'questioncircleo',
+        title: 'Toast',
+        onPress: () => toast.show({description: 'Normal Toast'}),
+      },
+      {
+        iconName: 'customerservice',
+        title: 'Custom Toast',
+        onPress: () => {
+          const _id = 'alert-network';
+          if (!toast.isActive(_id))
+            toast.show({
+              id: _id,
+              placement: 'top',
+              render: ({id}) => (
+                <ToastAlert
+                  id={id}
+                  title="Network connection failed!"
+                  description="Connect your Network"
+                  status="error"
+                  isClosable
+                />
+              ),
+            });
+        },
+      },
+      {
+        iconName: 'customerservice',
+        title: 'ActionSheet',
+        onPress: onActionSheetOpen,
+      },
 
-    {
-      iconName: 'customerservice',
-      title: 'Customer Service',
-    },
-
-    {
-      iconName: 'setting',
-      title: 'Settings',
-      onPress: () => navigation.navigate('Settings'),
-    },
-    {
-      iconName: 'logout',
-      title: 'Log out',
-      onPress: onLogout,
-    },
-  ];
+      {
+        iconName: 'setting',
+        title: 'Settings',
+        onPress: () => navigation.navigate('Settings'),
+      },
+      {
+        iconName: 'logout',
+        title: 'Log out',
+        onPress: onLogout,
+      },
+    ],
+    [navigation, onActionSheetOpen, onLogout, onOpen, toast],
+  );
 
   useEffect(() => {
     dispatch(showTabBar(true));
@@ -126,12 +168,11 @@ const ProfileScreen = () => {
         scrollRef={positionRef}
         data={menuItems}
         keyExtractor={(item, index) => `${item.title}${index}`}
-        ListHeaderComponent={_buildHeader()}
+        ListHeaderComponent={_buildHeader}
         ItemSeparatorComponent={() => <Divider opacity={0.3} />}
         renderItem={({item, index}) => (
           <ListTitle
             onPress={item.onPress}
-            key={index}
             title={item.title}
             backgroundColor={'transparent'}
             leftComponent={
@@ -146,6 +187,47 @@ const ProfileScreen = () => {
           />
         )}
       />
+
+      <ModalAlert
+        title="Title"
+        description="description"
+        isOpen={isOpen}
+        onClose={onClose}
+      />
+
+      <Actionsheet
+        isOpen={isActionSheetOpen}
+        onClose={onActionSheetClose}
+        size="full">
+        <Actionsheet.Content>
+          <Box w="100%" h={60} px={4} justifyContent="center">
+            <Text fontSize="16" color="gray.500" _dark={{color: 'gray.300'}}>
+              Albums
+            </Text>
+          </Box>
+          <Actionsheet.Item
+            startIcon={<Icon as={MaterialIcons} size="6" name="delete" />}>
+            Delete
+          </Actionsheet.Item>
+          <Actionsheet.Item
+            startIcon={<Icon as={MaterialIcons} name="share" size="6" />}>
+            Share
+          </Actionsheet.Item>
+          <Actionsheet.Item
+            startIcon={<Icon as={Ionicons} name="play-circle" size="6" />}>
+            Play
+          </Actionsheet.Item>
+          <Actionsheet.Item
+            startIcon={<Icon as={MaterialIcons} size="6" name="favorite" />}>
+            Favourite
+          </Actionsheet.Item>
+          <Actionsheet.Item
+            startIcon={<Icon as={MaterialIcons} size="6" name="close" />}
+            onPress={onActionSheetClose}>
+            Cancel
+          </Actionsheet.Item>
+        </Actionsheet.Content>
+      </Actionsheet>
     </Container>
   );
 };
