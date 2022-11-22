@@ -1,21 +1,11 @@
 import {getPromotion} from '@/api/promotion';
-import usePageAutoScroll from '@/hooks/usePageAutoScroll';
 import {Promotion} from '@/models/Promotion';
 import {getFoodsApi} from '@/redux/food';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
-import {widthNoSpace} from '@/styles/mixins';
-import {FULL_WIDTH, HALF_WIDTH} from '@/styles/spacing';
-import FilterIcon from '@Assets/icons/filter.svg';
 import {
-  AspectRatio,
   Box,
-  FlatList,
   Heading,
   HStack,
-  Icon,
-  Image,
-  Input,
-  Pressable,
   ScrollView,
   Spacer,
   Text,
@@ -23,8 +13,12 @@ import {
 } from 'native-base';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList as RNFlatList, RefreshControl, StyleSheet} from 'react-native';
-import Feather from 'react-native-vector-icons/Feather';
+import {RefreshControl} from 'react-native';
+import ListNearestRestaurant from './ListNearestRestaurant';
+import ListPopularMenu from './ListPopularMenu';
+import ListPopularRestaurant from './ListPopularRestaurant';
+import SearchBar from './SearchBar';
+import SlideBanner from './SlideBanner';
 
 const HomeScreen = () => {
   const {t} = useTranslation();
@@ -34,8 +28,6 @@ const HomeScreen = () => {
   const isRendered = useRef(false);
 
   const [promotions, setPromotions] = useState<Promotion[]>();
-  const promotionListRef = useRef<RNFlatList>();
-  usePageAutoScroll({ref: promotionListRef, itemLength: promotions?.length});
 
   const loadPromotions = async () => {
     const _promotions = await getPromotion();
@@ -70,62 +62,9 @@ const HomeScreen = () => {
             {t('home.welcome')}
           </Heading>
 
-          <HStack space={2} px={4}>
-            <Input
-              flex={1}
-              placeholder="What do you want to order?"
-              placeholderTextColor="tertiary.505"
-              InputLeftElement={
-                <Icon
-                  as={<Feather name="search" />}
-                  size={5}
-                  ml="4"
-                  color="tertiary.500"
-                />
-              }
-              borderWidth={0}
-              borderRadius="xl"
-              backgroundColor="tertiary.501"
-              _dark={{backgroundColor: 'dark.600'}}
-            />
+          <SearchBar />
 
-            <Pressable
-              px={3}
-              backgroundColor="tertiary.501"
-              _dark={{backgroundColor: 'dark.600'}}
-              borderRadius="xl"
-              alignItems="center"
-              justifyContent="center">
-              <Icon size={'md'} as={FilterIcon} />
-            </Pressable>
-          </HStack>
-
-          <AspectRatio ratio={325 / 150}>
-            <FlatList
-              ref={promotionListRef}
-              data={promotions}
-              nestedScrollEnabled={true}
-              showsHorizontalScrollIndicator={false}
-              horizontal
-              keyExtractor={(item, index) => `${item.id || index}`}
-              w="full"
-              pagingEnabled
-              renderItem={({item}) => {
-                return (
-                  <AspectRatio ratio={325 / 150} mx="4">
-                    <Image
-                      key={item.id}
-                      alt={item.name}
-                      source={{uri: item.image}}
-                      w="full"
-                      borderRadius="xl"
-                      flexGrow={1}
-                    />
-                  </AspectRatio>
-                );
-              }}
-            />
-          </AspectRatio>
+          <SlideBanner data={promotions} />
 
           <HStack
             px={4}
@@ -135,49 +74,7 @@ const HomeScreen = () => {
             <Heading fontSize="lg">{t('home.nearestRestaurant')}</Heading>
             <Text color="orange.500">{t('common.viewMore')}</Text>
           </HStack>
-          <FlatList
-            data={food.list}
-            nestedScrollEnabled={true}
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            keyExtractor={(item, index) => `${item.id || index}`}
-            w="full"
-            px={4}
-            ItemSeparatorComponent={() => <Spacer w="4" />}
-            renderItem={({item}) => {
-              return (
-                <VStack
-                  key={item.id}
-                  p={3}
-                  space={8}
-                  w={widthNoSpace(HALF_WIDTH, '4')}
-                  borderRadius="xl"
-                  backgroundColor={'white'}
-                  _dark={{backgroundColor: 'dark.600'}}>
-                  <AspectRatio ratio={96 / 73}>
-                    <Image
-                      key={item.id}
-                      alt={item.name}
-                      source={{uri: item.image}}
-                      borderRadius="xl"
-                    />
-                  </AspectRatio>
-                  <VStack>
-                    <Heading fontSize="md" alignSelf="center" numberOfLines={1}>
-                      {item.name}
-                    </Heading>
-                    <Text
-                      fontSize="sm"
-                      color="gray.400"
-                      fontWeight="light"
-                      alignSelf="center">
-                      {8} mins
-                    </Text>
-                  </VStack>
-                </VStack>
-              );
-            }}
-          />
+          <ListNearestRestaurant data={food.list} />
 
           <HStack
             py={2}
@@ -187,58 +84,7 @@ const HomeScreen = () => {
             <Heading fontSize="lg">{t('home.popularMenu')}</Heading>
             <Text color="orange.500">{t('common.viewMore')}</Text>
           </HStack>
-          <FlatList
-            data={food.list}
-            nestedScrollEnabled={true}
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(item, index) => `${item.id || index}`}
-            numColumns={2}
-            columnWrapperStyle={styles.spaceBetween}
-            scrollEnabled={false}
-            w="full"
-            px={4}
-            ItemSeparatorComponent={() => <Spacer w="4" h="4" />}
-            renderItem={({item}) => {
-              return (
-                <HStack
-                  key={item.id}
-                  p={2}
-                  space={3}
-                  w={widthNoSpace(FULL_WIDTH, '4')}
-                  borderRadius="xl"
-                  backgroundColor={'white'}
-                  _dark={{backgroundColor: 'dark.600'}}>
-                  <VStack flex={1} justifyContent="center">
-                    <AspectRatio ratio={1}>
-                      <Image
-                        key={item.id}
-                        alt={item.name}
-                        source={{uri: item.image}}
-                        borderRadius="xl"
-                      />
-                    </AspectRatio>
-                  </VStack>
-                  <VStack flex={3} justifyContent="center">
-                    <Heading fontSize="md" numberOfLines={1}>
-                      {item.name}
-                    </Heading>
-                    <Text fontSize="sm" color="gray.400" numberOfLines={1}>
-                      {item.description}
-                    </Text>
-                  </VStack>
-                  <VStack
-                    flex={1}
-                    mr={2}
-                    justifyContent="center"
-                    alignItems="flex-end">
-                    <Heading fontSize="lg" color="amber.500" numberOfLines={1}>
-                      ${10}
-                    </Heading>
-                  </VStack>
-                </HStack>
-              );
-            }}
-          />
+          <ListPopularMenu data={food.list} />
 
           <HStack
             py={2}
@@ -248,50 +94,7 @@ const HomeScreen = () => {
             <Heading fontSize="lg">{t('home.popularRestaurant')}</Heading>
             <Text color="orange.500">{t('common.viewMore')}</Text>
           </HStack>
-          <FlatList
-            data={food.list}
-            nestedScrollEnabled={true}
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(item, index) => `${item.id || index}`}
-            numColumns={2}
-            columnWrapperStyle={styles.spaceBetween}
-            w="full"
-            px={4}
-            ItemSeparatorComponent={() => <Spacer w="4" h="4" />}
-            renderItem={({item}) => {
-              return (
-                <VStack
-                  key={item.id}
-                  p={3}
-                  space={8}
-                  w={widthNoSpace(HALF_WIDTH, '3')}
-                  borderRadius="xl"
-                  backgroundColor={'white'}
-                  _dark={{backgroundColor: 'dark.600'}}>
-                  <AspectRatio ratio={96 / 73}>
-                    <Image
-                      key={item.id}
-                      alt={item.name}
-                      source={{uri: item.image}}
-                      borderRadius="xl"
-                    />
-                  </AspectRatio>
-                  <VStack>
-                    <Heading fontSize="md" alignSelf="center" numberOfLines={1}>
-                      {item.name}
-                    </Heading>
-                    <Text
-                      fontSize="sm"
-                      color="gray.400"
-                      fontWeight="light"
-                      alignSelf="center">
-                      {8} mins
-                    </Text>
-                  </VStack>
-                </VStack>
-              );
-            }}
-          />
+          <ListPopularRestaurant data={food.list} />
         </VStack>
 
         <Spacer w="4" h="4" />
@@ -301,7 +104,3 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({
-  spaceBetween: {justifyContent: 'space-between'},
-});
