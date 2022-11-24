@@ -1,7 +1,7 @@
 import {showTabBar} from '@Redux/system';
 import {Center, FlatList, Text, View} from 'native-base';
-import {InterfaceFlatListProps} from 'native-base/lib/typescript/components/basic/FlatList/types';
-import React, {FC} from 'react';
+import {IFlatListProps as IBaseFlatListProps} from 'native-base/lib/typescript/components/basic/FlatList';
+import React, {useCallback} from 'react';
 import {
   ActivityIndicator,
   NativeScrollEvent,
@@ -9,49 +9,58 @@ import {
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 
-interface IFlatListProps {
+interface IFlatListProps<T> extends IBaseFlatListProps<T> {
   scrollRef: any;
   loadMore?: () => void;
   endPage?: boolean;
 }
-const IFlatList: FC<InterfaceFlatListProps<any> & IFlatListProps> = ({
+
+const IFlatList = <T extends {}>({
   scrollRef,
   loadMore,
   endPage,
   ...props
-}) => {
+}: IFlatListProps<T>) => {
   const dispatch = useDispatch();
-  const isCloseToBottom = ({
-    layoutMeasurement,
-    contentOffset,
-    contentSize,
-  }: NativeScrollEvent) => {
-    const paddingToBottom = 20;
 
-    return (
-      layoutMeasurement.height + contentOffset.y >=
-      contentSize.height - paddingToBottom
-    );
-  };
+  const isCloseToBottom = useCallback(
+    ({layoutMeasurement, contentOffset, contentSize}: NativeScrollEvent) => {
+      const paddingToBottom = 20;
 
-  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const currentPosition = event.nativeEvent.contentOffset.y;
+      return (
+        layoutMeasurement.height + contentOffset.y >=
+        contentSize.height - paddingToBottom
+      );
+    },
+    [],
+  );
 
-    if (currentPosition < 0) return;
-    const isEndPage = isCloseToBottom(event.nativeEvent);
-    const isScrollTop = scrollRef.current - currentPosition >= 0;
-    if (isEndPage && !!currentPosition) {
-      dispatch(showTabBar(false));
-    } else {
-      dispatch(showTabBar(isScrollTop));
-    }
+  const onEndReached = useCallback(
+    ({distanceFromEnd}) => {
+      if (distanceFromEnd < 100 && !endPage) loadMore?.();
+    },
+    [endPage, loadMore],
+  );
 
-    setTimeout(() => {
-      scrollRef.current = currentPosition;
-    }, 400);
-  };
+  const onScroll = useCallback(
+    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const currentPosition = event.nativeEvent.contentOffset.y;
+      if (currentPosition < 0) return;
 
-  const _buildFooter = () => {
+      const isEndPage = isCloseToBottom(event.nativeEvent);
+      const isScrollTop = scrollRef.current - currentPosition >= 0;
+
+      if (isEndPage && !!currentPosition) dispatch(showTabBar(false));
+      else dispatch(showTabBar(isScrollTop));
+
+      setTimeout(() => {
+        scrollRef.current = currentPosition;
+      }, 400);
+    },
+    [dispatch, isCloseToBottom, scrollRef],
+  );
+
+  const renderFooter = useCallback(() => {
     if (endPage) {
       return (
         <Center p={4}>
@@ -59,6 +68,7 @@ const IFlatList: FC<InterfaceFlatListProps<any> & IFlatListProps> = ({
         </Center>
       );
     }
+
     if (!loadMore) return <View />;
 
     return (
@@ -66,18 +76,14 @@ const IFlatList: FC<InterfaceFlatListProps<any> & IFlatListProps> = ({
         <ActivityIndicator />
       </Center>
     );
-  };
+  }, [endPage, loadMore]);
 
   return (
     <FlatList
-      onScroll={handleScroll}
+      onScroll={onScroll}
       onEndReachedThreshold={0.01}
-      onEndReached={info => {
-        if (info.distanceFromEnd < 100 && !endPage) {
-          !!loadMore ?? loadMore!();
-        }
-      }}
-      ListFooterComponent={_buildFooter()}
+      onEndReached={onEndReached}
+      ListFooterComponent={renderFooter}
       {...props}
     />
   );
