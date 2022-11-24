@@ -1,4 +1,4 @@
-import {getFoods} from '@/api/food';
+import {getFoods} from '@Api/food';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
 // https://redux-toolkit.js.org/api/createAsyncThunk#payloadcreator

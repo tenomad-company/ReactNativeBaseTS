@@ -1,5 +1,5 @@
-import usePageAutoScroll from '@/hooks/usePageAutoScroll';
-import {Promotion} from '@/models/Promotion';
+import usePageAutoScroll from '@Hooks/usePageAutoScroll';
+import {Promotion} from '@Models/Promotion';
 import {AspectRatio, FlatList, Image} from 'native-base';
 import React, {useCallback, useRef} from 'react';
 import {FlatList as RNFlatList} from 'react-native';

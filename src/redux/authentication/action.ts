@@ -1,4 +1,4 @@
-import {login} from '@/api/authentication';
+import {login} from '@Api/authentication';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
 // https://redux-toolkit.js.org/api/createAsyncThunk#payloadcreator

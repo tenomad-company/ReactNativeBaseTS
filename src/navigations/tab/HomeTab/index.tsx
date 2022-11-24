@@ -2,11 +2,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Image} from 'native-base';
 import React from 'react';
 
-import {Assets} from '@/constants/assets';
-import ChatTabScreen from '@/screens/Chat/ChatTab';
-import HomeScreen from '@/screens/Home';
-import OrderTabScreen from '@/screens/Order';
-import ProfileScreen from '@/screens/Profile';
+import {Assets} from '@Constants/assets';
+import ChatTabScreen from '@Screens/Chat/ChatTab';
+import HomeScreen from '@Screens/Home';
+import OrderTabScreen from '@Screens/Order';
+import ProfileScreen from '@Screens/Profile';
 import TabBar from './TabBar';
 import {HomeTabParamList, homeTabRoute} from './type';
 import {useTranslation} from 'react-i18next';

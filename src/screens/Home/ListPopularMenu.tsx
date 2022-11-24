@@ -1,6 +1,6 @@
-import {Food} from '@/models/Food';
-import {widthNoSpace} from '@/styles/mixins';
-import {FULL_WIDTH} from '@/styles/spacing';
+import {Food} from '@Models/Food';
+import {widthNoSpace} from '@Styles/mixins';
+import {FULL_WIDTH} from '@Styles/spacing';
 import {
   AspectRatio,
   Center,

@@ -1,4 +1,4 @@
-import {showTabBar} from '@/redux/system';
+import {showTabBar} from '@Redux/system';
 import {Center, FlatList, Text, View} from 'native-base';
 import {InterfaceFlatListProps} from 'native-base/lib/typescript/components/basic/FlatList/types';
 import React, {FC} from 'react';

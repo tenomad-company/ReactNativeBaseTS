@@ -1,6 +1,6 @@
 import NativeBaseIcon from '@Components/NativeBaseIcon';
 import ToggleDarkMode from '@Components/button/ToggleDarkMode';
-import {RootNavigationProp} from '@/navigations/type';
+import {RootNavigationProp} from '@Navigations/type';
 import {useNavigation} from '@react-navigation/native';
 import {Box, Center, Heading, HStack, Link, Text, VStack} from 'native-base';
 import React from 'react';

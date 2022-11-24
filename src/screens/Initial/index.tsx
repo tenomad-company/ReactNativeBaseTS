@@ -1,4 +1,4 @@
-import {AppColor} from '@/styles';
+import {AppColor} from '@Styles';
 import React from 'react';
 import {
   ActivityIndicator,

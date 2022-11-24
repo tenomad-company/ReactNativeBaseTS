@@ -1,4 +1,4 @@
-import {API} from '@/constants';
+import {API} from '@Constants';
 
 export async function get<T>(endpoint: string): Promise<T> {
   return fetch(API + endpoint, {method: 'GET'}).then(response =>

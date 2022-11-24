@@ -1,5 +1,5 @@
-import LoginScreen from '@/screens/Authentication/LoginScreen';
-import RegisterScreen from '@/screens/Authentication/RegisterScreen';
+import LoginScreen from '@Screens/Authentication/LoginScreen';
+import RegisterScreen from '@Screens/Authentication/RegisterScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {hideHeaderOptions} from '../screenOption';

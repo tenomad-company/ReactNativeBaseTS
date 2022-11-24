@@ -1,4 +1,4 @@
-import {RootNavigationProp} from '@/navigations/type';
+import {RootNavigationProp} from '@Navigations/type';
 import {useNavigation} from '@react-navigation/native';
 import {HStack, Icon, Pressable, useColorMode} from 'native-base';
 import React, {useCallback, useMemo} from 'react';

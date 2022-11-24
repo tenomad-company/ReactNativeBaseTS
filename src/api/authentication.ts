@@ -1,4 +1,4 @@
-import {User} from '@/models/User';
+import {User} from '@Models/User';
 import {post} from './base';
 
 // A mock function to mimic making an async request for data

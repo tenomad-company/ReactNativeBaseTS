@@ -1,4 +1,4 @@
-import {Assets} from '@/constants/assets';
+import {Assets} from '@Constants/assets';
 import AnimatedLottieView from 'lottie-react-native';
 import {View} from 'native-base';
 import React, {FC} from 'react';

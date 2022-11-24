@@ -1,6 +1,6 @@
 import Button from '@Components/button/Button';
-import {useBackHandler} from '@/hooks/useBackHandler';
-import {AppNavigationProps} from '@/navigations/route';
+import {useBackHandler} from '@Hooks/useBackHandler';
+import {AppNavigationProps} from '@Navigations/route';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {Box, Heading, Image, Text, VStack} from 'native-base';
 import React, {useCallback, useState} from 'react';

@@ -1,7 +1,7 @@
-import {getPromotion} from '@/api/promotion';
-import {Promotion} from '@/models/Promotion';
-import {getFoodsApi} from '@/redux/food';
-import {useAppDispatch, useAppSelector} from '@/redux/hooks';
+import {getPromotion} from '@Api/promotion';
+import {Promotion} from '@Models/Promotion';
+import {getFoodsApi} from '@Redux/food';
+import {useAppDispatch, useAppSelector} from '@Redux/hooks';
 import {
   Box,
   Heading,

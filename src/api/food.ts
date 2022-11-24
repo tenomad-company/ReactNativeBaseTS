@@ -1,4 +1,4 @@
-import {Food} from '@/models/Food';
+import {Food} from '@Models/Food';
 import {get} from './base';
 
 export async function getFoods(page = 1, limit = 10): Promise<Food[]> {

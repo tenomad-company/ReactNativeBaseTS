@@ -1,8 +1,8 @@
-import {getFoods} from '@/api/food';
-import Container from '@/components/container/Container';
-import ListTitle from '@/components/container/ListTitle';
-import IFlatList from '@/components/scroll/Flatlist';
-import {Food} from '@/models/Food';
+import {getFoods} from '@Api/food';
+import Container from '@Components/container/Container';
+import ListTitle from '@Components/container/ListTitle';
+import IFlatList from '@Components/scroll/Flatlist';
+import {Food} from '@Models/Food';
 import {useTheme} from '@react-navigation/native';
 import {AddIcon, Center, Divider, HStack, MinusIcon, Text} from 'native-base';
 import React, {FC, useEffect, useRef, useState} from 'react';

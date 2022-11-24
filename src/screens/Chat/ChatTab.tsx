@@ -1,6 +1,6 @@
-import Container from '@/components/container/Container';
-import ListTitle from '@/components/container/ListTitle';
-import {ChatModel} from '@/models/ChatModel';
+import Container from '@Components/container/Container';
+import ListTitle from '@Components/container/ListTitle';
+import {ChatModel} from '@Models/ChatModel';
 import {Text} from 'native-base';
 import React, {FC, useEffect, useState} from 'react';
 import {FlatList, StyleSheet} from 'react-native';

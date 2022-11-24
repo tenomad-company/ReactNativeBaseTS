@@ -1,12 +1,14 @@
-import {showTabBar} from '@/redux/system';
-import Onboarding from '@/screens/Onboarding';
-import useUpdateEffect from '@Hooks/useUpdateEffect';
 import {useNavigation} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {useAppSelector} from '@Redux/hooks';
-import SettingsScreen from '@Screens/Settings';
 import React, {useEffect, useMemo} from 'react';
 import {useDispatch} from 'react-redux';
+
+import useUpdateEffect from '@Hooks/useUpdateEffect';
+import {useAppSelector} from '@Redux/hooks';
+import {showTabBar} from '@Redux/system';
+import Onboarding from '@Screens/Onboarding';
+import SettingsScreen from '@Screens/Settings';
+
 import AuthStack from './stack/AuthStack';
 import Header from './stack/Header';
 import {hideHeaderOptions} from './stack/screenOption';

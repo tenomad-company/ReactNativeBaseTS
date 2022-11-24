@@ -1,5 +1,5 @@
-import {useAppDispatch, useAppSelector} from '@/redux/hooks';
-import {setColorMode} from '@/redux/system';
+import {useAppDispatch, useAppSelector} from '@Redux/hooks';
+import {setColorMode} from '@Redux/system';
 import {ColorMode, StorageManager} from 'native-base';
 import {useMemo} from 'react';
 import {StatusBar} from 'react-native';

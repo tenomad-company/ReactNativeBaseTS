@@ -1,4 +1,4 @@
-import {Food} from '@/models/Food';
+import {Food} from '@Models/Food';
 import {createSlice} from '@reduxjs/toolkit';
 import {getFoodsApi} from './action';
 

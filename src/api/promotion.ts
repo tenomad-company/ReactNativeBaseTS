@@ -1,4 +1,4 @@
-import {Promotion} from '@/models/Promotion';
+import {Promotion} from '@Models/Promotion';
 import {get} from './base';
 
 export async function getPromotion(page = 1, limit = 10): Promise<Promotion[]> {
