@@ -10,7 +10,7 @@ export const navTheme: Theme = {
     ...DefaultTheme.colors,
     primary: appColors.primary[200],
     text: appColors.darkText,
-    card: appColors.cardBg.light,
+    card: appColors.card.light,
     background: appColors.background.light,
     border: '#F4F4F4',
   },
@@ -22,7 +22,7 @@ export const navDarkTheme: Theme = {
     ...DarkTheme.colors,
     primary: appColors.primary[800],
     text: appColors.lightText,
-    card: appColors.cardBg.dark,
+    card: appColors.card.dark,
     background: appColors.background.dark,
   },
 };

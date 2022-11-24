@@ -1,11 +1,10 @@
-import {useTheme} from '@react-navigation/native';
-import {FormControl, Input} from 'native-base';
+import {FormControl, Icon, IconButton, Input} from 'native-base';
 import {IInputProps} from 'native-base/lib/typescript/components/primitives/Input/types';
-import React, {FC} from 'react';
+import React, {FC, useCallback, useState} from 'react';
 import {Control, Controller} from 'react-hook-form';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 interface Props {
   label?: string;
-  placeholder?: string;
   errorMessage?: string;
   onChangeText?: (value: string) => void;
   control?: Control<any>;
@@ -14,13 +13,38 @@ interface Props {
 
 export const IInput: FC<IInputProps & Props> = ({
   label,
-  placeholder,
   errorMessage,
   control,
   name,
+  type,
   ...props
 }) => {
-  const {colors} = useTheme();
+  const [isHiddenPass, setIsHiddenPass] = useState(true);
+
+  const _type = isHiddenPass ? type : 'text';
+
+  const _buildEyeIcon = useCallback(
+    () =>
+      type === 'password' ? (
+        <IconButton
+          colorScheme="gray"
+          onPress={() => setIsHiddenPass(!isHiddenPass)}
+          rounded="full"
+          icon={
+            <Icon
+              name="eye-visibility"
+              as={
+                <MaterialIcons
+                  name={!isHiddenPass ? 'visibility-off' : 'visibility'}
+                  color="border"
+                />
+              }
+            />
+          }
+        />
+      ) : undefined,
+    [isHiddenPass, type],
+  );
 
   return (
     <FormControl isInvalid={!!errorMessage}>
@@ -29,23 +53,22 @@ export const IInput: FC<IInputProps & Props> = ({
       )}
       <Controller
         control={control}
-        rules={{
-          required: true,
-        }}
+        rules={{required: true}}
         render={({field: {onChange, onBlur, value}}) => (
           <Input
-            backgroundColor={colors.card}
+            backgroundColor="card.light"
+            borderColor="border.light"
+            _dark={{backgroundColor: 'card.dark', borderColor: 'border.dark'}}
             variant="filled"
             padding={4}
-            borderRadius={'full'}
-            type={placeholder}
+            borderRadius="full"
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
             shadow={1}
             borderWidth={1}
-            borderColor={colors.border}
-            placeholder={placeholder}
+            type={_type}
+            InputRightElement={_buildEyeIcon()}
             {...props}
           />
         )}

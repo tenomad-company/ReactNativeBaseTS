@@ -29,15 +29,15 @@ const palletes = {
   },
   dark: {
     50: '#656565',
-    100: '#5b5b5b',
+    100: '#5B5B5B',
     200: '#515151',
     300: '#484848',
-    400: '#3e3e3e',
+    400: '#3E3E3E',
     450: '#343434',
-    500: '#2a2a2a',
+    500: '#2A2A2A',
     600: '#202020',
     700: '#171717',
-    800: '#0d0d0d',
+    800: '#0D0D0D',
     900: '#030303',
   },
 };
@@ -47,10 +47,14 @@ export const appColors = {
   primary: palletes.emerald,
   background: {
     dark: palletes.dark[900],
-    light: '#f5f5f4',
+    light: '#F5F5F4',
   },
-  cardBg: {
+  card: {
     dark: palletes.dark[500],
     light: palletes.white,
+  },
+  border: {
+    dark: palletes.dark[900],
+    light: '#F4F4F4',
   },
 };

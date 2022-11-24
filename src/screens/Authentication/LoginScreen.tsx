@@ -16,18 +16,15 @@ import {
   Center,
   Heading,
   HStack,
-  Icon,
-  IconButton,
   Image,
   Link,
   Text,
   View,
   VStack,
 } from 'native-base';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as yup from 'yup';
 
 const LoginScreen = () => {
@@ -58,49 +55,22 @@ const LoginScreen = () => {
     },
   });
 
-  const [isHiddenPass, setIsHiddenPass] = useState<boolean>(true);
-
   const onLogin = (value: LoginParams) =>
     dispatch(loginApi({username: value.email, password: value.password}));
-  const onToggleShowPass = useCallback(
-    () => setIsHiddenPass(!isHiddenPass),
-    [isHiddenPass],
-  );
 
-  const _buildEyeIcon = () => (
-    <IconButton
-      colorScheme={'gray'}
-      onPress={onToggleShowPass}
-      icon={
-        <Icon
-          name="eye-visibility"
-          as={
-            <MaterialIcons
-              name={!isHiddenPass ? 'visibility-off' : 'visibility'}
-              color={useTheme().colors.border}
-            />
-          }
-        />
-      }
-    />
-  );
   useEffect(() => {
     if (firstTime) dispatch(setFirstTime());
   }, [firstTime, dispatch]);
 
   return (
-    <Container
-      flex={1}
-      mx="auto"
-      justifyContent={'space-between'}
-      safeArea
-      p={6}>
+    <Container flex={1} mx="auto" justifyContent="space-between" safeArea p={6}>
       <ToggleDarkMode alignSelf="flex-end" />
+
       <Center>
         <AppLogo />
       </Center>
 
-      <VStack space={3} mt="5">
+      <VStack space={3}>
         <Heading size="md" alignSelf="center">
           {t('login.title')}
         </Heading>
@@ -125,8 +95,7 @@ const LoginScreen = () => {
           name="password"
           placeholder={'your password...'}
           errorMessage={errors?.password?.message}
-          type={!isHiddenPass ? 'text' : 'password'}
-          InputRightElement={_buildEyeIcon()}
+          type="password"
           InputLeftElement={
             <Image
               alt="password"
@@ -140,7 +109,7 @@ const LoginScreen = () => {
 
         <IButton onPress={handleSubmit(onLogin)}>{t('login.title')}</IButton>
 
-        <HStack mt="6" justifyContent="center">
+        <HStack justifyContent="center">
           <Text
             fontSize="sm"
             color="coolGray.600"
@@ -148,22 +117,19 @@ const LoginScreen = () => {
             {t('login.newUser')}.{' '}
           </Text>
           <Link
-            _text={{
-              color: 'primary.500',
-              fontWeight: 'bold',
-            }}
+            _text={{color: 'primary.500', fontWeight: 'bold'}}
             onPress={() => navigation.navigate('Register')}>
             {t('register.title')}
           </Link>
         </HStack>
 
-        <HStack mt="6" justifyContent="center" alignItems="center" space={4}>
-          <View flex={1} backgroundColor={border} height={'1px'} />
+        <HStack justifyContent="center" alignItems="center" space={4}>
+          <View flex={1} backgroundColor={border} />
           <Text>Or</Text>
-          <View flex={1} backgroundColor={border} height={'1px'} />
+          <View flex={1} backgroundColor={border} />
         </HStack>
 
-        <HStack mt="6" justifyContent="center" alignItems="center" space={4}>
+        <HStack justifyContent="center" alignItems="center" space={4}>
           <IButton
             backgroundColor={card}
             flex={1}
