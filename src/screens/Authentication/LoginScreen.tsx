@@ -3,14 +3,15 @@ import IButton from '@Components/button/Button';
 import ToggleDarkMode from '@Components/button/ToggleDarkMode';
 import Container from '@Components/container/Container';
 import {IInput} from '@Components/form/Input';
+import {useLoading} from '@Components/loading';
 import {Assets} from '@Constants/assets';
+import {yupResolver} from '@hookform/resolvers/yup';
 import {LoginParams} from '@Models/params/AuthParams';
 import {AuthNavigationProp} from '@Navigations/stack/AuthStack/type';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import {loginApi} from '@Redux/authentication';
 import {useAppDispatch, useAppSelector} from '@Redux/hooks';
 import {setFirstTime} from '@Redux/system';
-import {yupResolver} from '@hookform/resolvers/yup';
-import {useNavigation, useTheme} from '@react-navigation/native';
 import {t} from 'i18next';
 import {
   Center,
@@ -24,12 +25,12 @@ import {
 } from 'native-base';
 import React, {useEffect} from 'react';
 import {useForm} from 'react-hook-form';
-
 import * as yup from 'yup';
 
 const LoginScreen = () => {
   const dispatch = useAppDispatch();
   const firstTime = useAppSelector(state => state.system.firstTime);
+  const {showLoading, hideLoading} = useLoading();
 
   const navigation = useNavigation<AuthNavigationProp>();
   const {border, card, text} = useTheme().colors;
@@ -55,8 +56,11 @@ const LoginScreen = () => {
     },
   });
 
-  const onLogin = (value: LoginParams) =>
-    dispatch(loginApi({username: value.email, password: value.password}));
+  const onLogin = async ({email, password}: LoginParams) => {
+    showLoading();
+    await dispatch(loginApi({username: email, password}));
+    hideLoading();
+  };
 
   useEffect(() => {
     if (firstTime) dispatch(setFirstTime());

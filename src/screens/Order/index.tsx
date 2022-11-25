@@ -32,33 +32,31 @@ const OrderTabScreen: FC<OrderTabProps> = () => {
 
   const _buildRightComponents = () => (
     <HStack
-      justifyContent={'center'}
-      alignItems={'center'}
       space={2}
-      alignSelf={'flex-end'}>
+      justifyContent="center"
+      alignItems="center"
+      alignSelf="flex-end">
       <Center
         backgroundColor="primary.800"
-        _light={{
-          backgroundColor: 'primary.100',
-        }}
+        _light={{backgroundColor: 'primary.100'}}
         borderRadius={8}
-        width={'32px'}
-        height={'32px'}>
+        width="32px"
+        height="32px">
         <MinusIcon color={colors.text} />
       </Center>
       <Center
         borderRadius={8}
-        width={'32px'}
-        height={'32px'}
+        width="32px"
+        height="32px"
         borderWidth={1}
-        borderColor={'white'}>
+        borderColor="white">
         <Text>2</Text>
       </Center>
       <Center
         backgroundColor="primary.500"
         borderRadius={8}
-        width={'32px'}
-        height={'32px'}>
+        width="32px"
+        height="32px">
         <AddIcon color={colors.text} />
       </Center>
     </HStack>

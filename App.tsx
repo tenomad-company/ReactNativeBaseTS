@@ -22,6 +22,7 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 
 import '@Utils/ActivateLayoutAnimation';
+import LoadingProvider from '@Components/loading';
 
 const config = {
   dependencies: {
@@ -55,7 +56,9 @@ const NativeBaseContent = () => {
       theme={theme}
       config={config}
       colorModeManager={colorModeManager}>
-      <NavigationContent />
+      <LoadingProvider>
+        <NavigationContent />
+      </LoadingProvider>
     </NativeBaseProvider>
   );
 };

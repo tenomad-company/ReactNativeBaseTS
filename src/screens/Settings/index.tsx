@@ -1,4 +1,5 @@
 import ListTitle from '@Components/container/ListTitle';
+import {useLoading} from '@Components/loading';
 import {useAppSelector} from '@Redux/hooks';
 import {Box, Divider, FlatList, Icon, useColorMode} from 'native-base';
 import React, {useCallback, useMemo} from 'react';
@@ -9,11 +10,13 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import FlagUK from '@Assets/icons/flag-uk.svg';
 import FlagVN from '@Assets/icons/flag-vn.svg';
+import wait from '@Utils/wait';
 
 const SettingsScreen = () => {
   const {t, i18n} = useTranslation();
   const {colorMode, toggleColorMode} = useColorMode();
   const language = useAppSelector(state => state.system.language);
+  const {showLoading, hideLoading} = useLoading();
 
   const isLight = useMemo(() => colorMode === 'light', [colorMode]);
 
@@ -27,7 +30,12 @@ const SettingsScreen = () => {
         title: isLight
           ? t('settings.switchDarkMode')
           : t('settings.switchLightMode'),
-        onPress: toggleColorMode,
+        onPress: async () => {
+          showLoading();
+          await wait(100);
+          toggleColorMode();
+          hideLoading();
+        },
         leftComponent: (
           <Icon
             name="settings-display"
@@ -49,7 +57,12 @@ const SettingsScreen = () => {
       },
       {
         title: t('settings.switchLanguage'),
-        onPress: toggleLanguage,
+        onPress: async () => {
+          showLoading();
+          await wait(100);
+          toggleLanguage();
+          hideLoading();
+        },
         leftComponent: (
           <Icon
             name="language"
@@ -81,7 +94,15 @@ const SettingsScreen = () => {
         ),
       },
     ],
-    [isLight, language, t, toggleColorMode, toggleLanguage],
+    [
+      t,
+      hideLoading,
+      isLight,
+      language,
+      showLoading,
+      toggleColorMode,
+      toggleLanguage,
+    ],
   );
 
   return (

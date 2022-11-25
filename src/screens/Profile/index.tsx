@@ -1,3 +1,4 @@
+import ModalAlert from '@Components/alert/AlertDialog';
 import ToastAlert from '@Components/alert/ToastAlert';
 import ToggleDarkMode from '@Components/button/ToggleDarkMode';
 import Container from '@Components/container/Container';
@@ -6,12 +7,10 @@ import IFlatList from '@Components/scroll/Flatlist';
 import SettingLink from '@Components/SettingLink';
 import {Assets} from '@Constants/assets';
 import {AppNavigationProps} from '@Navigations/route';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import {logout} from '@Redux/authentication';
 import {useAppDispatch, useAppSelector} from '@Redux/hooks';
 import {showTabBar} from '@Redux/system';
-
-import ModalAlert from '@Components/alert/AlertDialog';
-import {useNavigation, useTheme} from '@react-navigation/native';
 import {
   Actionsheet,
   Avatar,
@@ -38,7 +37,6 @@ const ProfileScreen = () => {
   const navigation = useNavigation<AppNavigationProps>();
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.authentication.user);
-
   const {isOpen, onOpen, onClose} = useDisclose();
 
   const {
