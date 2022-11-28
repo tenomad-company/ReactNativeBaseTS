@@ -1,9 +1,9 @@
 import Container from '@Components/container/Container';
 import ListTitle from '@Components/container/ListTitle';
+import ExtendedFlatlist from '@Components/scroll/ExtendedFlatlist';
 import {ChatModel} from '@Models/ChatModel';
 import {Text} from 'native-base';
 import React, {FC, useEffect, useState} from 'react';
-import {FlatList, StyleSheet} from 'react-native';
 
 interface ChatTabProps {}
 
@@ -39,51 +39,35 @@ const MOCK_TEST: ChatModel[] = [
 ];
 
 const ChatTabScreen: FC<ChatTabProps> = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<ChatModel[]>([]);
 
   useEffect(() => {
     setIsLoading(true);
     setTimeout(() => {
-      setIsLoading(false);
       setData(MOCK_TEST);
+      setIsLoading(false);
     }, 1);
   }, []);
 
   return (
     <Container safeArea padding={4} flex={1}>
-      {isLoading ? (
-        <>
-          <ListTitle loading />
-          <ListTitle loading />
-          <ListTitle loading />
-          <ListTitle loading />
-          <ListTitle loading />
-        </>
-      ) : (
-        <FlatList
-          contentContainerStyle={styles.flex}
-          scrollEnabled={false}
-          data={data}
-          renderItem={({item}) => {
-            return (
-              <ListTitle
-                source={{uri: item.avatar}}
-                key={item.id}
-                title={item.name}
-                subTitle={item.message}
-                rightComponent={<Text color={'gray.400'}>12:20:00</Text>}
-              />
-            );
-          }}
-        />
-      )}
+      <ExtendedFlatlist
+        data={data}
+        keyExtractor={item => `${item.id} `}
+        isLoading={isLoading}
+        renderItem={({item, index}) => (
+          <ListTitle
+            source={{uri: item.avatar}}
+            key={item.id}
+            title={item.name}
+            subTitle={item.message}
+            rightComponent={<Text color={'gray.400'}>12:20:00</Text>}
+          />
+        )}
+      />
     </Container>
   );
 };
 
 export default ChatTabScreen;
-
-const styles = StyleSheet.create({
-  flex: {flex: 1},
-});

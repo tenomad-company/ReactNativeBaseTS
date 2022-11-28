@@ -4,7 +4,6 @@ module.exports = {
     'react-native-reanimated/plugin',
     [
       'module-resolver',
-
       {
         extensions: ['.js', '.json', '.ts', '.tsx'],
         root: ['./'],

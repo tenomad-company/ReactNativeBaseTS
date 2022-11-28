@@ -36,16 +36,11 @@
       "@Constants/*": ["src/constants/*"],
       "@Hooks/*": ["src/hooks/*"],
       "@Language": ["src/language"],
-      "@Language/*": ["src/language/*"],
       "@Models/*": ["src/models/*"],
       "@Navigations/*": ["src/navigations/*"],
-      "@Redux": ["src/redux"],
       "@Redux/*": ["src/redux/*"],
-      "@Screens": ["src/screens"],
       "@Screens/*": ["src/screens/*"],
-      "@Styles": ["src/styles"],
       "@Styles/*": ["src/styles/*"],
-      "@Utils": ["src/utils"],
       "@Utils/*": ["src/utils/*"],
     },                                                   /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */

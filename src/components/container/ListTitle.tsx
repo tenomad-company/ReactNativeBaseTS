@@ -56,9 +56,8 @@ export default ({
       <HStack
         backgroundColor={colors.card}
         borderRadius="lg"
-        padding={4}
         alignItems="center"
-        marginTop={4}
+        padding={4}
         space={4}
         {...props}>
         {leftComponent ?? (
@@ -69,7 +68,6 @@ export default ({
           <Text fontWeight="bold">{title}</Text>
           {!!subTitle && <Text color={'gray.400'}>{subTitle}</Text>}
         </VStack>
-        {/* <Spacer /> */}
         {rightComponent ? rightComponent : <ChevronRightIcon />}
       </HStack>
     </TouchableOpacity>
