@@ -63,7 +63,7 @@ const OrderTabScreen: FC<OrderTabProps> = () => {
             <Heading fontSize="lg" numberOfLines={2}>
               {item.name}
             </Heading>
-            <HStack flex={1} alignItems="center">
+            <HStack flex={1} space={1} alignItems="center">
               <Text flex={1} numberOfLines={2} color="text.400">
                 {item.description}
               </Text>
