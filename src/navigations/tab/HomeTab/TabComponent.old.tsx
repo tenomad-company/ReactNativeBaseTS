@@ -29,6 +29,17 @@ export default function TabComponent({
       ? options.title
       : name;
 
+  const animatedComponentCircleStyles = useAnimatedStyle(() => {
+    return {
+      backgroundColor: colors.card,
+      transform: [
+        {
+          scale: withTiming(active ? 1 : 0, {duration: 250}),
+        },
+      ],
+    };
+  });
+
   const animatedIconContainerStyles = useAnimatedStyle(() => {
     return {
       opacity: withTiming(active ? 1 : 0.5, {duration: 250}),
@@ -39,7 +50,6 @@ export default function TabComponent({
     return {
       marginTop: active ? 4 : 0,
       height: active ? 'auto' : 0,
-      width: active ? 'auto' : 0,
       transform: [
         {
           scale: withTiming(active ? 1 : 0, {duration: 250}),
@@ -51,9 +61,12 @@ export default function TabComponent({
   return (
     <Pressable onPress={onPress} onLayout={onLayout} style={styles.component}>
       <Animated.View
+        style={[styles.componentCircle, animatedComponentCircleStyles]}
+      />
+      <Animated.View
         style={[styles.iconContainer, animatedIconContainerStyles]}>
         {options.tabBarIcon ? (
-          options.tabBarIcon({focused: !!active, color: 'white', size: 18})
+          options.tabBarIcon({focused: !!active, color: 'white', size: 16})
         ) : (
           <Text>?</Text>
         )}
@@ -71,8 +84,15 @@ export default function TabComponent({
 const styles = StyleSheet.create({
   component: {
     height: 60,
+    width: 60,
+    padding: 4,
+    marginTop: -2,
+    marginBottom: 2,
+  },
+  componentCircle: {
     flex: 1,
-    padding: 8,
+    borderRadius: 30,
+    backgroundColor: 'white',
   },
   iconContainer: {
     position: 'absolute',
@@ -80,12 +100,8 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   textContainer: {},
-  icon: {
-    height: 18,
-    width: 18,
-  },
 });

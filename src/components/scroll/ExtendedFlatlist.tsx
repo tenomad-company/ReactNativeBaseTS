@@ -42,7 +42,14 @@ const ExtendedFlatlist = <T extends {}>({
 
   const _renderPlaceholder = useCallback(
     key => (
-      <HStack key={key} bg="text.100" w="full" rounded="md" space="2" p="2">
+      <HStack
+        key={key}
+        bg="text.100"
+        _dark={{bg: 'text.800'}}
+        w="full"
+        rounded="md"
+        space="2"
+        p="2">
         <Skeleton size="16" rounded="lg" />
         <Skeleton.Text w="3/4" />
       </HStack>

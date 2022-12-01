@@ -52,7 +52,13 @@ const OrderTabScreen: FC<OrderTabProps> = () => {
   const renderItem: ListRenderItem<Food> = useCallback(
     ({item, index}) => {
       return (
-        <HStack bg="text.100" w="full" rounded="md" space="2" p="2">
+        <HStack
+          bg="text.100"
+          _dark={{bg: 'text.800'}}
+          w="full"
+          rounded="md"
+          space="2"
+          p="2">
           <Image
             source={{uri: item.image}}
             alt={item.id}

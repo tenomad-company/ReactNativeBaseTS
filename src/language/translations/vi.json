@@ -6,8 +6,17 @@
     "subSlogan2": "Tận hưởng dịch vụ giao đồ ăn nhanh chóng và suôn sẻ tại \n ngưỡng cửa của bạn"
   },
   "home": {
-    "title": "Màn hình chính",
+    "title": "Trang chủ",
     "welcome": "Tìm đồ ăn tại đây"
+  },
+  "profile": {
+    "title": "Trang cá nhân"
+  },
+  "order": {
+    "title": "Đặt món"
+  },
+  "chat": {
+    "title": "Trò chuyện"
   },
   "login": {
     "title": "Đăng nhập",
